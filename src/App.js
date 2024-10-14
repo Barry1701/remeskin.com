@@ -1,10 +1,11 @@
-// import logo from './logo.svg';
+import React from 'react';
+import Button from 'react-bootstrap/Button';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>remeskin.com</h1>
+      <Button variant="primary">remeskin.com</Button>
     </div>
   );
 }
