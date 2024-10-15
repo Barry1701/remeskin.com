@@ -1,0 +1,30 @@
+.NavBar {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.NavLink {
+  color: #333;
+  margin-right: 1rem; /* Dodaje odstęp pomiędzy linkami */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.NavLink:hover {
+  color: #2b2d7a;
+}
+
+.Active {
+  color: #2b2d7a;
+}
+
+.icon {
+  margin-right: 5px; /* Odstęp między ikoną a tekstem */
+  font-size: 1.2rem; /* Rozmiar ikony */
+}
+
+.Logo {
+  height: 60px;
+  margin-right: 1rem;
+}

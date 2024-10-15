@@ -1,0 +1,23 @@
+.App {
+    font-family: 'Lato', sans-serif;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+.Main {
+    padding-top: 81px;
+}
+
+a {
+    color: #2b2d7a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+  
+a:hover {
+    color: #7a7dbb;
+}
+
+.icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
