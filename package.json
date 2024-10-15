@@ -19,7 +19,6 @@
   },
   "scripts": {
     "heroku-prebuild": "npm install -g serve",
-    "prestart": "nvm use",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
