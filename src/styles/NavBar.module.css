@@ -5,7 +5,7 @@
 
 .NavLink {
   color: #333;
-  margin-right: 1rem; /* Dodaje odstęp pomiędzy linkami */
+  margin-right: 20px; /* Dodaje odstęp pomiędzy linkami */
   display: flex;
   align-items: center;
   text-decoration: none;

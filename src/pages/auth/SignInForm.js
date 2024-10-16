@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { Form, Button, Alert, Container, Col, Row } from "react-bootstrap";
+import axios from "axios";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
-
-import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
-import axios from "axios";
+import { SetCurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const SignInForm = () => {
   const [signInData, setSignInData] = useState({
@@ -18,6 +18,7 @@ const SignInForm = () => {
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
+  const setCurrentUser = useContext(SetCurrentUserContext);
 
   const handleChange = (event) => {
     setSignInData({
@@ -29,7 +30,8 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/login/", signInData);
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
       history.push("/");
     } catch (err) {
       setErrors(err.response?.data);
@@ -38,35 +40,34 @@ const SignInForm = () => {
 
   return (
     <Row className={styles.Row}>
-      <Col className="my-auto py-2 p-md-2" md={6}>
-        <Container className={`${appStyles.Content} p-4 `}>
+      <Col className="my-auto p-0 p-md-2" md={6}>
+        <Container className={`${appStyles.Content} p-4`}>
           <h1 className={styles.Header}>sign in</h1>
-
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
-              <Form.Label className="d-none">username</Form.Label>
+              <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
-                className={styles.Input}
                 type="text"
                 placeholder="Enter Username"
                 name="username"
+                className={styles.Input}
                 value={username}
                 onChange={handleChange}
               />
             </Form.Group>
             {errors.username?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert key={idx} variant="warning">
                 {message}
               </Alert>
             ))}
 
             <Form.Group controlId="password">
-              <Form.Label className="d-none">password</Form.Label>
+              <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
-                className={styles.Input}
                 type="password"
                 placeholder="Password"
                 name="password"
+                className={styles.Input}
                 value={password}
                 onChange={handleChange}
               />
@@ -93,7 +94,7 @@ const SignInForm = () => {
 
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
-            Don't have an account? <span>Sign up now!</span>
+            Don&apos;t have an account? <span>Sign up now!</span>
           </Link>
         </Container>
       </Col>

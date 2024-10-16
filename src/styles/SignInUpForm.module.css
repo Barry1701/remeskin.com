@@ -24,11 +24,15 @@
 }
 
 .Link {
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    margin: auto;
     color: #2b2d7a;
+    margin-right: 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+  
+.Link .fa-icon {
+    margin-right: 8px; /* Margines pomiędzy ikoną a tekstem */
 }
 
 .Link span {
