@@ -1,7 +1,7 @@
 .Row {
     height: calc(100vh - 81px);
 }
-    
+
 .Input {
     background: #f2f2f2;
     border: 1px solid #7a7dbb;
@@ -11,7 +11,7 @@
     text-align: center;
     padding: 12px;
 }
-    
+
 .Header {
     font-style: normal;
     font-weight: bold;
@@ -22,7 +22,7 @@
     text-transform: uppercase;
     color: #2b2d7a;
 }
-    
+
 .Link {
     text-decoration: none;
     text-align: center;
@@ -30,24 +30,32 @@
     margin: auto;
     color: #2b2d7a;
 }
-    
+
 .Link span {
     color: #80d5fa;
 }
-    
+
 .Container {
     padding: 40px 20px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-    
+
 .SignInCol {
     height: 350px;
 }
-    
+
 .SignUpCol {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
+
+.FillerImage {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
