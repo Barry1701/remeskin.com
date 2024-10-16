@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faSignInAlt, faSignOutAlt, faHome } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/logo.png";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 import styles from "../styles/NavBar.module.css";
 
 const NavBar = () => {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useCurrentUser();
 
   return (
     <Navbar bg="light" expand="lg" fixed="top" className={styles.NavBar}>
