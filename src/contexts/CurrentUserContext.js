@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect, useContext, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
-import axios from "axios"; 
 
 // Tworzenie kontekstu dla bieżącego użytkownika i funkcji ustawiania użytkownika
 export const CurrentUserContext = createContext(null);
@@ -35,7 +34,7 @@ export const CurrentUserProvider = ({ children }) => {
       async (error) => {
         if (error.response?.status === 401) {
           try {
-            await axios.post("/dj-rest-auth/token/refresh/");
+            await axiosRes.post("/dj-rest-auth/token/refresh/");
             return axiosRes(error.config);
           } catch (err) {
             setCurrentUser(null);
@@ -49,7 +48,7 @@ export const CurrentUserProvider = ({ children }) => {
     axiosReq.interceptors.request.use(
       async (config) => {
         try {
-          await axios.post("/dj-rest-auth/token/refresh/");
+          await axiosRes.post("/dj-rest-auth/token/refresh/");
           return config;
         } catch (err) {
           setCurrentUser(null);

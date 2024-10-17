@@ -1,0 +1,10 @@
+.Avatar {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .Text {
+    margin-left: 8px;
+    font-weight: bold;
+  }
+  
