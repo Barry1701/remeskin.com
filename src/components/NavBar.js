@@ -26,7 +26,7 @@ const NavBar = () => {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
     } catch (err) {
-      console.error(err);
+      console.error("Error during sign out:", err);
     }
   };
 
@@ -44,8 +44,12 @@ const NavBar = () => {
       <NavLink to="/liked" className={styles.NavLink}>
         <FontAwesomeIcon icon={faHeart} className={styles.icon} /> Liked
       </NavLink>
-      <NavLink to="/profile" className={styles.NavLink}>
-        <Avatar src={currentUser?.profile_image} height={40} text="Profile" />
+      <NavLink to={`/profiles/${currentUser?.pk}`} className={styles.NavLink}>
+        <Avatar
+          src={currentUser?.profile_image ? currentUser.profile_image : "https://res.cloudinary.com/dprwuhawr/image/upload/v1729293609/default_profile_xysrop.jpg"}
+          height={40}
+          text="Profile"
+        />
       </NavLink>
       <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>
         <FontAwesomeIcon icon={faSignOutAlt} className={styles.icon} /> Sign out

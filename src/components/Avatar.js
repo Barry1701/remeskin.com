@@ -11,9 +11,11 @@ const Avatar = ({ src, height = 45, text }) => {
         width={height}
         alt="avatar"
       />
-      {text && <span className={styles.Text}>{text}</span>}
+      {text}
     </span>
   );
 };
+
+
 
 export default Avatar;

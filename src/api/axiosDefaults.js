@@ -1,15 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
-axios.defaults.baseURL = "https://drestf-api-8914bba56128.herokuapp.com/";
+// Set the base URL for axios requests
+axios.defaults.baseURL = 'https://drestf-api-8914bba56128.herokuapp.com';
+axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
 axios.defaults.withCredentials = true;
 
+
+// Create instances for axios requests
 export const axiosReq = axios.create();
 export const axiosRes = axios.create();
 
-// Set default Content-Type dynamically based on request type
-axiosReq.interceptors.request.use((config) => {
-  if (config.method === "post" && config.headers["Content-Type"] !== "multipart/form-data") {
-    config.headers["Content-Type"] = "application/json";
-  }
-  return config;
-});
+export default axios;

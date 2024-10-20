@@ -1,7 +1,9 @@
 .Avatar {
-    border-radius: 50%;
-    object-fit: cover;
-  }
+  border-radius: 50%;
+  object-fit: cover;
+  width: 40px; /* Dodaj odpowiednią szerokość */
+  height: 40px; /* Dodaj odpowiednią wysokość */
+}
   
   .Text {
     margin-left: 8px;
