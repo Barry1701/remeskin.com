@@ -1,11 +1,12 @@
 .NavBar {
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
+  padding: 0.5rem 1rem; /* Dodaje odstępy wewnętrzne dla poprawienia wyglądu */
 }
 
 .NavLink {
   color: #333;
-  margin-right: 20px; /* Dodaje odstęp pomiędzy linkami */
+  margin-right: 1rem; /* Zmieniamy z 20px na rem, aby lepiej działało na różnych rozmiarach ekranu */
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -20,11 +21,15 @@
 }
 
 .icon {
-  margin-right: 5px; /* Odstęp między ikoną a tekstem */
-  font-size: 1.2rem; /* Rozmiar ikony */
+  margin-right: 0.5rem; /* Zmieniamy na rem, aby być bardziej responsywnym */
+  font-size: 1.2rem;
 }
 
 .Logo {
   height: 60px;
   margin-right: 1rem;
+}
+
+.CollapseNav {
+  margin-top: 1rem; /* Dodajemy margines górny, aby poprawić wygląd rozwiniętego menu na mniejszych ekranach */
 }

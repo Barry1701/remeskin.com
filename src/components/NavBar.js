@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserPlus,
@@ -72,22 +72,24 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar bg="light" expand="lg" fixed="top" className={styles.NavBar} expanded={expanded}>
-      <NavLink to="/">
-        <Navbar.Brand>
-          <img src={logo} alt="logo" height="70" className={styles.Logo} />
-        </Navbar.Brand>
-      </NavLink>
-      {currentUser && addPostIcon}
-      <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto text-right">
-          <NavLink exact to="/" className={styles.NavLink}>
-            <FontAwesomeIcon icon={faHome} className={styles.icon} /> Home
-          </NavLink>
-          {currentUser ? loggedInIcons : loggedOutIcons}
-        </Nav>
-      </Navbar.Collapse>
+    <Navbar bg="light" expand="lg" fixed="top" className={`${styles.NavBar} d-lg-flex`} expanded={expanded}>
+      <Container>
+        <NavLink to="/">
+          <Navbar.Brand>
+            <img src={logo} alt="logo" height="70" className={styles.Logo} />
+          </Navbar.Brand>
+        </NavLink>
+        {currentUser && addPostIcon}
+        <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className={`d-lg-flex align-items-center ${styles.CollapseNav}`}>
+          <Nav className="ml-lg-auto text-right">
+            <NavLink exact to="/" className={styles.NavLink}>
+              <FontAwesomeIcon icon={faHome} className={styles.icon} /> Home
+            </NavLink>
+            {currentUser ? loggedInIcons : loggedOutIcons}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
   );
 };
