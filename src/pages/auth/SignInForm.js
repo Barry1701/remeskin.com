@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Form, Button, Alert, Container, Col, Row } from "react-bootstrap";
+import { Form, Button, Alert, Container, Col, Row, Image } from "react-bootstrap";
 import axios from "axios";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import customImage from "../../assets/sign_in.png";
 
 const SignInForm = () => {
   const [signInData, setSignInData] = useState({
@@ -97,6 +98,13 @@ const SignInForm = () => {
             Don&apos;t have an account? <span>Sign up now!</span>
           </Link>
         </Container>
+      </Col>
+      <Col md={6} className="my-auto d-none d-md-block p-2">
+        <Image
+          className={`${appStyles.FillerImage} ${styles.FillerImage}`}
+          src={customImage}
+          alt="Bloom and Heal"
+        />
       </Col>
     </Row>
   );

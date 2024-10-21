@@ -48,6 +48,7 @@
 
 .SignInCol {
     height: 350px;
+   
 }
 
 .SignUpCol {
@@ -59,7 +60,7 @@
 .FillerImage {
     width: 100%;
     height: auto;
-    max-height: 400px;
+    max-height: 600px;
     object-fit: cover;
     border-radius: 8px;
 }
