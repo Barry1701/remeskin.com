@@ -7,7 +7,7 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
-import customImage from "../../assets/sign_in.png";
+import customImage from "../../assets/relief.png";
 
 const SignInForm = () => {
   const [signInData, setSignInData] = useState({

@@ -1,19 +1,25 @@
-import React, { useState } from "react";
-import { Form, Button, Image, Container, Row, Col } from "react-bootstrap";
+import React, { useState, useRef } from "react";
+import { Form, Button, Image, Container, Row, Col, Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import Asset from "../../components/Asset";
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import upload from "../../assets/upload.png";
+import { axiosReq } from "../../api/axiosDefaults";
 
 const PostCreateForm = () => {
   const [postData, setPostData] = useState({
     title: "",
     content: "",
-    image: "",
   });
+  const { title, content } = postData;
 
-  const { title, content, image } = postData;
+  // Referencja do komponentu Form.File
+  const imageInput = useRef(null);
+  const history = useHistory();
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     setPostData({
@@ -24,11 +30,31 @@ const PostCreateForm = () => {
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
-      URL.revokeObjectURL(image);
       setPostData({
         ...postData,
         image: URL.createObjectURL(event.target.files[0]),
       });
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("content", content);
+
+    if (imageInput.current?.files[0]) {
+      formData.append("image", imageInput.current.files[0]);
+    }
+
+    try {
+      const { data } = await axiosReq.post("/posts/", formData);
+      history.push(`/posts/${data.id}`);
+    } catch (err) {
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
     }
   };
 
@@ -42,6 +68,11 @@ const PostCreateForm = () => {
           value={title}
           onChange={handleChange}
         />
+        {errors.title?.map((message, idx) => (
+          <Alert key={idx} variant="warning">
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
       <Form.Group>
         <Form.Label>Content</Form.Label>
@@ -52,10 +83,15 @@ const PostCreateForm = () => {
           value={content}
           onChange={handleChange}
         />
+        {errors.content?.map((message, idx) => (
+          <Alert key={idx} variant="warning">
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
       <Button
         className={`${btnStyles.Button} ${btnStyles.Wide}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
         Cancel
       </Button>
@@ -69,17 +105,17 @@ const PostCreateForm = () => {
   );
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              {image ? (
+              {postData.image ? (
                 <>
                   <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
+                    <Image className={styles.Image} src={postData.image} rounded />
                   </figure>
                   <div>
                     <Form.Label
@@ -102,8 +138,14 @@ const PostCreateForm = () => {
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
-                className="d-none" // Ukrywa standardowe pole wyboru pliku
+                className="d-none"
+                ref={imageInput} // Ustawiamy referencję do komponentu Form.File
               />
+              {errors.image?.map((message, idx) => (
+                <Alert key={idx} variant="warning">
+                  {message}
+                </Alert>
+              ))}
             </Form.Group>
             <div className="d-md-none">{textFields}</div>
           </Container>

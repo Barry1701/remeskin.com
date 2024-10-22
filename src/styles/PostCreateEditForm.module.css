@@ -1,3 +1,25 @@
+/* PostCreateEditForm.module.css */
+
 .Container {
-    min-height: 343px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Wycentrowanie w pionie */
+    align-items: center; /* Wycentrowanie w poziomie */
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 100%; /* Ustawienie pełnej wysokości */
+    border: 1px solid #ccc;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    padding: 20px; /* Dodanie odrobiny przestrzeni wokół */
+    min-height: 400px; /* Określamy minimalną wysokość, aby był środek */
   }
+  
+  .Image {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
