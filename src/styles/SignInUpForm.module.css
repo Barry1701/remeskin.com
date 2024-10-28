@@ -1,66 +1,46 @@
 .Row {
     height: calc(100vh - 81px);
-}
-
-.Input {
-    background: #f2f2f2;
-    border: 1px solid #7a7dbb;
+  }
+  .Input {
+    background: #ffffff;
+    border: 1px solid #f0f1f9;
     box-sizing: border-box;
-    border-radius: 8px;
-    color: #2b2d7a;
+    border-radius: 2px;
+    color: #7177a1;
     text-align: center;
-    padding: 12px;
-}
-
-.Header {
+    padding: 10px;
+  }
+  
+  .Header {
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 19px;
     text-align: center;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #2b2d7a;
-}
-
-.Link {
-    color: #2b2d7a;
-    margin-right: 20px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
+    color: #2142b2;
+  }
   
-.Link .fa-icon {
-    margin-right: 8px; /* Margines pomiędzy ikoną a tekstem */
-}
-
-.Link span {
-    color: #80d5fa;
-}
-
-.Container {
-    padding: 40px 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.SignInCol {
-    height: 350px;
-   
-}
-
-.SignUpCol {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.FillerImage {
-    width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: cover;
-    border-radius: 8px;
-}
+  .Link {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+  
+  .Link span {
+    color: #ff9254;
+  }
+  
+  .Container {
+    padding: 30px 10px;
+  }
+  
+  .SignInCol {
+    height: 320px;
+  }
+  
+  .SignUpCol {
+    height: 375px;
+  }

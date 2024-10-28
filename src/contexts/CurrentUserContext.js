@@ -1,63 +1,72 @@
-import React, { createContext, useState, useEffect, useContext, useMemo } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
-import axios from "axios"; // Dodaj ten import
+import { useHistory } from "react-router";
 
-// Tworzenie kontekstu dla bieżącego użytkownika i funkcji ustawiania użytkownika
-export const CurrentUserContext = createContext(null);
-export const SetCurrentUserContext = createContext(null);
+export const CurrentUserContext = createContext();
+export const SetCurrentUserContext = createContext();
 
-// Hook do korzystania z CurrentUserContext w komponentach
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
-// Provider zarządzający stanem użytkownika i jego aktualizacją
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
 
-  useEffect(() => {
-    const handleMount = async () => {
-      try {
-        const { data } = await axiosRes.get("/dj-rest-auth/user/");
-        setCurrentUser(data);
-      } catch (err) {
-        console.error("Error while fetching current user:", err);
-      }
-    };
+  const handleMount = async () => {
+    try {
+      const { data } = await axiosRes.get("dj-rest-auth/user/");
+      setCurrentUser(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
     handleMount();
   }, []);
 
   useMemo(() => {
-    axiosRes.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        if (error.response?.status === 401) {
-          try {
-            await axios.post("/dj-rest-auth/token/refresh/");
-            return axiosRes(error.config);
-          } catch (err) {
-            setCurrentUser(null);
-            history.push("/signin");
-          }
-        }
-        return Promise.reject(error);
-      }
-    );
-
     axiosReq.interceptors.request.use(
       async (config) => {
         try {
           await axios.post("/dj-rest-auth/token/refresh/");
-          return config;
         } catch (err) {
-          setCurrentUser(null);
-          history.push("/signin");
-          return Promise.reject(err);
+          setCurrentUser((prevCurrentUser) => {
+            if (prevCurrentUser) {
+              history.push("/signin");
+            }
+            return null;
+          });
+          return config;
         }
+        return config;
       },
-      (error) => Promise.reject(error)
+      (err) => {
+        return Promise.reject(err);
+      }
+    );
+
+    axiosRes.interceptors.response.use(
+      (response) => response,
+      async (err) => {
+        if (err.response?.status === 401) {
+          try {
+            await axios.post("/dj-rest-auth/token/refresh/");
+          } catch (err) {
+            setCurrentUser((prevCurrentUser) => {
+              if (prevCurrentUser) {
+                history.push("/signin");
+              }
+              return null;
+            });
+          }
+          return axios(err.config);
+        }
+        return Promise.reject(err);
+      }
     );
   }, [history]);
 

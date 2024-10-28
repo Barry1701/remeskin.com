@@ -1,25 +1,36 @@
-import React, { useState, useRef } from "react";
-import { Form, Button, Image, Container, Row, Col, Alert } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import React, { useRef, useState } from "react";
+
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
+import Image from "react-bootstrap/Image";
+
 import Asset from "../../components/Asset";
+
+import Upload from "../../assets/upload.png";
+
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import upload from "../../assets/upload.png";
+
+import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
-const PostCreateForm = () => {
+function PostCreateForm() {
+  const [errors, setErrors] = useState({});
+
   const [postData, setPostData] = useState({
     title: "",
     content: "",
+    image: "",
   });
-  const { title, content } = postData;
+  const { title, content, image } = postData;
 
-  // Referencja do komponentu Form.File
   const imageInput = useRef(null);
   const history = useHistory();
-
-  const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     setPostData({
@@ -30,6 +41,7 @@ const PostCreateForm = () => {
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
+      URL.revokeObjectURL(image);
       setPostData({
         ...postData,
         image: URL.createObjectURL(event.target.files[0]),
@@ -43,15 +55,13 @@ const PostCreateForm = () => {
 
     formData.append("title", title);
     formData.append("content", content);
-
-    if (imageInput.current?.files[0]) {
-      formData.append("image", imageInput.current.files[0]);
-    }
+    formData.append("image", imageInput.current.files[0]);
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
+      console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -68,12 +78,13 @@ const PostCreateForm = () => {
           value={title}
           onChange={handleChange}
         />
-        {errors.title?.map((message, idx) => (
-          <Alert key={idx} variant="warning">
-            {message}
-          </Alert>
-        ))}
       </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -83,23 +94,21 @@ const PostCreateForm = () => {
           value={content}
           onChange={handleChange}
         />
-        {errors.content?.map((message, idx) => (
-          <Alert key={idx} variant="warning">
-            {message}
-          </Alert>
-        ))}
       </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Wide}`}
+        className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
       >
-        Cancel
+        cancel
       </Button>
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Wide}`}
-        type="submit"
-      >
-        Create
+      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+        create
       </Button>
     </div>
   );
@@ -112,10 +121,10 @@ const PostCreateForm = () => {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              {postData.image ? (
+              {image ? (
                 <>
                   <figure>
-                    <Image className={styles.Image} src={postData.image} rounded />
+                    <Image className={appStyles.Image} src={image} rounded />
                   </figure>
                   <div>
                     <Form.Label
@@ -131,22 +140,26 @@ const PostCreateForm = () => {
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
                 >
-                  <Asset src={upload} message="Click or tap to upload an image" />
+                  <Asset
+                    src={Upload}
+                    message="Click or tap to upload an image"
+                  />
                 </Form.Label>
               )}
+
               <Form.File
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
-                className="d-none"
-                ref={imageInput} // Ustawiamy referencję do komponentu Form.File
+                ref={imageInput}
               />
-              {errors.image?.map((message, idx) => (
-                <Alert key={idx} variant="warning">
-                  {message}
-                </Alert>
-              ))}
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
@@ -156,6 +169,6 @@ const PostCreateForm = () => {
       </Row>
     </Form>
   );
-};
+}
 
 export default PostCreateForm;

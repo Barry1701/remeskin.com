@@ -1,21 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUserPlus,
-  faSignInAlt,
-  faSignOutAlt,
-  faHome,
-  faPlusSquare,
-  faStream,
-  faHeart,
-} from "@fortawesome/free-solid-svg-icons";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
-import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
+import styles from "../styles/NavBar.module.css";
+import { NavLink } from "react-router-dom";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import axios from "axios";
-import styles from "../styles/NavBar.module.css";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 
 const NavBar = () => {
@@ -26,66 +19,98 @@ const NavBar = () => {
 
   const handleSignOut = async () => {
     try {
-      await axios.post("/dj-rest-auth/logout/");
+      await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
     } catch (err) {
-      console.error("Error during sign out:", err);
+      console.log(err);
     }
   };
 
   const addPostIcon = (
-    <NavLink to="/posts/create" className={styles.NavLink}>
-      <FontAwesomeIcon icon={faPlusSquare} className={styles.icon} /> Add Post
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/posts/create"
+    >
+      <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
-
   const loggedInIcons = (
     <>
-      <NavLink to="/feed" className={styles.NavLink}>
-        <FontAwesomeIcon icon={faStream} className={styles.icon} /> Feed
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/feed"
+      >
+        <i className="fas fa-stream"></i>Feed
       </NavLink>
-      <NavLink to="/liked" className={styles.NavLink}>
-        <FontAwesomeIcon icon={faHeart} className={styles.icon} /> Liked
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/liked"
+      >
+        <i className="fas fa-heart"></i>Liked
       </NavLink>
-      <NavLink to={`/profiles/${currentUser?.pk}`} className={styles.NavLink}>
-        <Avatar
-          src={currentUser?.profile_image ? currentUser.profile_image : "https://res.cloudinary.com/dprwuhawr/image/upload/v1729293609/default_profile_xysrop.jpg"}
-          height={40}
-          text="Profile"
-        />
+      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
+        <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
-      <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>
-        <FontAwesomeIcon icon={faSignOutAlt} className={styles.icon} /> Sign out
+      <NavLink
+        className={styles.NavLink}
+        to={`/profiles/${currentUser?.profile_id}`}
+      >
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
     </>
   );
-
   const loggedOutIcons = (
     <>
-      <NavLink to="/signin" className={styles.NavLink}>
-        <FontAwesomeIcon icon={faSignInAlt} className={styles.icon} /> Sign in
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/signin"
+      >
+        <i className="fas fa-sign-in-alt"></i>Sign in
       </NavLink>
-      <NavLink to="/signup" className={styles.NavLink}>
-        <FontAwesomeIcon icon={faUserPlus} className={styles.icon} /> Sign up
+      <NavLink
+        to="/signup"
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+      >
+        <i className="fas fa-user-plus"></i>Sign up
       </NavLink>
     </>
   );
 
   return (
-    <Navbar bg="light" expand="lg" fixed="top" className={`${styles.NavBar} d-lg-flex`} expanded={expanded}>
+    <Navbar
+      expanded={expanded}
+      className={styles.NavBar}
+      expand="md"
+      fixed="top"
+    >
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="70" className={styles.Logo} />
+            <img src={logo} alt="logo" height="45" />
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
-        <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className={`d-lg-flex align-items-center ${styles.CollapseNav}`}>
-          <Nav className="ml-lg-auto text-right">
-            <NavLink exact to="/" className={styles.NavLink}>
-              <FontAwesomeIcon icon={faHome} className={styles.icon} /> Home
+        <Navbar.Toggle
+          ref={ref}
+          onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav"
+        />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto text-left">
+            <NavLink
+              exact
+              className={styles.NavLink}
+              activeClassName={styles.Active}
+              to="/"
+            >
+              <i className="fas fa-home"></i>Home
             </NavLink>
+
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import customImage from "../../assets/boy_smile.png";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
-import customImage from "../../assets/boy_smile.png";
-
 
 import {
   Form,
@@ -104,15 +103,13 @@ const SignUpForm = () => {
                 {message}
               </Alert>
             ))}
-            <Form.Group controlId="signup-button">
 
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
-                type="submit"
-              >
-                Sign up
-              </Button>
-            </Form.Group>
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
+              type="submit"
+            >
+              Sign up
+            </Button>
             {errors.non_field_errors?.map((message, idx) => (
               <Alert key={idx} variant="warning" className="mt-3">
                 {message}
@@ -132,7 +129,7 @@ const SignUpForm = () => {
         className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
       >
         <Image
-          className={`${appStyles.FillerImage} ${styles.FillerImage}`}
+          className={`${appStyles.FillerImage}`}
           src={customImage}
         />
       </Col>
