@@ -11,6 +11,7 @@ import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
+import PostEditForm from "./pages/posts/PostEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -25,7 +26,7 @@ function App() {
             exact
             path="/"
             render={() => (
-              <PostsPage message="No results found. Adjust the search keyword." />
+              <PostsPage message="No posts found. Try adjusting your search terms." />
             )}
           />
           <Route
@@ -33,7 +34,7 @@ function App() {
             path="/feed"
             render={() => (
               <PostsPage
-                message="No results found. Adjust the search keyword or follow a user."
+                message="No posts found. Try changing your search terms or follow more users."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
               />
             )}
@@ -43,7 +44,7 @@ function App() {
             path="/liked"
             render={() => (
               <PostsPage
-                message="No results found. Adjust the search keyword or like a post."
+                message="No liked posts found. Try updating your search or liking more posts."
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
               />
             )}
@@ -52,7 +53,8 @@ function App() {
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
-          <Route render={() => <p>Page not found!</p>} />
+          <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
+          <Route render={() => <p>Sorry, the page you’re looking for doesn’t exist.</p>} />
         </Switch>
       </Container>
     </div>
