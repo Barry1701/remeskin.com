@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
@@ -12,6 +12,7 @@ import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PostEditForm from "./pages/posts/PostEditForm";
+import ProfilePage from "./pages/profiles/ProfilePage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -26,7 +27,7 @@ function App() {
             exact
             path="/"
             render={() => (
-              <PostsPage message="No posts found. Try adjusting your search terms." />
+              <PostsPage message="No posts available. Try exploring new content or creating your first post!" />
             )}
           />
           <Route
@@ -34,7 +35,7 @@ function App() {
             path="/feed"
             render={() => (
               <PostsPage
-                message="No posts found. Try changing your search terms or follow more users."
+                message="Your feed is empty. Start following users to see their posts here!"
                 filter={`owner__followed__owner__profile=${profile_id}&`}
               />
             )}
@@ -44,7 +45,7 @@ function App() {
             path="/liked"
             render={() => (
               <PostsPage
-                message="No liked posts found. Try updating your search or liking more posts."
+                message="You haven’t liked any posts yet. Like some posts to see them here!"
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
               />
             )}
@@ -54,7 +55,16 @@ function App() {
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
-          <Route render={() => <p>Sorry, the page you’re looking for doesn’t exist.</p>} />
+          <Route
+            exact
+            path="/profiles/:id"
+            render={() => (
+              <ProfilePage
+                message="This profile is currently empty. Start sharing posts to make it more engaging!"
+              />
+            )}
+          />
+          <Route render={() => <p>Page not found! Return to the homepage to continue exploring.</p>} />
         </Switch>
       </Container>
     </div>
