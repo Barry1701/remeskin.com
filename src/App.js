@@ -1,5 +1,4 @@
 import React from "react";
-
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import Container from "react-bootstrap/Container";
@@ -16,6 +15,8 @@ import ProfilePage from "./pages/profiles/ProfilePage";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import NotFound from "./components/NotFound";
+import ProductsPage from "./pages/products/ProductsPage"; // Dodaj ten import
 
 function App() {
   const currentUser = useCurrentUser();
@@ -30,7 +31,7 @@ function App() {
             exact
             path="/"
             render={() => (
-              <PostsPage message="No posts available. Try searching with a different keyword." />
+              <PostsPage message="Sorry, no posts to display here. Try searching with different keywords." />
             )}
           />
           <Route
@@ -38,7 +39,7 @@ function App() {
             path="/feed"
             render={() => (
               <PostsPage
-                message="No posts found in your feed. Follow other users to see their posts here."
+                message="No new updates in your feed. Follow more users to see their latest posts here."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
               />
             )}
@@ -48,7 +49,7 @@ function App() {
             path="/liked"
             render={() => (
               <PostsPage
-                message="No liked posts yet. Start liking posts to see them appear here."
+                message="You haven’t liked any posts yet. Start exploring and like posts to see them here."
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
               />
             )}
@@ -74,8 +75,14 @@ function App() {
             path="/profiles/:id/edit"
             render={() => <ProfileEditForm />}
           />
-
-          <Route render={() => <p>Oops! The page you're looking for doesn't exist.</p>} />
+          <Route
+            exact
+            path="/products"
+            render={() => (
+              <ProductsPage message="Sorry, no products found. Check back later!" />
+            )}
+          />
+          <Route render={() => <NotFound message="Oops! The page you're looking for doesn't exist." />} />
         </Switch>
       </Container>
     </div>
