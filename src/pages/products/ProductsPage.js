@@ -3,15 +3,13 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
 import Asset from "../../components/Asset";
-import Product from "./Product"; // komponent do wyświetlania pojedynczego produktu
+import Product from "./Product";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/ProductsPage.module.css";
 import { useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-
-import NoResults from "../../assets/no_results.png"; // obraz, gdy nie ma wyników
+import NoResults from "../../assets/no_results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
@@ -21,7 +19,6 @@ function ProductsPage({ message, filter = "" }) {
   const [products, setProducts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-
   const [query, setQuery] = useState("");
   const currentUser = useCurrentUser();
 

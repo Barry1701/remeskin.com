@@ -38,6 +38,16 @@ const NavBar = () => {
     </NavLink>
   );
 
+  const addProductIcon = (
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/products/create"
+    >
+      <i className="fas fa-plus-circle"></i>Add product
+    </NavLink>
+  );
+
   const loggedInIcons = (
     <>
       <NavLink
@@ -61,6 +71,7 @@ const NavBar = () => {
       >
         <i className="fas fa-box-open"></i>Products
       </NavLink>
+      {addProductIcon}
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>

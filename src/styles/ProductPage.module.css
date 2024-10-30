@@ -1,0 +1,16 @@
+.Container {
+    padding: 20px;
+  }
+  
+  .ProductImage {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .ButtonsContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
