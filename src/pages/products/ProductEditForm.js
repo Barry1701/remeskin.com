@@ -6,15 +6,18 @@ import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import axios from "axios";
 
 function ProductEditForm() {
   const [errors, setErrors] = useState({});
+  const [categories, setCategories] = useState([]);
   const [productData, setProductData] = useState({
     name: "",
     description: "",
     image: "",
+    category: "",
   });
-  const { name, description, image } = productData;
+  const { name, description, image, category } = productData;
   const imageInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
@@ -29,7 +32,18 @@ function ProductEditForm() {
         history.push("/");
       }
     };
+
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get("/categories/");
+        setCategories(data.results);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     fetchProduct();
+    fetchCategories();
   }, [history, id]);
 
   const handleChange = (event) => {
@@ -54,6 +68,7 @@ function ProductEditForm() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
+    formData.append("category", category);
 
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
@@ -75,43 +90,50 @@ function ProductEditForm() {
       <Container>
         <Form.Group>
           <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleChange}
-          />
+          <Form.Control type="text" name="name" value={name} onChange={handleChange} />
         </Form.Group>
         {errors?.name?.map((message, idx) => (
-          <Alert variant="warning" key={idx}>{message}</Alert>
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
         ))}
-        
+
         <Form.Group>
           <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            name="description"
-            value={description}
-            onChange={handleChange}
-          />
+          <Form.Control as="textarea" rows={3} name="description" value={description} onChange={handleChange} />
         </Form.Group>
         {errors?.description?.map((message, idx) => (
-          <Alert variant="warning" key={idx}>{message}</Alert>
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+
+        <Form.Group>
+          <Form.Label>Category</Form.Label>
+          <Form.Control as="select" name="category" value={category} onChange={handleChange}>
+            <option value="">Select a category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        {errors?.category?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
         ))}
 
         <Form.Group>
           <Image src={image} rounded />
           <Form.Label htmlFor="image-upload">Change Image</Form.Label>
-          <Form.File
-            id="image-upload"
-            accept="image/*"
-            onChange={handleChangeImage}
-            ref={imageInput}
-          />
+          <Form.File id="image-upload" accept="image/*" onChange={handleChangeImage} ref={imageInput} />
         </Form.Group>
         {errors?.image?.map((message, idx) => (
-          <Alert variant="warning" key={idx}>{message}</Alert>
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
         ))}
 
         <Button type="submit">Save Changes</Button>

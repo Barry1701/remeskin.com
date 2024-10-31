@@ -55,6 +55,11 @@ function ProductPage() {
           <Card.Body>
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
+            {product.category_name && (
+              <Card.Text className="text-muted">
+                Category: {product.category_name}
+              </Card.Text>
+            )}
             {isOwner && (
               <div className="d-flex justify-content-end">
                 <Button

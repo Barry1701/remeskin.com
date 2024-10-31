@@ -14,18 +14,38 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import axios from "axios";
 
 function ProductsPage({ message, filter = "" }) {
   const [products, setProducts] = useState({ results: [] });
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
   const [query, setQuery] = useState("");
   const currentUser = useCurrentUser();
 
+  // Pobieranie listy kategorii
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get("/categories/");
+        setCategories(data.results);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Pobieranie listy produktów z uwzględnieniem wybranej kategorii i zapytania
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axiosReq.get(`/products/?${filter}search=${query}`);
+        const { data } = await axiosReq.get(
+          `/products/?${filter}search=${query}&category=${selectedCategory}`
+        );
         setProducts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -41,7 +61,7 @@ function ProductsPage({ message, filter = "" }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, pathname, currentUser]);
+  }, [filter, query, pathname, currentUser, selectedCategory]);
 
   return (
     <Row className="h-100">
@@ -59,6 +79,19 @@ function ProductsPage({ message, filter = "" }) {
             className="mr-sm-2"
             placeholder="Search products"
           />
+          <Form.Control
+            as="select"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="mt-2"
+          >
+            <option value="">All Categories</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </Form.Control>
         </Form>
 
         {hasLoaded ? (

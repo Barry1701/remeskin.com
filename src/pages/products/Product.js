@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
 
-const Product = ({ id, owner, name, description, image, setProducts }) => {
+const Product = ({ id, owner, name, description, image, category_name, setProducts }) => {
   const history = useHistory();
   const currentUser = useCurrentUser();
 
@@ -29,13 +29,10 @@ const Product = ({ id, owner, name, description, image, setProducts }) => {
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{description}</Card.Text>
+        {category_name && <Card.Text>Category: {category_name}</Card.Text>}
         {isOwner && (
           <div className="d-flex justify-content-end">
-            <Button
-              variant="warning"
-              onClick={() => history.push(`/products/${id}/edit`)}
-              className="mr-2"
-            >
+            <Button variant="warning" onClick={() => history.push(`/products/${id}/edit`)} className="mr-2">
               Edit
             </Button>
             <Button variant="danger" onClick={handleDelete}>
