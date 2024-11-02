@@ -1,13 +1,24 @@
 .Post {
-  background-color: #f9f9fb;
-  border: 1px solid #e0e0e5;
-  border-radius: 8px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: 1px solid #dadadf;
+  border-radius: 2px;
   margin-bottom: 16px;
-  transition: transform 0.2s ease;
+  text-align: center;
 }
 
-.Post:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+.Post figure,
+h5 {
+  margin: 0 0;
+}
+
+.Heart {
+  color: #f85032;
+}
+
+.Heart:hover {
+  color: #2142b2;
+}
+
+.HeartOutline:hover {
+  color: #f85032;
 }

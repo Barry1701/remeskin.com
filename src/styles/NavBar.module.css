@@ -1,8 +1,29 @@
 .NavBar {
-  background: linear-gradient(135deg, #ffffff, #f0f0f5);
-  border: 1px solid #d1d1e0;
+  /* Gradient background for a "wow" effect */
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  border: none;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.NavBar:hover {
+  /* Slightly darken on hover */
+  background: linear-gradient(135deg, #58c0d1, #1a7d91);
+}
+
+.NavLink {
+  padding: 5px;
+  color: #ffffff; /* White text color for contrast */
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.NavLink:hover {
+  color: #ffe900; /* Gold color on hover for emphasis */
 }
 
 .Active i {
-  color: #1e3d8f;
+  color: #ffe900; /* Highlighted color for active icon */
 }
