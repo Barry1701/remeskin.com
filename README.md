@@ -47,6 +47,8 @@ npm start
 The application will be available at [http://localhost:3000](http://localhost:3000) or at your specific development URL, e.g., [Remeskin Dev](https://3000-barry1701-remeskincom-4ugf58qe7yy.ws.codeinstitute-ide.net/).
 
 
+### Live Demo
+Check out the live version of the application here: [Remeskin on Heroku](https://remeskin-00de58d1deef.herokuapp.com/)
 
 
  
