@@ -1,5 +1,5 @@
 .NavBar {
-  /* Gradient background for a "wow" effect */
+  /* Gradient background for a better effect */
   background: linear-gradient(135deg, #6dd5ed, #2193b0);
   border: none;
   padding: 10px;
@@ -29,8 +29,8 @@
 }
 
 .NavLogo {
-  height: 100%; /* Sprawia, że logo zajmuje całą wysokość paska nawigacyjnego */
-  max-height: 60px; /* Możesz dostosować maksymalną wysokość logo */
-  object-fit: contain; /* Dopasowanie logo w pionie */
+  /* Ensures the logo takes up the full height of the navbar */
+  height: 100%;
+  max-height: 60px; /* Adjusts the maximum height of the logo */
+  object-fit: contain; /* Fits the logo within its container */
 }
-
