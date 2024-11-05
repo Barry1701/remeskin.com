@@ -7,8 +7,15 @@
 This project uses the following technologies:
 - **React** - JavaScript library for building user interfaces
 - **REST API** - Backend API to manage data interactions
+- **Bootstrap 4.6** - For responsive design and prebuilt styling components.
+- **Google Fonts (Lato)** - The Lato font family is used for typography.
+- **Font Awesome** - For icons throughout the application.
 - **CSS Modules** - Scoped styles for each component
 - **Axios** - For API requests
+
+## 📱 PWA Support
+Remeskin is configured to support installation as a Progressive Web App (PWA). This allows users to install the application on their mobile devices or desktops for a more native app experience. The `manifest.json` file provides metadata for the PWA setup.
+
 
 ## ⚙️ Installation and Setup
 To run this project locally, follow these steps:
