@@ -87,7 +87,7 @@ Below are some screenshots showcasing key features of the Remeskin platform. All
 - **Collapsed Menu**: The navigation bar for smaller screen in its collapsed form, showing icons and labels for quick access.
   ![Collapsed Menu](documentation/smaller.png)
 
-🔮 Future Plans
+## 🔮 Future Plans
 Some potential future enhancements for Remeskin include:
 
 - Adding resources from dermatologists and allergy specialists
@@ -101,7 +101,7 @@ Some potential future enhancements for Remeskin include:
 - The **logo**, **favicon**, and **signup images** are original creations generated using an image generator.
 
 
-👤 Authors
+## 👤 Authors
 - **Bartosz Stanczuk** - Developer and creator of Remeskin
 
 
