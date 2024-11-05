@@ -84,7 +84,7 @@ Below are some screenshots showcasing key features of the Remeskin platform. All
 - **Navigation Bar**: The top navigation bar, displaying links to Home, Products, Sign In, and Sign Up, along with the Remeskin logo.
   ![Navigation Bar](documentation/nav.png)
 
-- **Collapsed Menu**: The navigation bar for smaller screen in its collapsed form, showing icons and labels for quick access.
+- **Collapsed Menu**: The navigation bar for smaller screen, showing icons and labels for quick access.
   ![Collapsed Menu](documentation/smaller.png)
 
 ## 🔮 Future Plans
