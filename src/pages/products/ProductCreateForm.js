@@ -34,7 +34,7 @@ function ProductCreateForm() {
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get("/categories/");
-        setCategories(data.results);
+        setCategories(data);
       } catch (err) {
         console.log(err);
       }
