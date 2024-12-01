@@ -32,6 +32,7 @@ function SignInForm() {
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -39,7 +40,7 @@ function SignInForm() {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      history.goBack();
+      history.push("/"); // Przekierowanie na stronę główną po zalogowaniu
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -56,7 +57,7 @@ function SignInForm() {
     <Row className={styles.Row}>
       <Col className="my-auto p-0 p-md-2" md={6}>
         <Container className={`${appStyles.Content} p-4 `}>
-          <h1 className={styles.Header}>sign in</h1>
+          <h1 className={styles.Header}>Sign in</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
               <Form.Label className="d-none">Username</Form.Label>
@@ -91,6 +92,7 @@ function SignInForm() {
                 {message}
               </Alert>
             ))}
+
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"

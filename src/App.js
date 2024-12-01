@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import Container from "react-bootstrap/Container";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "./api/axiosDefaults";
 
 import SignUpForm from "./pages/auth/SignUpForm";
@@ -18,7 +18,7 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import ProductsPage from "./pages/products/ProductsPage";
 import ProductCreateForm from "./pages/products/ProductCreateForm";
 import ProductEditForm from "./pages/products/ProductEditForm";
-import ProductPage from "./pages/products/ProductPage"; // Import nowego komponentu
+import ProductPage from "./pages/products/ProductPage";
 import NotFound from "./components/NotFound";
 
 import { useCurrentUser } from "./contexts/CurrentUserContext";
@@ -32,54 +32,119 @@ function App() {
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
+          {/* Domyślna strona dla zalogowanych i niezalogowanych */}
           <Route
             exact
             path="/"
-            render={() => (
-              <PostsPage message="Sorry, no posts to display here. Try searching with different keywords." />
-            )}
+            render={() =>
+              currentUser ? (
+                <PostsPage message="Sorry, no posts to display here. Try searching with different keywords." />
+              ) : (
+                <Redirect to="/signin" />
+              )
+            }
           />
+
+          {/* Trasa dla zalogowanych użytkowników */}
           <Route
             exact
             path="/feed"
-            render={() => (
-              <PostsPage
-                message="No new updates in your feed. Follow more users to see their latest posts here."
-                filter={`owner__followed__owner__profile=${profile_id}&`}
-              />
-            )}
+            render={() =>
+              currentUser ? (
+                <PostsPage
+                  message="No new updates in your feed. Follow more users to see their latest posts here."
+                  filter={`owner__followed__owner__profile=${profile_id}&`}
+                />
+              ) : (
+                <Redirect to="/signin" />
+              )
+            }
           />
           <Route
             exact
             path="/liked"
-            render={() => (
-              <PostsPage
-                message="You haven’t liked any posts yet. Start exploring and like posts to see them here."
-                filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
-              />
-            )}
+            render={() =>
+              currentUser ? (
+                <PostsPage
+                  message="You haven’t liked any posts yet. Start exploring and like posts to see them here."
+                  filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
+                />
+              ) : (
+                <Redirect to="/signin" />
+              )
+            }
           />
-          <Route exact path="/signin" render={() => <SignInForm />} />
-          <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/posts/create" render={() => <PostCreateForm />} />
-          <Route exact path="/posts/:id" render={() => <PostPage />} />
-          <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
-          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+
+          {/* Trasy dla logowania i rejestracji */}
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignInForm />
+            }
+          />
+          <Route
+            exact
+            path="/signup"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignUpForm />
+            }
+          />
+
+          {/* Trasy dla postów */}
+          <Route
+            exact
+            path="/posts/create"
+            render={() =>
+              currentUser ? <PostCreateForm /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/posts/:id"
+            render={() =>
+              currentUser ? <PostPage /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/posts/:id/edit"
+            render={() =>
+              currentUser ? <PostEditForm /> : <Redirect to="/signin" />
+            }
+          />
+
+          {/* Trasy dla profili */}
+          <Route
+            exact
+            path="/profiles/:id"
+            render={() =>
+              currentUser ? <ProfilePage /> : <Redirect to="/signin" />
+            }
+          />
           <Route
             exact
             path="/profiles/:id/edit/username"
-            render={() => <UsernameForm />}
+            render={() =>
+              currentUser ? <UsernameForm /> : <Redirect to="/signin" />
+            }
           />
           <Route
             exact
             path="/profiles/:id/edit/password"
-            render={() => <UserPasswordForm />}
+            render={() =>
+              currentUser ? <UserPasswordForm /> : <Redirect to="/signin" />
+            }
           />
           <Route
             exact
             path="/profiles/:id/edit"
-            render={() => <ProfileEditForm />}
+            render={() =>
+              currentUser ? <ProfileEditForm /> : <Redirect to="/signin" />
+            }
           />
+
+          {/* Trasy dla produktów */}
           <Route
             exact
             path="/products"
@@ -90,19 +155,25 @@ function App() {
           <Route
             exact
             path="/products/create"
-            render={() => <ProductCreateForm />}
+            render={() =>
+              currentUser ? <ProductCreateForm /> : <Redirect to="/signin" />
+            }
           />
           <Route
             exact
             path="/products/:id"
-            render={() => <ProductPage />} // Dodajemy nową trasę
+            render={() => <ProductPage />}
           />
           <Route
             exact
             path="/products/:id/edit"
-            render={() => <ProductEditForm />}
+            render={() =>
+              currentUser ? <ProductEditForm /> : <Redirect to="/signin" />
+            }
           />
-          <Route render={() => <NotFound message="Oops! The page you're looking for doesn't exist." />} />
+
+          {/* Domyślna trasa */}
+          <Route render={() => <NotFound />} />
         </Switch>
       </Container>
     </div>

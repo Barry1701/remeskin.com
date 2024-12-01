@@ -3,10 +3,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
-import {
-  useCurrentUser,
-  useSetCurrentUser,
-} from "../contexts/CurrentUserContext";
+import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
@@ -28,6 +25,7 @@ const NavBar = () => {
     }
   };
 
+  // Add Post Icon
   const addPostIcon = (
     <NavLink
       className={styles.NavLink}
@@ -38,6 +36,7 @@ const NavBar = () => {
     </NavLink>
   );
 
+  // Add Product Icon
   const addProductIcon = (
     <NavLink
       className={styles.NavLink}
@@ -48,8 +47,25 @@ const NavBar = () => {
     </NavLink>
   );
 
+  // Logged-in Icons
   const loggedInIcons = (
     <>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/"
+      >
+        <i className="fas fa-home"></i>Home
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/products"
+      >
+        <i className="fas fa-box-open"></i>Products
+      </NavLink>
+      {addPostIcon} {/* Include Add Post Icon */}
+      {addProductIcon} {/* Include Add Product Icon */}
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -64,14 +80,6 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/products"
-      >
-        <i className="fas fa-box-open"></i>Products
-      </NavLink>
-      {addProductIcon}
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
@@ -84,15 +92,9 @@ const NavBar = () => {
     </>
   );
 
+  // Logged-out Icons
   const loggedOutIcons = (
     <>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/products"
-      >
-        <i className="fas fa-box-open"></i>Products
-      </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -111,19 +113,20 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar
-      expanded={expanded}
-      className={styles.NavBar}
-      expand="md"
-      fixed="top"
-    >
+    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed="top">
       <Container>
-        <NavLink to="/">
+        {/* Logo */}
+        {currentUser ? (
+          <NavLink to="/">
+            <Navbar.Brand>
+              <img src={logo} alt="logo" className={styles.NavLogo} />
+            </Navbar.Brand>
+          </NavLink>
+        ) : (
           <Navbar.Brand>
             <img src={logo} alt="logo" className={styles.NavLogo} />
           </Navbar.Brand>
-        </NavLink>
-        {currentUser && addPostIcon}
+        )}
         <Navbar.Toggle
           ref={ref}
           onClick={() => setExpanded(!expanded)}
@@ -131,14 +134,6 @@ const NavBar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to="/"
-            >
-              <i className="fas fa-home"></i>Home
-            </NavLink>
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
