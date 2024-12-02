@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
-import customImage from "../../assets/relief.png";
+import customImage from "../../assets/sign_out.png";
 
 import { Link, useHistory } from "react-router-dom";
 

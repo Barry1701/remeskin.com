@@ -32,7 +32,7 @@ const NavBar = () => {
       activeClassName={styles.Active}
       to="/posts/create"
     >
-      <i className="far fa-plus-square"></i>Add post
+      <i className="far fa-plus-square"></i>Add Post
     </NavLink>
   );
 
@@ -42,18 +42,21 @@ const NavBar = () => {
       className={styles.NavLink}
       activeClassName={styles.Active}
       to="/products/create"
+      exact
     >
-      <i className="fas fa-plus-circle"></i>Add product
+      <i className="fas fa-plus-circle"></i>Add Product
     </NavLink>
   );
 
   // Logged-in Icons
   const loggedInIcons = (
     <>
+      {addPostIcon} {/* Add Post Icon */}
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/"
+        exact
       >
         <i className="fas fa-home"></i>Home
       </NavLink>
@@ -61,11 +64,11 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/products"
+        exact
       >
         <i className="fas fa-box-open"></i>Products
       </NavLink>
-      {addPostIcon} {/* Include Add Post Icon */}
-      {addProductIcon} {/* Include Add Product Icon */}
+      {addProductIcon} {/* Add Product Icon */}
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -80,14 +83,14 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
-      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
-        <i className="fas fa-sign-out-alt"></i>Sign out
-      </NavLink>
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+      </NavLink>
+      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
+        <i className="fas fa-sign-out-alt"></i>Sign Out
       </NavLink>
     </>
   );
@@ -134,7 +137,9 @@ const NavBar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
-            {currentUser ? loggedInIcons : loggedOutIcons}
+            <div className={styles.customBox}>
+              {currentUser ? loggedInIcons : loggedOutIcons}
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>

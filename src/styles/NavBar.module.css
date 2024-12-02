@@ -22,7 +22,7 @@
 
 .NavLink {
   margin-left: 10px;
-  color: #ffffff;
+  color: #FFD700;
   font-weight: bold;
   font-size: 1rem;
   transition: color 0.3s ease-in-out;
@@ -30,15 +30,48 @@
 }
 
 .NavLink:hover {
-  color: #ffe900;
+  color: #DC143C;
 }
 
 .Active i {
-  color: #ffe900;
+  color: #DC143C;
 }
 
 .SearchBar {
   flex-grow: 1;
   max-width: 300px;
   margin-left: 20px;
+}
+
+.customBox {
+  background: linear-gradient(180deg, #6dd5ed, #2193b0);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center; /* Wyrównanie w poziomie */
+  align-items: center;     /* Wyrównanie w pionie */
+  width: fit-content;
+  height: 100%; /* Jeśli chcesz, aby div miał pełną wysokość kontenera */
+}
+
+@media (max-width: 768px) {
+  .NavBar {
+    padding: 0; /* Zmniejsz padding na małych ekranach */
+  }
+
+  .NavLink {
+    font-size: 14px; /* Zmniejsz czcionkę na urządzeniach mobilnych */
+    margin-right: 0;
+    margin-bottom: 10px; /* Ustaw margines na dole */
+  }
+
+  .customBox {
+    display: block;
+    width: 100%; /* Zajmij całą szerokość na małych ekranach */
+    padding: 0;
+  }
+
+  .Navbar-collapse {
+    padding: 10px;
+  }
 }
