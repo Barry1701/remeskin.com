@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
+import btnStyles from "../../styles/Button.module.css"; // Import your Button styles
 
 function ProductEditForm() {
   const [errors, setErrors] = useState({});
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]); // Default to an empty array
   const [productData, setProductData] = useState({
     name: "",
     description: "",
@@ -29,16 +29,17 @@ function ProductEditForm() {
         setProductData(data);
       } catch (err) {
         console.log(err);
-        history.push("/");
+        history.push("/"); // Redirect on failure
       }
     };
 
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get("/categories/");
-        setCategories(data.results);
+        setCategories(data.results || data); // Ensure compatibility with both formats
       } catch (err) {
         console.log(err);
+        setCategories([]); // Ensure categories is always an array
       }
     };
 
@@ -88,9 +89,15 @@ function ProductEditForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <Container>
+        {/* Name Field */}
         <Form.Group>
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" name="name" value={name} onChange={handleChange} />
+          <Form.Control
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
         </Form.Group>
         {errors?.name?.map((message, idx) => (
           <Alert variant="warning" key={idx}>
@@ -98,9 +105,16 @@ function ProductEditForm() {
           </Alert>
         ))}
 
+        {/* Description Field */}
         <Form.Group>
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} name="description" value={description} onChange={handleChange} />
+          <Form.Control
+            as="textarea"
+            rows={3}
+            name="description"
+            value={description}
+            onChange={handleChange}
+          />
         </Form.Group>
         {errors?.description?.map((message, idx) => (
           <Alert variant="warning" key={idx}>
@@ -108,9 +122,15 @@ function ProductEditForm() {
           </Alert>
         ))}
 
+        {/* Category Field */}
         <Form.Group>
           <Form.Label>Category</Form.Label>
-          <Form.Control as="select" name="category" value={category} onChange={handleChange}>
+          <Form.Control
+            as="select"
+            name="category"
+            value={category}
+            onChange={handleChange}
+          >
             <option value="">Select a category</option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -125,10 +145,24 @@ function ProductEditForm() {
           </Alert>
         ))}
 
+        {/* Image Upload */}
         <Form.Group>
-          <Image src={image} rounded />
-          <Form.Label htmlFor="image-upload">Change Image</Form.Label>
-          <Form.File id="image-upload" accept="image/*" onChange={handleChangeImage} ref={imageInput} />
+          {image && <Image src={image} rounded />}
+          <div className="mt-3">
+            <label
+              htmlFor="image-upload"
+              className={`${btnStyles.Button} ${btnStyles.Blue}`} // Same style as Cancel/Create
+            >
+              Change Image
+            </label>
+            <Form.File
+              id="image-upload"
+              accept="image/*"
+              onChange={handleChangeImage}
+              ref={imageInput}
+              style={{ display: "none" }}
+            />
+          </div>
         </Form.Group>
         {errors?.image?.map((message, idx) => (
           <Alert variant="warning" key={idx}>
@@ -136,7 +170,22 @@ function ProductEditForm() {
           </Alert>
         ))}
 
-        <Button type="submit">Save Changes</Button>
+        {/* Buttons */}
+        <div className="d-flex justify-content-between mt-3">
+          <button
+            type="button"
+            onClick={() => history.goBack()}
+            className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          >
+            Save Changes
+          </button>
+        </div>
       </Container>
     </Form>
   );

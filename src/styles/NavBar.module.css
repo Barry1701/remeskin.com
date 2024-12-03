@@ -30,11 +30,11 @@
 }
 
 .NavLink:hover {
-  color: #DC143C;
+  color: #EEC699;
 }
 
 .Active i {
-  color: #DC143C;
+  color: #008000;
 }
 
 .SearchBar {
