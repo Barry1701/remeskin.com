@@ -56,18 +56,24 @@
 
 @media (max-width: 768px) {
   .NavBar {
-    padding: 0; /* Zmniejsz padding na małych ekranach */
+    height: 75px; /* Ensure consistent navbar height */
+    padding: 0; /* Adjust padding for mobile */
+  }
+
+  .NavLogo {
+    height: 100%; /* Ensure logo always occupies full navbar height */
+    padding: 5px; /* Optional: Adjust padding for small screens */
   }
 
   .NavLink {
-    font-size: 14px; /* Zmniejsz czcionkę na urządzeniach mobilnych */
+    font-size: 14px; /* Smaller font for links */
     margin-right: 0;
-    margin-bottom: 10px; /* Ustaw margines na dole */
+    margin-bottom: 10px; /* Add spacing below links */
   }
 
   .customBox {
     display: block;
-    width: 100%; /* Zajmij całą szerokość na małych ekranach */
+    width: 100%; /* Take full width on small screens */
     padding: 0;
   }
 
