@@ -6,11 +6,11 @@ import Image from "react-bootstrap/Image";
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
-import btnStyles from "../../styles/Button.module.css"; // Import your Button styles
+import Swal from "sweetalert2";
 
 function ProductEditForm() {
   const [errors, setErrors] = useState({});
-  const [categories, setCategories] = useState([]); // Default to an empty array
+  const [categories, setCategories] = useState([]);
   const [productData, setProductData] = useState({
     name: "",
     description: "",
@@ -28,18 +28,27 @@ function ProductEditForm() {
         const { data } = await axiosReq.get(`/products/${id}/`);
         setProductData(data);
       } catch (err) {
-        console.log(err);
-        history.push("/"); // Redirect on failure
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to load the product. Redirecting to the main page.",
+        });
+        history.push("/");
       }
     };
 
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get("/categories/");
-        setCategories(data.results || data); // Ensure compatibility with both formats
+        setCategories(data.results || data);
       } catch (err) {
-        console.log(err);
-        setCategories([]); // Ensure categories is always an array
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to load categories. Please try again later.",
+        });
       }
     };
 
@@ -77,19 +86,59 @@ function ProductEditForm() {
 
     try {
       await axiosReq.put(`/products/${id}/`, formData);
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Product updated successfully!",
+      });
       history.push(`/products/${id}`);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to update the product. Please check the form.",
+        });
       }
     }
   };
 
+  const handleDelete = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosReq.delete(`/products/${id}/`);
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "Your product has been deleted.",
+          });
+          history.push("/products");
+        } catch (err) {
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Failed to delete the product. Please try again later.",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
-      <Container>
-        {/* Name Field */}
+      <Container className="p-4 border rounded">
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -105,7 +154,6 @@ function ProductEditForm() {
           </Alert>
         ))}
 
-        {/* Description Field */}
         <Form.Group>
           <Form.Label>Description</Form.Label>
           <Form.Control
@@ -122,7 +170,6 @@ function ProductEditForm() {
           </Alert>
         ))}
 
-        {/* Category Field */}
         <Form.Group>
           <Form.Label>Category</Form.Label>
           <Form.Control
@@ -145,24 +192,22 @@ function ProductEditForm() {
           </Alert>
         ))}
 
-        {/* Image Upload */}
-        <Form.Group>
-          {image && <Image src={image} rounded />}
-          <div className="mt-3">
-            <label
-              htmlFor="image-upload"
-              className={`${btnStyles.Button} ${btnStyles.Blue}`} // Same style as Cancel/Create
-            >
-              Change Image
-            </label>
-            <Form.File
-              id="image-upload"
-              accept="image/*"
-              onChange={handleChangeImage}
-              ref={imageInput}
-              style={{ display: "none" }}
-            />
-          </div>
+        <Form.Group className="text-center">
+          {image && (
+            <figure className="d-flex justify-content-center">
+              <Image src={image} rounded className="w-50" />
+            </figure>
+          )}
+          <label htmlFor="image-upload" className="btn btn-info mt-3">
+            Change Image
+          </label>
+          <Form.File
+            id="image-upload"
+            accept="image/*"
+            onChange={handleChangeImage}
+            ref={imageInput}
+            style={{ display: "none" }}
+          />
         </Form.Group>
         {errors?.image?.map((message, idx) => (
           <Alert variant="warning" key={idx}>
@@ -170,18 +215,17 @@ function ProductEditForm() {
           </Alert>
         ))}
 
-        {/* Buttons */}
         <div className="d-flex justify-content-between mt-3">
           <button
             type="button"
-            onClick={() => history.goBack()}
-            className={`${btnStyles.Button} ${btnStyles.Blue}`}
+            onClick={handleDelete}
+            className="btn btn-danger"
           >
-            Cancel
+            Delete
           </button>
           <button
             type="submit"
-            className={`${btnStyles.Button} ${btnStyles.Blue}`}
+            className="btn btn-warning"
           >
             Save Changes
           </button>

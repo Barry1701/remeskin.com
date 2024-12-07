@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
+import Swal from "sweetalert2";
 
 const Post = (props) => {
   const {
@@ -33,12 +34,26 @@ const Post = (props) => {
   };
 
   const handleDelete = async () => {
-    try {
-      await axiosRes.delete(`/posts/${id}/`);
-      history.goBack();
-    } catch (err) {
-      console.log(err);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosRes.delete(`/posts/${id}/`);
+          Swal.fire("Deleted!", "Your post has been deleted.", "success");
+          history.goBack();
+        } catch (err) {
+          Swal.fire("Error!", "Something went wrong. Please try again.", "error");
+          console.log(err);
+        }
+      }
+    });
   };
 
   const handleLike = async () => {

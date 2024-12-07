@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -18,12 +17,12 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import Swal from "sweetalert2";
 
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-
   const [query, setQuery] = useState("");
 
   const currentUser = useCurrentUser();
@@ -35,7 +34,7 @@ function PostsPage({ message, filter = "" }) {
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        Swal.fire("Error", "Failed to load posts. Please try again.", "error");
       }
     };
 
@@ -49,6 +48,12 @@ function PostsPage({ message, filter = "" }) {
     };
   }, [filter, query, pathname, currentUser]);
 
+  const handleSearchChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const noPostsMessage = message || "No posts found.";
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
@@ -60,7 +65,7 @@ function PostsPage({ message, filter = "" }) {
         >
           <Form.Control
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={handleSearchChange}
             type="text"
             className="mr-sm-2"
             placeholder="Search posts"
@@ -71,17 +76,18 @@ function PostsPage({ message, filter = "" }) {
           <>
             {posts.results.length ? (
               <InfiniteScroll
-                children={posts.results.map((post) => (
+                dataLength={posts.results.length}
+                next={() => fetchMoreData(posts, setPosts)}
+                hasMore={!!posts.next}
+                loader={<Asset spinner />}
+              >
+                {posts.results.map((post) => (
                   <Post key={post.id} {...post} setPosts={setPosts} />
                 ))}
-                dataLength={posts.results.length}
-                loader={<Asset spinner />}
-                hasMore={!!posts.next}
-                next={() => fetchMoreData(posts, setPosts)}
-              />
+              </InfiniteScroll>
             ) : (
               <Container className={appStyles.Content}>
-                <Asset src={NoResults} message={message} />
+                <Asset src={NoResults} message={noPostsMessage} />
               </Container>
             )}
           </>

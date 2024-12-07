@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -13,10 +12,10 @@ import btnStyles from "../../styles/Button.module.css";
 
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import Swal from "sweetalert2";
 
 function PostEditForm() {
   const [errors, setErrors] = useState({});
-
   const [postData, setPostData] = useState({
     title: "",
     content: "",
@@ -36,7 +35,7 @@ function PostEditForm() {
 
         is_owner ? setPostData({ title, content, image }) : history.push("/");
       } catch (err) {
-        console.log(err);
+        Swal.fire("Error!", "Failed to load post details.", "error");
       }
     };
 
@@ -73,9 +72,11 @@ function PostEditForm() {
 
     try {
       await axiosReq.put(`/posts/${id}/`, formData);
-      history.push(`/posts/${id}`);
+      Swal.fire("Success!", "Your post has been updated.", "success").then(() =>
+        history.push(`/posts/${id}`)
+      );
     } catch (err) {
-      console.log(err);
+      Swal.fire("Error!", "Failed to update the post. Please try again.", "error");
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -115,15 +116,21 @@ function PostEditForm() {
         </Alert>
       ))}
 
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goBack()}
-      >
-        cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        save
-      </Button>
+      <div className="d-flex justify-content-between mt-3">
+        <button
+          type="button"
+          onClick={() => history.goBack()}
+          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className={`${btnStyles.Button} ${btnStyles.Bright}`}
+        >
+          Save Changes
+        </button>
+      </div>
     </div>
   );
 
@@ -152,6 +159,7 @@ function PostEditForm() {
                 accept="image/*"
                 onChange={handleChangeImage}
                 ref={imageInput}
+                style={{ display: "none" }}
               />
             </Form.Group>
             {errors?.image?.map((message, idx) => (

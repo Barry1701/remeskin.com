@@ -15,6 +15,7 @@ import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 function ProductsPage({ message, filter = "" }) {
   const [products, setProducts] = useState({ results: [] });
@@ -25,7 +26,7 @@ function ProductsPage({ message, filter = "" }) {
   const [query, setQuery] = useState("");
   const currentUser = useCurrentUser();
 
-  // Pobieranie listy kategorii
+  // Fetch category list
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -33,13 +34,18 @@ function ProductsPage({ message, filter = "" }) {
         setCategories(data);
       } catch (err) {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to load categories. Please try again later.",
+        });
       }
     };
 
     fetchCategories();
   }, []);
 
-  // Pobieranie listy produktów z uwzględnieniem wybranej kategorii i zapytania
+  // Fetch product list based on selected category and query
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -50,6 +56,11 @@ function ProductsPage({ message, filter = "" }) {
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to load products. Please try again later.",
+        });
       }
     };
 

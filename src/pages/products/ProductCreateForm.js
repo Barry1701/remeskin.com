@@ -15,6 +15,7 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 function ProductCreateForm() {
   const [errors, setErrors] = useState({});
@@ -37,6 +38,11 @@ function ProductCreateForm() {
         setCategories(data);
       } catch (err) {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to load categories. Please try again later.",
+        });
       }
     };
     fetchCategories();
@@ -70,11 +76,21 @@ function ProductCreateForm() {
 
     try {
       const { data } = await axiosReq.post("/products/", formData);
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Product created successfully!",
+      });
       history.push(`/products/${data.id}`);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to create product. Please check the form and try again.",
+        });
       }
     }
   };
