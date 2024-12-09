@@ -18,6 +18,7 @@ import appStyles from "../../App.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
 import { setTokenTimestamp } from "../../utils/utils";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
@@ -40,9 +41,24 @@ function SignInForm() {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      history.push("/"); // Przekierowanie na stronę główną po zalogowaniu
+
+      // Show success notification
+      Swal.fire({
+        icon: "success",
+        title: "Welcome!",
+        text: "You have successfully signed in.",
+      }).then(() => {
+        history.push("/"); // Redirect to home page after login
+      });
     } catch (err) {
       setErrors(err.response?.data);
+
+      // Show error notification
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: "Invalid credentials. Please try again.",
+      });
     }
   };
 

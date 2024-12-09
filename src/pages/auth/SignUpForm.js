@@ -15,11 +15,14 @@ import {
   Container,
   Alert,
 } from "react-bootstrap";
+import Swal from "sweetalert2"; // Import SweetAlert
 import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
 
 const SignUpForm = () => {
   useRedirect("loggedIn");
+
+  // State to store sign-up data
   const [signUpData, setSignUpData] = useState({
     username: "",
     password1: "",
@@ -27,10 +30,12 @@ const SignUpForm = () => {
   });
   const { username, password1, password2 } = signUpData;
 
+  // State to handle form errors
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
 
+  // Handle changes in form input fields
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -38,25 +43,42 @@ const SignUpForm = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Make a POST request to the registration endpoint
       await axios.post("/dj-rest-auth/registration/", signUpData);
+
+      // Show success notification
+      Swal.fire("Success!", "Your account has been created.", "success");
+
+      // Redirect user to the sign-in page
       history.push("/signin");
     } catch (err) {
+      // Set error messages in the form
       setErrors(err.response?.data);
+
+      // Show error notification
+      Swal.fire(
+        "Error!",
+        "There was an issue creating your account. Please check your inputs.",
+        "error"
+      );
     }
   };
 
   return (
     <Row className={styles.Row}>
       <Col className="my-auto py-2 p-md-2" md={6}>
-        <Container className={`${appStyles.Content} p-4 `}>
-          <h1 className={styles.Header}>sign up</h1>
+        <Container className={`${appStyles.Content} p-4`}>
+          <h1 className={styles.Header}>Sign up</h1>
 
+          {/* Sign-up Form */}
           <Form onSubmit={handleSubmit}>
+            {/* Username Field */}
             <Form.Group controlId="username">
-              <Form.Label className="d-none">username</Form.Label>
+              <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
                 className={styles.Input}
                 type="text"
@@ -72,6 +94,7 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
+            {/* Password Field */}
             <Form.Group controlId="password1">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
@@ -89,6 +112,7 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
+            {/* Confirm Password Field */}
             <Form.Group controlId="password2">
               <Form.Label className="d-none">Confirm password</Form.Label>
               <Form.Control
@@ -106,12 +130,15 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
+            {/* Submit Button */}
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"
             >
               Sign up
             </Button>
+
+            {/* Non-field Errors */}
             {errors.non_field_errors?.map((message, idx) => (
               <Alert key={idx} variant="warning" className="mt-3">
                 {message}
@@ -120,20 +147,20 @@ const SignUpForm = () => {
           </Form>
         </Container>
 
+        {/* Link to Sign-in Page */}
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signin">
             Already have an account? <span>Sign in</span>
           </Link>
         </Container>
       </Col>
+
+      {/* Image Section */}
       <Col
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
       >
-        <Image
-          className={`${appStyles.FillerImage}`}
-          src={customImage}
-        />
+        <Image className={`${appStyles.FillerImage}`} src={customImage} />
       </Col>
     </Row>
   );
