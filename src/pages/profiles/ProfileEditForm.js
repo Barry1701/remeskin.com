@@ -17,6 +17,7 @@ import {
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import Swal from "sweetalert2";
 
 const ProfileEditForm = () => {
   const currentUser = useCurrentUser();
@@ -43,9 +44,11 @@ const ProfileEditForm = () => {
           setProfileData({ name, content, image });
         } catch (err) {
           console.log(err);
+          Swal.fire("Error!", "Failed to load profile details.", "error");
           history.push("/");
         }
       } else {
+        Swal.fire("Error!", "Unauthorized access to this profile.", "error");
         history.push("/");
       }
     };
@@ -76,10 +79,15 @@ const ProfileEditForm = () => {
         ...currentUser,
         profile_image: data.image,
       }));
-      history.goBack();
+      Swal.fire("Success!", "Your profile has been updated.", "success").then(
+        () => {
+          history.goBack();
+        }
+      );
     } catch (err) {
       console.log(err);
       setErrors(err.response?.data);
+      Swal.fire("Error!", "Failed to update the profile.", "error");
     }
   };
 

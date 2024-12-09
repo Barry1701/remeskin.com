@@ -21,9 +21,8 @@ const Post = (props) => {
     content,
     image,
     updated_at,
-    postPage,
     setPosts,
-  } = props;
+  } = props; // Removed postPage since it's no longer needed.
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
@@ -47,7 +46,10 @@ const Post = (props) => {
         try {
           await axiosRes.delete(`/posts/${id}/`);
           Swal.fire("Deleted!", "Your post has been deleted.", "success");
-          history.goBack();
+          setPosts((prevPosts) => ({
+            ...prevPosts,
+            results: prevPosts.results.filter((post) => post.id !== id),
+          }));
         } catch (err) {
           Swal.fire("Error!", "Something went wrong. Please try again.", "error");
           console.log(err);
@@ -98,7 +100,7 @@ const Post = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && postPage && (
+            {is_owner && (
               <MoreDropdown
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}

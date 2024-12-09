@@ -14,6 +14,7 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
+import Swal from "sweetalert2";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
@@ -52,15 +53,28 @@ function PostCreateForm() {
 
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("image", imageInput.current.files[0]);
+    if (imageInput.current?.files[0]) {
+      formData.append("image", imageInput.current.files[0]);
+    }
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
-      history.push(`/posts/${data.id}`);
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Your post has been created successfully.",
+      }).then(() => {
+        history.push(`/posts/${data.id}`);
+      });
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: "Failed to create the post. Please check the form.",
+        });
       }
     }
   };
@@ -98,15 +112,20 @@ function PostCreateForm() {
         </Alert>
       ))}
 
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goBack()}
-      >
-        cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        create
-      </Button>
+      <div className="d-flex justify-content-between mt-3">
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          onClick={() => history.goBack()}
+        >
+          Cancel
+        </Button>
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.Bright}`}
+          type="submit"
+        >
+          Create
+        </Button>
+      </div>
     </div>
   );
 
@@ -149,6 +168,7 @@ function PostCreateForm() {
                 accept="image/*"
                 onChange={handleChangeImage}
                 ref={imageInput}
+                style={{ display: "none" }}
               />
             </Form.Group>
             {errors?.image?.map((message, idx) => (

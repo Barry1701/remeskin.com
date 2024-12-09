@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
 
 import styles from "../../styles/CommentCreateEditForm.module.css";
+import Swal from "sweetalert2";
 
 function CommentEditForm(props) {
   const { id, content, setShowEditForm, setComments } = props;
@@ -33,8 +34,10 @@ function CommentEditForm(props) {
         }),
       }));
       setShowEditForm(false);
+      Swal.fire("Success!", "Your comment has been updated.", "success");
     } catch (err) {
       console.log(err);
+      Swal.fire("Error!", "Failed to update the comment. Please try again.", "error");
     }
   };
 
@@ -59,7 +62,7 @@ function CommentEditForm(props) {
         </button>
         <button
           className={styles.Button}
-          disabled={!content.trim()}
+          disabled={!formContent.trim()}
           type="submit"
         >
           save

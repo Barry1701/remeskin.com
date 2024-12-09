@@ -33,7 +33,12 @@ function PostEditForm() {
         const { data } = await axiosReq.get(`/posts/${id}/`);
         const { title, content, image, is_owner } = data;
 
-        is_owner ? setPostData({ title, content, image }) : history.push("/");
+        if (is_owner) {
+          setPostData({ title, content, image });
+        } else {
+          Swal.fire("Error!", "You do not own this post.", "error");
+          history.push("/");
+        }
       } catch (err) {
         Swal.fire("Error!", "Failed to load post details.", "error");
       }
@@ -83,6 +88,29 @@ function PostEditForm() {
     }
   };
 
+  const handleDelete = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosReq.delete(`/posts/${id}/`);
+          Swal.fire("Deleted!", "Your post has been deleted.", "success").then(() =>
+            history.push("/posts")
+          );
+        } catch (err) {
+          Swal.fire("Error!", "Failed to delete the post. Please try again.", "error");
+        }
+      }
+    });
+  };
+
   const textFields = (
     <div className="text-center">
       <Form.Group>
@@ -119,10 +147,10 @@ function PostEditForm() {
       <div className="d-flex justify-content-between mt-3">
         <button
           type="button"
-          onClick={() => history.goBack()}
-          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          onClick={handleDelete}
+          className={`${btnStyles.Button} ${btnStyles.Danger}`}
         >
-          Cancel
+          Delete
         </button>
         <button
           type="submit"

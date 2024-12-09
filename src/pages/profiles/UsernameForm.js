@@ -16,6 +16,7 @@ import {
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import Swal from "sweetalert2";
 
 const UsernameForm = () => {
   const [username, setUsername] = useState("");
@@ -31,6 +32,7 @@ const UsernameForm = () => {
     if (currentUser?.profile_id?.toString() === id) {
       setUsername(currentUser.username);
     } else {
+      Swal.fire("Error!", "Unauthorized access to this page.", "error");
       history.push("/");
     }
   }, [currentUser, history, id]);
@@ -45,10 +47,15 @@ const UsernameForm = () => {
         ...prevUser,
         username,
       }));
-      history.goBack();
+      Swal.fire(
+        "Success!",
+        "Your username has been updated successfully.",
+        "success"
+      ).then(() => history.goBack());
     } catch (err) {
       console.log(err);
       setErrors(err.response?.data);
+      Swal.fire("Error!", "Failed to update your username.", "error");
     }
   };
 

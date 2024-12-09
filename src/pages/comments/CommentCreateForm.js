@@ -7,6 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
+import Swal from "sweetalert2";
 
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
@@ -36,8 +37,10 @@ function CommentCreateForm(props) {
         ],
       }));
       setContent("");
+      Swal.fire("Success!", "Your comment has been posted.", "success");
     } catch (err) {
       console.log(err);
+      Swal.fire("Error!", "Failed to post the comment. Please try again.", "error");
     }
   };
 

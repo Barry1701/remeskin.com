@@ -13,6 +13,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import Swal from "sweetalert2";
 
 const UserPasswordForm = () => {
   const history = useHistory();
@@ -36,7 +37,7 @@ const UserPasswordForm = () => {
 
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
-      // redirect user if they are not the owner of this profile
+      Swal.fire("Error!", "Unauthorized access to this page.", "error");
       history.push("/");
     }
   }, [currentUser, history, id]);
@@ -45,10 +46,13 @@ const UserPasswordForm = () => {
     event.preventDefault();
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
-      history.goBack();
+      Swal.fire("Success!", "Your password has been updated.", "success").then(
+        () => history.goBack()
+      );
     } catch (err) {
       console.log(err);
       setErrors(err.response?.data);
+      Swal.fire("Error!", "Failed to update the password. Please try again.", "error");
     }
   };
 
