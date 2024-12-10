@@ -148,7 +148,7 @@ This screenshot displays the **Sign-In Page** of the Remeskin platform, allowing
   - A "Sign In" button to submit the form.
   - A link at the bottom of the form for users who don't have an account to navigate to the **Sign-Up Page**.
 
-- On the **right side**, there is an artistic image of a profile with intricate, nature-inspired patterns. This image was designed and generated using AI tools, adding a modern and creative touch to the page while aligning with the theme of individuality and natural solutions.
+- On the **right side**, there is an artistic image of a profile with intricate, nature-inspired patterns. This image was designed by author and generated using AI tools, adding a modern and creative touch to the page while aligning with the theme of individuality and natural solutions.
 
 ![Sign-In Page](documentation/signin.png)
 
