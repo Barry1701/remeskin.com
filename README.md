@@ -331,6 +331,102 @@ This alert provides immediate feedback about an issue, guiding the user to retry
 
 ![Error Notification](documentation/sweet_error1.png)
 
+## ✅ Testing
+
+### Manual Testing
+- The application was manually tested to ensure all core functionalities work as expected across different devices and screen sizes.
+- Key manual test cases included:
+  - User registration and login flows.
+  - Adding, editing, and deleting posts.
+  - Searching and filtering posts and products.
+  - Responsiveness on desktop, tablet, and mobile devices.
+  - Interaction with SweetAlert notifications for success, error, and confirmation messages.
+
+### Browser Compatibility
+- The application was tested on the following browsers:
+  - Google Chrome
+  - Mozilla Firefox
+  - Microsoft Edge
+
+## 🚀 Frontend Deployment
+
+### Hosting Platform
+- The frontend of the **Remeskin** platform is hosted on **Heroku**.
+
+### Deployment Process
+To deploy the frontend, follow these steps:
+
+1. **Build the Application**:
+   - Ensure all dependencies are installed by running:
+     ```bash
+     npm install
+     ```
+   - Create a production-ready build using:
+     ```bash
+     npm run build
+     ```
+   - This command generates an optimized build in the `build/` folder.
+
+2. **Create a Heroku App**:
+   - Log in to Heroku using:
+     ```bash
+     heroku login
+     ```
+   - Create a new Heroku application:
+     ```bash
+     heroku create remeskin-frontend
+     ```
+
+3. **Configure Heroku for Static File Hosting**:
+   - Add a `static.json` file in the root directory with the following content:
+     ```json
+     {
+       "root": "build/"
+     }
+     ```
+   - This tells Heroku to serve static files from the `build/` folder.
+
+4. **Add Buildpacks**:
+   - Configure Heroku buildpacks for React apps:
+     ```bash
+     heroku buildpacks:set mars/create-react-app
+     ```
+
+5. **Deploy to Heroku**:
+   - Initialize a Git repository (if not already initialized):
+     ```bash
+     git init
+     ```
+   - Add all files and commit:
+     ```bash
+     git add .
+     git commit -m "Deploy frontend to Heroku"
+     ```
+   - Push the code to Heroku:
+     ```bash
+     git push heroku main
+     ```
+
+6. **Set Environment Variables**:
+   - Set the environment variable for the backend API URL:
+     ```bash
+     heroku config:set REACT_APP_API_URL=<your-backend-api-url>
+     ```
+
+7. **Verify Deployment**:
+   - Visit the live frontend application at the URL provided by Heroku.
+
+### Environment Variables
+- **REACT_APP_API_URL**: URL for the backend API (e.g., `https://drestf-api-8914bba56128.herokuapp.com/`).
+
+### Continuous Deployment
+- **GitHub Integration**:
+  - Connect the Heroku app to the GitHub repository for automatic deployment whenever changes are pushed to the main branch.
+  - Set up the deployment pipeline in the **Heroku Dashboard** under the "Deploy" tab.
+
+## 🌍 Live Demo
+ - Check out the live version of Remeskin: [https://remeskin-00de58d1deef.herokuapp.com/](https://remeskin-00de58d1deef.herokuapp.com/).
+
 
 ## 🔮 Future Plans
 - **Resources from dermatologists and allergy specialists**  
@@ -345,8 +441,7 @@ This alert provides immediate feedback about an issue, guiding the user to retry
 - **Short video uploads**  
   Users can share short videos (e.g., 30 seconds) to better illustrate their symptoms, experiences, or product reviews, fostering a more engaging and informative community.
 
-## 🌍 Live Demo
- - Check out the live version of Remeskin: [https://remeskin-00de58d1deef.herokuapp.com/](https://remeskin-00de58d1deef.herokuapp.com/).
+
 
 ## 🤝 Contributing
 We welcome contributions! To get started:
