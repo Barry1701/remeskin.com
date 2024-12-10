@@ -1,5 +1,24 @@
 # 🌿 Remeskin - Social Media Platform for Skin Issues and Allergies
 
+## Table of Contents
+
+- [📘 Introduction](#-introduction)
+- [📱 Fully Responsive Design](#-fully-responsive-design)
+- [🌟 Features](#-features)
+- [🛠️ Technologies](#️-technologies)
+- [📱 PWA Support](#-pwa-support)
+- [📋 User Stories](#-user-stories)
+- [⚙️ Installation and Setup](#️-installation-and-setup)
+- [📁 Project Structure](#-project-structure)
+- [🖼️ Screenshots](#️-screenshots)
+- [✅ Testing](#-testing)
+- [🚀 Frontend Deployment](#-frontend-deployment)
+- [🌍 Live Demo](#-live-demo)
+- [🔮 Future Plans](#-future-plans)
+- [🤝 Contributing](#-contributing)
+- [👤 Author](#-author)
+
+
 ## 📘 Introduction
 [Remeskin](https://remeskin-00de58d1deef.herokuapp.com/) is a social media platform designed to support individuals dealing with skin conditions like eczema and allergies, including nut allergies. The goal is to create a community where users can share experiences, seek advice, post images of symptoms, and discuss products that help them manage these conditions. Remeskin aims to reduce isolation and helplessness by providing a supportive space for people facing similar challenges.
 
