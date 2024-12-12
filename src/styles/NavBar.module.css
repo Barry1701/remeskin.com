@@ -48,10 +48,10 @@
   padding: 10px;
   border-radius: 10px;
   display: flex;
-  justify-content: center; /* Wyrównanie w poziomie */
-  align-items: center;     /* Wyrównanie w pionie */
+  justify-content: center; 
+  align-items: center;     
   width: fit-content;
-  height: 100%; /* Jeśli chcesz, aby div miał pełną wysokość kontenera */
+  height: 100%; 
 }
 
 @media (max-width: 768px) {

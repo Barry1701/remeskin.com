@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
@@ -22,11 +22,12 @@ const Post = (props) => {
     image,
     updated_at,
     setPosts,
-  } = props; // Removed postPage since it's no longer needed.
+  } = props;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
+  const location = useLocation(); // Check the current page's path
 
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
@@ -50,6 +51,13 @@ const Post = (props) => {
             ...prevPosts,
             results: prevPosts.results.filter((post) => post.id !== id),
           }));
+
+          // Redirect based on the current path
+          if (location.pathname === `/posts/${id}`) {
+            history.push("/"); // Redirect to home page if on PostPage
+          } else if (location.pathname.startsWith(`/profiles/`)) {
+            history.push(location.pathname); // Stay on the profile page
+          }
         } catch (err) {
           Swal.fire("Error!", "Something went wrong. Please try again.", "error");
           console.log(err);
@@ -63,11 +71,11 @@ const Post = (props) => {
       const { data } = await axiosRes.post("/likes/", { post: id });
       setPosts((prevPosts) => ({
         ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
+        results: prevPosts.results.map((post) =>
+          post.id === id
             ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
-            : post;
-        }),
+            : post
+        ),
       }));
     } catch (err) {
       console.log(err);
@@ -79,11 +87,11 @@ const Post = (props) => {
       await axiosRes.delete(`/likes/${like_id}/`);
       setPosts((prevPosts) => ({
         ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
+        results: prevPosts.results.map((post) =>
+          post.id === id
             ? { ...post, likes_count: post.likes_count - 1, like_id: null }
-            : post;
-        }),
+            : post
+        ),
       }));
     } catch (err) {
       console.log(err);

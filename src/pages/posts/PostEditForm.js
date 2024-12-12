@@ -10,7 +10,7 @@ import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Swal from "sweetalert2";
 
@@ -26,6 +26,7 @@ function PostEditForm() {
   const imageInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -101,9 +102,13 @@ function PostEditForm() {
       if (result.isConfirmed) {
         try {
           await axiosReq.delete(`/posts/${id}/`);
-          Swal.fire("Deleted!", "Your post has been deleted.", "success").then(() =>
-            history.push("/posts")
-          );
+          Swal.fire("Deleted!", "Your post has been deleted.", "success").then(() => {
+            if (location.state?.fromProfile) {
+              history.push(`/profiles/${location.state.profileId}`);
+            } else {
+              history.push("/");
+            }
+          });
         } catch (err) {
           Swal.fire("Error!", "Failed to delete the post. Please try again.", "error");
         }
