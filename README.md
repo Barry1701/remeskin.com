@@ -64,7 +64,6 @@ This project uses the following technologies:
 Remeskin is configured to support installation as a Progressive Web App (PWA). This allows users to install the application on their mobile devices or desktops for a more native app experience. The `manifest.json` file provides metadata for the PWA setup.
 
 ## 🗂️ Project Management
-
 ### **Milestones**
 
 | Milestone                   | Description                                     | Related User Stories      |
