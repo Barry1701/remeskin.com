@@ -18,7 +18,6 @@
 - [🤝 Contributing](#-contributing)
 - [👤 Author](#-author)
 
-
 ## 📘 Introduction
 [Remeskin](https://remeskin-00de58d1deef.herokuapp.com/) is a social media platform designed to support individuals dealing with skin conditions like eczema and allergies, including nut allergies. The goal is to create a community where users can share experiences, seek advice, post images of symptoms, and discuss products that help them manage these conditions. Remeskin aims to reduce isolation and helplessness by providing a supportive space for people facing similar challenges.
 
@@ -95,14 +94,8 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 - **Improved UX/UI Enhancements** 
 - **Final Testing & Deployment** 
 
-
-
- >###  **Full List of User Stories**  
- >For the complete breakdown of user stories, visit the **[User Stories Board](https://github.com/users/Barry1701/projects/11)**.
-
-
-
-
+>###  **Full List of User Stories**  
+>For the complete breakdown of user stories, visit the **[User Stories Board](https://github.com/users/Barry1701/projects/11)**.
 
 ## ⚙️ Installation and Setup
 ### Prerequisites
@@ -133,9 +126,6 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 
 5. Visit the application at [http://localhost:3000](http://localhost:3000).
 
-
-
-
 ## 📁 Project Structure
 - `src/api` - Axios configuration for API calls.
 - `src/assets` - Images and static assets.
@@ -144,11 +134,8 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 - `src/styles` - CSS Modules for scoped styling.
 - `src/utils` - Helper functions used throughout the app.
 
-
-
 ## 🖼️ Screenshots
 Below are screenshots showcasing key features and elements of the Remeskin platform. Each screenshot includes a detailed description to help users understand the functionality and design of the application.
-
 
 ### 🖼️ Navigation Bar (Logged-Out View)
 This screenshot displays the navigation bar visible to users who are not logged in or registered.
@@ -256,7 +243,6 @@ This screenshot displays the **Products Page** of the Remeskin platform, where u
   - Shows the assigned category: **Non-Steroidal Eczema Treatments**.
   - **Edit** and **Delete** buttons are visible for the owner of the product, allowing them to update or remove the product listing.
 
-
 This page provides a user-friendly interface to browse, manage, and share products beneficial for individuals with skin issues and allergies.
 
 ![Products Page](documentation/product.png)
@@ -290,7 +276,6 @@ This screenshot displays the **Feed Page** of the Remeskin platform, a dynamic s
     - **Date**: Displayed in the top-right corner of the post card.
     - **Like and Comment Counts**: Located below the post content, showing the level of engagement.
     
-
 This page provides a personalized and interactive interface for users to stay updated on posts from their network and discover new content.
 
 ![Feed Page](documentation/feed.png)
@@ -307,7 +292,6 @@ This screenshot displays the **Liked Posts Page** of the Remeskin platform, wher
     - **Date**: Displayed in the top-right corner of the post card.
     - **Like and Comment Counts**: Located below the post content, showing the number of interactions.
     
-
 This page offers a focused view of the user's liked posts, making it easy to revisit or engage further with previously liked content.
 
 ![Liked Posts Page](documentation/like.png)
@@ -328,7 +312,6 @@ This screenshot displays the **Profile Page** of the Remeskin platform, where us
 - **User's Posts Section**:
   - Displays the posts created by the user.
   - If no posts are found, as in this case, it shows the message: **"No results found, Nikodem hasn't posted yet."**
-
 
 This page offers a clean and organized interface for users to manage their profiles and review their contributions to the community.
 
@@ -477,8 +460,6 @@ To deploy the frontend, follow these steps:
 
 - **Short video uploads**  
   Users can share short videos (e.g., 30 seconds) to better illustrate their symptoms, experiences, or product reviews, fostering a more engaging and informative community.
-
-
 
 ## 🤝 Contributing
 We welcome contributions! To get started:
