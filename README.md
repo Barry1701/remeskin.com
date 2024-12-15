@@ -8,6 +8,7 @@
 - [🛠️ Technologies](#️-technologies)
 - [📱 PWA Support](#-pwa-support)
 - [🗂️ Project Management](#-project-management)
+- [🗂️ Project Management](#-project-management)
 - [⚙️ Installation and Setup](#️-installation-and-setup)
 - [📁 Project Structure](#-project-structure)
 - [🖼️ Screenshots](#️-screenshots)
