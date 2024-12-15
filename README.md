@@ -100,15 +100,6 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 ## 🗂️ Project Management
 ### Milestones
 
-| Milestone                   | Description                                     | Related User Stories      |
-|-----------------------------|-------------------------------------------------|------------------------   |
-| **Core Functionality Implementation**| Implement user registration, login, and logout | #1, #2, #3, #4, #5|
-| **Post Features**           | Create, like, and comment on posts             | #11, #12, #14, #15, #16    |
-| **Commenting System**       | Add, edit, delete, and view comments           | #19, #20, #21, #22, #23    |
-| **User Profile Management** | Manage profile details, posts, and followers   | #24, #25, #26,#27, #28, #29|
-| **Product and Category Management**| Add and view product recommendations    | #33, #34, #35, #36    |
-| **UX/UI Enhancements**      | Improve design and user experience             | #6, #7, #8, #9, #10        |
-| **Final Testing & Deployment** | Ensure full functionality and deployment    | #39, General               |
 
 ### MoSCoW Prioritization
 
