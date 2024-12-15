@@ -96,6 +96,39 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 >###  **Full List of User Stories**  
 >For the complete breakdown of user stories, visit the **[User Stories Board](https://github.com/users/Barry1701/projects/11)**.
 
+## 🗂️ Project Management
+### Milestones
+
+| Milestone                   | Description                                     | Related User Stories      |
+|-----------------------------|-------------------------------------------------|------------------------   |
+| **Core Functionality Implementation**| Implement user registration, login, and logout | #1, #2, #3, #4, #5|
+| **Post Features**           | Create, like, and comment on posts             | #11, #12, #14, #15, #16    |
+| **Commenting System**       | Add, edit, delete, and view comments           | #19, #20, #21, #22, #23    |
+| **User Profile Management** | Manage profile details, posts, and followers   | #24, #25, #26,#27, #28, #29|
+| **Product and Category Management**| Add and view product recommendations    | #33, #34, #35, #36    |
+| **UX/UI Enhancements**      | Improve design and user experience             | #6, #7, #8, #9, #10        |
+| **Final Testing & Deployment** | Ensure full functionality and deployment    | #39, General               |
+
+### MoSCoW Prioritization
+
+#### MUST:
+- **Core Functionality Implementation** 
+- **Post Features** 
+- **User Profile Management**   
+- **Comment System**   
+
+#### SHOULD:
+- **Product and Category Management** 
+- **Search & Filter Features**  
+- **Follow User System**   
+
+#### COULD:
+- **Improved UX/UI Enhancements** 
+- **Final Testing & Deployment** 
+
+>###  **Full List of User Stories**  
+>For the complete breakdown of user stories, visit the **[User Stories Board](https://github.com/users/Barry1701/projects/11)**.
+
 ## ⚙️ Installation and Setup
 ### Prerequisites
 - Node.js (v16.0 or later)
