@@ -66,7 +66,7 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 
 
 
----
+
 
 ## 🗂️ Project Management
 
