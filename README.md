@@ -100,7 +100,7 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 - `src/styles` - CSS Modules for scoped styling.
 - `src/utils` - Helper functions used throughout the app.
 
-## 📊 Project Management
+## Project Management
 ### Milestones
 
 | Milestone                   | Description                                     | Related User Stories      |
