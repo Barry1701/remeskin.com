@@ -9,7 +9,7 @@
 - [📱 PWA Support](#-pwa-support)
 - [⚙️ Installation and Setup](#️-installation-and-setup)
 - [📁 Project Structure](#-project-structure)
-- [Project Management](#project-management)
+- [📊 Project Management](#project-management)
 - [🖼️ Screenshots](#️-screenshots)
 - [✅ Testing](#-testing)
 - [🚀 Frontend Deployment](#-frontend-deployment)
@@ -100,7 +100,7 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 - `src/styles` - CSS Modules for scoped styling.
 - `src/utils` - Helper functions used throughout the app.
 
-## Project Management
+## 📊 Project Management
 ### Milestones
 
 | Milestone                   | Description                                     | Related User Stories      |
