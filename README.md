@@ -9,7 +9,7 @@
 - [📱 PWA Support](#-pwa-support)
 - [⚙️ Installation and Setup](#️-installation-and-setup)
 - [📁 Project Structure](#-project-structure)
-- [🗂️ Project Management](#-project-management)
+- [Project Management](#project-management)
 - [🖼️ Screenshots](#️-screenshots)
 - [✅ Testing](#-testing)
 - [🚀 Frontend Deployment](#-frontend-deployment)
@@ -100,7 +100,7 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 - `src/styles` - CSS Modules for scoped styling.
 - `src/utils` - Helper functions used throughout the app.
 
-## 🗂️ Project Management
+## Project Management
 ### Milestones
 
 | Milestone                   | Description                                     | Related User Stories      |
@@ -299,10 +299,10 @@ This page offers a focused view of the user's liked posts, making it easy to rev
 This screenshot displays the **Profile Page** of the Remeskin platform, where users can view and manage their profile information and posts.
 
 - **Profile Information**:
-  - Shows the user's profile picture, username (**"Nikodem"**), and statistics:
+  - Shows the user's profile picture, username (**"Katarzyna"**), and statistics:
     - **0 posts**
-    - **13 followers**
-    - **5 following**
+    - **10 followers**
+    - **4 following**
   - A **three dots menu** provides options to:
     - **Edit Profile**: Allows the user to update their profile information.
     - **Change Username**: Enables the user to update their username.
@@ -310,7 +310,8 @@ This screenshot displays the **Profile Page** of the Remeskin platform, where us
 
 - **User's Posts Section**:
   - Displays the posts created by the user.
-  - If no posts are found, as in this case, it shows the message: **"No results found, Nikodem hasn't posted yet."**
+  - If no posts are found, as in this case, it shows the message: **"No results found, Katarzyna hasn't posted yet."**
+  - The **"No results found" image** was conceptualized by the author and generated using AI tools to enhance the user experience with a visually appealing placeholder.
 
 This page offers a clean and organized interface for users to manage their profiles and review their contributions to the community.
 
