@@ -1,3 +1,5 @@
+[⬆️ Back to Top](#top)
+
 # 🌿 Remeskin - Social Media Platform for Skin Issues and Allergies
 
 ## Table of Contents
@@ -48,6 +50,9 @@ Below is a visual representation of the platform's responsiveness:
 - **Responsive Design**  
   Optimized for both desktop and mobile devices.
 
+[⬆️ Back to Top](#top)
+
+
 ## 🛠️ Technologies
 This project uses the following technologies:
 
@@ -59,6 +64,8 @@ This project uses the following technologies:
 - **CSS Modules** - Scoped styles for each component.
 - **Axios** - For making API requests.
 - **SweetAlert2** - For stylish and customizable alert popups.
+
+[⬆️ Back to Top](#top)
 
 ## 📱 PWA Support
 Remeskin is configured to support installation as a Progressive Web App (PWA). This allows users to install the application on their mobile devices or desktops for a more native app experience. The `manifest.json` file provides metadata for the PWA setup.
@@ -91,6 +98,8 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
     ```
 
 5. Visit the application at [http://localhost:3000](http://localhost:3000).
+
+[⬆️ Back to Top](#top)
 
 ## 📁 Project Structure
 - `src/api` - Axios configuration for API calls.
@@ -132,6 +141,8 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 
 >###  **Full List of User Stories**  
 >For the complete breakdown of user stories, visit the **[User Stories Board](https://github.com/users/Barry1701/projects/11)**.
+
+[⬆️ Back to Top](#top)
 
 ## 🖼️ Screenshots
 Below are screenshots showcasing key features and elements of the Remeskin platform. Each screenshot includes a detailed description to help users understand the functionality and design of the application.
@@ -351,6 +362,8 @@ This alert provides immediate feedback about an issue, guiding the user to retry
 
 ![Error Notification](documentation/sweet_error1.png)
 
+[⬆️ Back to Top](#top)
+
 ## ✅ Testing
 
 ### Manual Testing
@@ -482,6 +495,8 @@ We welcome contributions! To get started:
 
 ## 👤 Author
 **Bartosz Stanczuk** - Developer and creator of Remeskin.
+
+[⬆️ Back to Top](#top)
 
 
 
