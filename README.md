@@ -1,6 +1,6 @@
-[⬆️ Back to Top](#top)
-
 # 🌿 Remeskin - Social Media Platform for Skin Issues and Allergies
+
+[⬆️ Back to Top](#top)
 
 ## Table of Contents
 
@@ -23,6 +23,8 @@
 ## 📘 Introduction
 [Remeskin](https://remeskin-00de58d1deef.herokuapp.com/) is a social media platform designed to support individuals dealing with skin conditions like eczema and allergies, including nut allergies. The goal is to create a community where users can share experiences, seek advice, post images of symptoms, and discuss products that help them manage these conditions. Remeskin aims to reduce isolation and helplessness by providing a supportive space for people facing similar challenges.
 
+[⬆️ Back to Top](#top)
+
 ## 📱 Fully Responsive Design
 Remeskin is designed with a fully responsive layout, ensuring an optimal user experience across various devices and screen sizes, including desktops, tablets, and smartphones.
 
@@ -30,6 +32,7 @@ Below is a visual representation of the platform's responsiveness:
 
 ![Responsive Design](documentation/responsive.png)
 
+[⬆️ Back to Top](#top)
 
 ## 🌟 Features
 - **User Registration and Authentication**  
@@ -70,6 +73,8 @@ This project uses the following technologies:
 ## 📱 PWA Support
 Remeskin is configured to support installation as a Progressive Web App (PWA). This allows users to install the application on their mobile devices or desktops for a more native app experience. The `manifest.json` file provides metadata for the PWA setup.
 
+[⬆️ Back to Top](#top)
+
 ## ⚙️ Installation and Setup
 ### Prerequisites
 - Node.js (v16.0 or later)
@@ -108,6 +113,8 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 - `src/pages` - Feature-specific pages (e.g., auth, posts, profiles).
 - `src/styles` - CSS Modules for scoped styling.
 - `src/utils` - Helper functions used throughout the app.
+
+[⬆️ Back to Top](#top)
 
 ## Project Management
 ### Milestones
@@ -381,6 +388,8 @@ This alert provides immediate feedback about an issue, guiding the user to retry
   - Mozilla Firefox
   - Microsoft Edge
 
+[⬆️ Back to Top](#top)
+
 ## 🚀 Frontend Deployment
 
 ### Hosting Platform
@@ -457,9 +466,12 @@ To deploy the frontend, follow these steps:
   - Connect the Heroku app to the GitHub repository for automatic deployment whenever changes are pushed to the main branch.
   - Set up the deployment pipeline in the **Heroku Dashboard** under the "Deploy" tab.
 
+[⬆️ Back to Top](#top)
+
 ## 🌍 Live Demo
  - Check out the live version of Remeskin: [https://remeskin-00de58d1deef.herokuapp.com/](https://remeskin-00de58d1deef.herokuapp.com/).
 
+[⬆️ Back to Top](#top)
 
 ## 🔮 Future Plans
 - **Resources from dermatologists and allergy specialists**  
@@ -473,6 +485,8 @@ To deploy the frontend, follow these steps:
 
 - **Short video uploads**  
   Users can share short videos (e.g., 30 seconds) to better illustrate their symptoms, experiences, or product reviews, fostering a more engaging and informative community.
+
+[⬆️ Back to Top](#top)
 
 ## 🤝 Contributing
 We welcome contributions! To get started:
@@ -492,6 +506,8 @@ We welcome contributions! To get started:
     git push origin feature-name
     ```
 5. Open a pull request.
+
+[⬆️ Back to Top](#top)
 
 ## 👤 Author
 **Bartosz Stanczuk** - Developer and creator of Remeskin.
