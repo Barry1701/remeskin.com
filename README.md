@@ -9,7 +9,7 @@
 - [📱 PWA Support](#-pwa-support)
 - [⚙️ Installation and Setup](#️-installation-and-setup)
 - [📁 Project Structure](#-project-structure)
-- [📊 Project Management](#project-management)
+- [📊Project Management](#project-management)
 - [🖼️ Screenshots](#️-screenshots)
 - [✅ Testing](#-testing)
 - [🚀 Frontend Deployment](#-frontend-deployment)
