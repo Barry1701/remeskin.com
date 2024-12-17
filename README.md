@@ -255,7 +255,7 @@ This screenshot displays the **Products Page** of the Remeskin platform, where u
 - **Search Bar**: Located at the top, allowing users to search for specific products by name.
 - **Category Dropdown**: A dropdown menu to filter products by category, helping users quickly find relevant recommendations.
 - **Product Section**:
-  - Displays a product titled **"H.Eczema"** with an accompanying description explaining its benefits and usage.
+  - Displays a product titled **"Natural Oils"** with an accompanying description explaining its benefits and usage.
   - Includes an image of the product (e.g., bottles of oils) to provide a visual representation.
   - Shows the assigned category: **Non-Steroidal Eczema Treatments**.
   - **Edit** and **Delete** buttons are visible for the owner of the product, allowing them to update or remove the product listing.
@@ -300,7 +300,7 @@ This page provides a personalized and interactive interface for users to stay up
 ### 🖼️ Liked Posts Page
 This screenshot displays the **Liked Posts Page** of the Remeskin platform, where users can view the posts they have liked.
 
-- **Search Bar**: Located at the top, allowing users to search through liked posts by keywords.
+
 - **Liked Posts Feed**:
   - Displays a series of posts liked by the user, including:
     - A post by "Saoirse28" titled **"Unsure"** with an image of the medication "Equoral" (100 mg) and a description expressing concerns about starting treatment with the medication and seeking advice.
