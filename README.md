@@ -249,6 +249,23 @@ This page provides a simple and user-friendly interface for sharing new posts wi
 
 ![Add Post Page](documentation/add_post.png)
 
+### 🖼️ Comment Category Selection  
+This screenshot showcases the **comment category selection** feature on the post page of the Remeskin platform. It allows users to assign a category to their comment, improving organization and readability of discussions.
+
+- **Comment Categories**: Users can choose from three options:  
+  - **General**: A standard comment without specific context.  
+  - **Question**: A comment containing a question to encourage responses.  
+  - **Tip**: A comment offering advice or helpful suggestions.  
+
+- **Example Comments**:  
+  - **Category: tip** - A comment providing advice on using a moisturizing cream for dry elbows.  
+  - **Category: general** - A simple, general comment such as wishing someone good luck.  
+
+This feature enhances user engagement by enabling clearer context for each comment, making interactions more efficient and helpful.
+
+![Comment](documentation/comment.png)
+
+
 ### 🖼️ Products Page
 This screenshot displays the **Products Page** of the Remeskin platform, where users can explore recommended skincare and allergy-related products.
 

@@ -7,12 +7,17 @@ import styles from "../../styles/CommentCreateEditForm.module.css";
 import Swal from "sweetalert2";
 
 function CommentEditForm(props) {
-  const { id, content, setShowEditForm, setComments } = props;
+  const { id, content, category, setShowEditForm, setComments } = props;
 
   const [formContent, setFormContent] = useState(content);
+  const [formCategory, setFormCategory] = useState(category);
 
-  const handleChange = (event) => {
+  const handleContentChange = (event) => {
     setFormContent(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setFormCategory(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -20,6 +25,7 @@ function CommentEditForm(props) {
     try {
       await axiosRes.put(`/comments/${id}/`, {
         content: formContent.trim(),
+        category: formCategory,
       });
       setComments((prevComments) => ({
         ...prevComments,
@@ -28,6 +34,7 @@ function CommentEditForm(props) {
             ? {
                 ...comment,
                 content: formContent.trim(),
+                category: formCategory,
                 updated_at: "now",
               }
             : comment;
@@ -48,9 +55,21 @@ function CommentEditForm(props) {
           className={styles.Form}
           as="textarea"
           value={formContent}
-          onChange={handleChange}
+          onChange={handleContentChange}
           rows={2}
         />
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          as="select"
+          value={formCategory}
+          onChange={handleCategoryChange}
+          className="mt-2"
+        >
+          <option value="general">General</option>
+          <option value="question">Question</option>
+          <option value="tip">Tip</option>
+        </Form.Control>
       </Form.Group>
       <div className="text-right">
         <button

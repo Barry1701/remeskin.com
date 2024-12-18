@@ -12,9 +12,14 @@ import Swal from "sweetalert2";
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("general"); // New state for category
 
-  const handleChange = (event) => {
+  const handleContentChange = (event) => {
     setContent(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -23,6 +28,7 @@ function CommentCreateForm(props) {
       const { data } = await axiosRes.post("/comments/", {
         content,
         post,
+        category, // Include category when submitting
       });
       setComments((prevComments) => ({
         ...prevComments,
@@ -37,6 +43,7 @@ function CommentCreateForm(props) {
         ],
       }));
       setContent("");
+      setCategory("general"); // Reset category
       Swal.fire("Success!", "Your comment has been posted.", "success");
     } catch (err) {
       console.log(err);
@@ -56,10 +63,20 @@ function CommentCreateForm(props) {
             placeholder="my comment..."
             as="textarea"
             value={content}
-            onChange={handleChange}
+            onChange={handleContentChange}
             rows={2}
           />
         </InputGroup>
+        <Form.Control
+          as="select"
+          value={category}
+          onChange={handleCategoryChange}
+          className="mt-2"
+        >
+          <option value="general">General</option>
+          <option value="question">Question</option>
+          <option value="tip">Tip</option>
+        </Form.Control>
       </Form.Group>
       <button
         className={`${styles.Button} btn d-block ml-auto`}

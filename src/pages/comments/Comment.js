@@ -16,6 +16,7 @@ const Comment = (props) => {
     owner,
     updated_at,
     content,
+    category, // Added category prop
     id,
     setPost,
     setComments,
@@ -54,11 +55,17 @@ const Comment = (props) => {
         <Media.Body className="align-self-center ml-2">
           <span className={styles.Owner}>{owner}</span>
           <span className={styles.Date}>{updated_at}</span>
+          <div className="mt-1"> {/* Add spacing here */}
+            <span className={styles.Category} style={{ fontWeight: "bold", color: "#007bff" }}>
+              Category: {category}
+            </span>
+          </div>
           {showEditForm ? (
             <CommentEditForm
               id={id}
               profile_id={profile_id}
               content={content}
+              category={category} // Pass category to the edit form
               profileImage={profile_image}
               setComments={setComments}
               setShowEditForm={setShowEditForm}
