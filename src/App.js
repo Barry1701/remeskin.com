@@ -25,14 +25,14 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 
 function App() {
   const currentUser = useCurrentUser();
-  const profile_id = currentUser?.profile_id || "";
+  const profileId = currentUser?.profile_id || "";
 
   return (
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          {/* Domyślna strona dla zalogowanych i niezalogowanych */}
+          {/* Default route for logged-in and logged-out users */}
           <Route
             exact
             path="/"
@@ -45,7 +45,7 @@ function App() {
             }
           />
 
-          {/* Trasa dla zalogowanych użytkowników */}
+          {/* Route for logged-in users */}
           <Route
             exact
             path="/feed"
@@ -53,7 +53,7 @@ function App() {
               currentUser ? (
                 <PostsPage
                   message="No new updates in your feed. Follow more users to see their latest posts here."
-                  filter={`owner__followed__owner__profile=${profile_id}&`}
+                  filter={`owner__followed__owner__profile=${profileId}&`}
                 />
               ) : (
                 <Redirect to="/signin" />
@@ -67,7 +67,7 @@ function App() {
               currentUser ? (
                 <PostsPage
                   message="You haven’t liked any posts yet. Start exploring and like posts to see them here."
-                  filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
+                  filter={`likes__owner__profile=${profileId}&ordering=-likes__created_at&`}
                 />
               ) : (
                 <Redirect to="/signin" />
@@ -75,7 +75,7 @@ function App() {
             }
           />
 
-          {/* Trasy dla logowania i rejestracji */}
+          {/* Routes for sign-in and sign-up */}
           <Route
             exact
             path="/signin"
@@ -91,7 +91,7 @@ function App() {
             }
           />
 
-          {/* Trasy dla postów */}
+          {/* Routes for posts */}
           <Route
             exact
             path="/posts/create"
@@ -114,7 +114,7 @@ function App() {
             }
           />
 
-          {/* Trasy dla profili */}
+          {/* Routes for profiles */}
           <Route
             exact
             path="/profiles/:id"
@@ -144,7 +144,7 @@ function App() {
             }
           />
 
-          {/* Trasy dla produktów */}
+          {/* Routes for products */}
           <Route
             exact
             path="/products"
@@ -172,7 +172,7 @@ function App() {
             }
           />
 
-          {/* Domyślna trasa */}
+          {/* Default route */}
           <Route render={() => <NotFound />} />
         </Switch>
       </Container>

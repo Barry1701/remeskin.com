@@ -36,7 +36,7 @@ function ProfilePage() {
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
-  const is_owner = currentUser?.username === profile?.owner;
+  const isOwner = currentUser?.username === profile?.owner;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,21 +46,25 @@ function ProfilePage() {
             axiosReq.get(`/profiles/${id}/`),
             axiosReq.get(`/posts/?owner__profile=${id}`),
           ]);
+
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
         }));
+
         setProfilePosts(profilePosts);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
+
     fetchData();
   }, [id, setProfileData]);
 
   const mainProfile = (
     <>
+      {/* Dropdown menu for profile editing (visible only for the profile owner) */}
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
@@ -75,37 +79,39 @@ function ProfilePage() {
           <Row className="justify-content-center no-gutters">
             <Col xs={3} className="my-2">
               <div>{profile?.posts_count}</div>
-              <div>posts</div>
+              <div>Posts</div>
             </Col>
             <Col xs={3} className="my-2">
               <div>{profile?.followers_count}</div>
-              <div>followers</div>
+              <div>Followers</div>
             </Col>
             <Col xs={3} className="my-2">
               <div>{profile?.following_count}</div>
-              <div>following</div>
+              <div>Following</div>
             </Col>
           </Row>
         </Col>
         <Col lg={3} className="text-lg-right">
+          {/* Follow/Unfollow button logic */}
           {currentUser &&
-            !is_owner &&
+            !isOwner &&
             (profile?.following_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
                 onClick={() => handleUnfollow(profile)}
               >
-                unfollow
+                Unfollow
               </Button>
             ) : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
                 onClick={() => handleFollow(profile)}
               >
-                follow
+                Follow
               </Button>
             ))}
         </Col>
+        {/* Display profile content, if available */}
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </Row>
     </>
@@ -114,7 +120,7 @@ function ProfilePage() {
   const mainProfilePosts = (
     <>
       <hr />
-      <p className="text-center">{profile?.owner}'s posts</p>
+      <p className="text-center">{profile?.owner}'s Posts</p>
       <hr />
       {profilePosts.results.length ? (
         <InfiniteScroll

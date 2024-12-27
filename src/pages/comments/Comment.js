@@ -56,8 +56,8 @@ const Comment = (props) => {
           <span className={styles.Owner}>{owner}</span>
           <span className={styles.Date}>{updated_at}</span>
           <div className="mt-1"> {/* Add spacing here */}
-            <span className={styles.Category} style={{ fontWeight: "bold", color: "#007bff" }}>
-              Category: {category}
+            <span className={styles.Category}>
+              Category: {category.charAt(0).toUpperCase() + category.slice(1)}
             </span>
           </div>
           {showEditForm ? (

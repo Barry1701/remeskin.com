@@ -8,3 +8,21 @@
     font-weight: lighter;
     color: #c1c1c5;
   }
+
+  .Category {
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Gradient */
+    padding: 4px 8px; /* Dodaj przestrzeń wewnętrzną */
+    border-radius: 8px; /* Zaokrąglenie krawędzi */
+    display: inline-block; /* Umożliwia lepsze rozmieszczenie */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Cień dla "wow efektu" */
+    margin-top: 5px; /* Odstęp od innych elementów */
+  }
+  
+  .Category:hover {
+    background: linear-gradient(45deg, #feb47b, #ff7e5f); /* Efekt hover */
+    transform: scale(1.05); /* Powiększenie przy najechaniu */
+    transition: all 0.3s ease-in-out; /* Płynne przejście */
+  }
+  

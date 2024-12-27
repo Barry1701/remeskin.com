@@ -1,6 +1,4 @@
-import React from "react";
-
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useHistory } from "react-router";
@@ -9,6 +7,7 @@ import { removeTokenTimestamp, shouldRefreshToken } from "../utils/utils";
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 
+// Custom hooks for accessing the user context
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
@@ -16,12 +15,13 @@ export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
 
+  // Fetch the current user data on mount
   const handleMount = async () => {
     try {
       const { data } = await axiosRes.get("dj-rest-auth/user/");
       setCurrentUser(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -29,6 +29,7 @@ export const CurrentUserProvider = ({ children }) => {
     handleMount();
   }, []);
 
+  // Set up Axios interceptors
   useMemo(() => {
     axiosReq.interceptors.request.use(
       async (config) => {
@@ -48,9 +49,7 @@ export const CurrentUserProvider = ({ children }) => {
         }
         return config;
       },
-      (err) => {
-        return Promise.reject(err);
-      }
+      (err) => Promise.reject(err)
     );
 
     axiosRes.interceptors.response.use(
@@ -59,7 +58,7 @@ export const CurrentUserProvider = ({ children }) => {
         if (err.response?.status === 401) {
           try {
             await axios.post("/dj-rest-auth/token/refresh/");
-          } catch (err) {
+          } catch (error) {
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
                 history.push("/signin");

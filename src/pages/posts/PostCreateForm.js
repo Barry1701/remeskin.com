@@ -24,8 +24,9 @@ function PostCreateForm() {
     title: "",
     content: "",
     image: "",
+    category: "general", // Default category
   });
-  const { title, content, image } = postData;
+  const { title, content, image, category } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -53,6 +54,7 @@ function PostCreateForm() {
 
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("category", category);
     if (imageInput.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
     }
@@ -107,6 +109,25 @@ function PostCreateForm() {
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Category</Form.Label>
+        <Form.Control
+          as="select"
+          name="category"
+          value={category}
+          onChange={handleChange}
+        >
+          <option value="general">General</option>
+          <option value="eczema">Eczema</option>
+          <option value="allergy">Allergy</option>
+        </Form.Control>
+      </Form.Group>
+      {errors?.category?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

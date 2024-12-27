@@ -218,50 +218,64 @@ The navigation bar maintains a clean design with a blue gradient background, ens
 ### 🖼️ Home Page
 This screenshot displays the **Home Page** of the Remeskin platform, where users can browse posts and interact with the community.
 
-- **Search Bar**: Located at the top, allowing users to search for specific posts.
+- **Search Bar**: Positioned at the top, allowing users to search for specific posts by keywords.
+- **Category Filter**: Located below the search bar, providing a dropdown menu to filter posts by specific categories.
 - **Post Section**:
-  - Includes a post by the user "Nikodem" with the title **"Nuts and Peanuts"**.
-  - The post describes a situation about nut allergies and includes an image of nuts.
-  - Users can see the number of **likes** (2) and **comments** (1) below the post, along with options to like or comment on the post.
-  - For post owners, the **three dots menu** located next to the post date provides options to **update** or **delete** the post.
-- **Most Followed Profiles**: Displayed on the right side, showing a list of the most followed profiles on the platform.
-  - Each profile includes a username, profile icon, and a button to either follow or unfollow the user.
+  - Displays a post by the user **Nikodem** with the title **"Nuts and Peanuts"**.
+  - The post describes a personal experience about nut allergies, highlighting the user's ability to eat peanuts despite a tree nut allergy. This encourages engagement with others who may relate.
+  - Includes a **category label** ("Allergy") displayed below the content, making it easy to identify the post's context.
+  - Interaction options include **like** and **comment** buttons, showing engagement metrics (e.g., 4 likes and 3 comments).
+  - A **three dots menu** next to the post date provides options to update or delete the post (visible to the post owner only).
+- **Most Followed Profiles**: Displayed on the right side, showcasing a list of the most followed profiles on the platform. Each profile card includes:
+  - **Username** and profile icon.
+  - A button to either **follow** or **unfollow** the user.
 
-This page is designed to provide a central hub for viewing content, managing posts, and connecting with other users in the community.
+This page provides a user-friendly interface for discovering posts, interacting with the community, and managing connections on the platform.
+
 
 ![Home Page](documentation/home.png)
 
 
-### 🖼️ Add Post Page
-This screenshot displays the **Add Post Page** of the Remeskin platform, where users can create and upload new posts.
+### 🖼️ Add Post Page with Category Dropdown
+This screenshot displays the **Add Post Page** of the Remeskin platform, where users can create and upload new posts. It highlights the **Category Dropdown** functionality.
 
-- **Left Section**:
-  - An upload area where users can click or tap to upload an image. The placeholder image was designed by the author and generated using AI tools.
+- **Image Upload Section**:
+  - A clickable area to upload an image. The placeholder includes an upload icon and a label: **"Click or tap to upload an image"**.
 
-- **Right Section**:
-  - **Title Field**: A text input field for adding a title to the post.
-  - **Content Field**: A larger text area for entering the content of the post.
-  - **Buttons**:
-    - **Cancel**: Allows the user to discard the current post creation process.
-    - **Create**: Submits the post to the platform.
+- **Form Fields**:
+  - **Title**: A text input field for adding a title to the post.
+  - **Content**: A larger text area for entering the content of the post, such as a description or details about the shared experience.
+  - **Category Dropdown**: A dropdown menu allowing users to select a category for the post. Available categories include:
+    - **General**
+    - **Eczema**
+    - **Allergy**
 
-This page provides a simple and user-friendly interface for sharing new posts with the community.
+- **Buttons**:
+  - **Cancel**: Allows users to discard the post creation process.
+  - **Create**: Submits the post to the platform.
+
+This page provides an intuitive interface for users to categorize their posts effectively, improving organization and discoverability within the community.
 
 ![Add Post Page](documentation/add_post.png)
 
-### 🖼️ Comment Category Selection  
-This screenshot showcases the **comment category selection** feature on the post page of the Remeskin platform. It allows users to assign a category to their comment, improving organization and readability of discussions.
+### 🖼️ Comments Section with Categories
+This screenshot showcases the **Comments Section** on the Remeskin platform, allowing users to interact and categorize their comments for better context and readability.
 
-- **Comment Categories**: Users can choose from three options:  
-  - **General**: A standard comment without specific context.  
-  - **Question**: A comment containing a question to encourage responses.  
-  - **Tip**: A comment offering advice or helpful suggestions.  
+- **Comment Input**:
+  - A text input field where users can type their comments.
+  - **Category Dropdown**: Allows users to assign a category to their comment. Available options include:
+    - **General**
+    - **Question**
+    - **Tip**
+  - **Post Button**: Submits the comment to the discussion.
 
-- **Example Comments**:  
-  - **Category: tip** - A comment providing advice on using a moisturizing cream for dry elbows.  
-  - **Category: general** - A simple, general comment such as wishing someone good luck.  
+- **Example Comments**:
+  - **Nikodem** (Category: Tip): Offers advice to see a doctor as soon as possible.
+  - **Olga** (Category: Question): Asks a question about nut allergies and whether to consult a doctor.
+  - **Hira_Singh** (Category: General): Shares that they have experienced something similar.
+  - **Caoimhin** (Category: General): Discusses their child's similar experience with nuts and mentions peanut butter.
 
-This feature enhances user engagement by enabling clearer context for each comment, making interactions more efficient and helpful.
+This section enhances engagement by allowing users to categorize their contributions, making discussions more organized and valuable to the community.
 
 ![Comment](documentation/comment.png)
 
@@ -300,33 +314,50 @@ This page is designed to provide an intuitive interface for users to add detaile
 
 ![Add Product Page](documentation/add_product.png)
 
-### 🖼️ Feed Page
-This screenshot displays the **Feed Page** of the Remeskin platform, a dynamic section where users can browse content published by the people they follow. The feed is personalized to show posts from followed profiles, ensuring relevant and engaging content.
+### 🖼️ Feed Page Example
+This screenshot displays a **Feed Page** example from the Remeskin platform, where users can view posts shared by the profiles they follow.
 
-- **Search Bar**: Located at the top, allowing users to search for specific posts by keywords.
-- **Post Feed**:
-  - Displays a series of posts.
-  - Each post includes:
-    - **Date**: Displayed in the top-right corner of the post card.
-    - **Like and Comment Counts**: Located below the post content, showing the level of engagement.
-    
-This page provides a personalized and interactive interface for users to stay updated on posts from their network and discover new content.
+- **Search and Filter**:
+  - **Search Bar**: Positioned at the top, allowing users to search for posts using keywords.
+  - **Category Filter**: Below the search bar, providing a dropdown menu to filter posts by categories.
+
+- **Post Section**:
+  - **Post Author**: The post is created by **Bartosz**, with the posting date displayed (**27 Dec 2024**).
+  - **Post Content**:
+    - A featured image showcasing skincare products and natural elements, emphasizing the platform's focus on holistic skin health and natural remedies.
+    - Text content encouraging community members to share tips, habits, or products that have helped them with skin issues and allergies. Examples include:
+      - A soothing cream.
+      - An allergen-free snack.
+      - A daily routine to prevent flare-ups.
+    - The post motivates users to provide advice and foster community support.
+    - A **category label** ("General") is prominently displayed below the text to identify the context of the post.
+  - **Engagement Options**:
+    - Users can interact with the post using **like** and **comment** buttons. Engagement metrics (4 likes, 6 comments) are displayed below the post.
+
+This page fosters a personalized and engaging space for users to connect with posts from their network and gain valuable insights shared by the community.
+
 
 ![Feed Page](documentation/feed.png)
 
-### 🖼️ Liked Posts Page
-This screenshot displays the **Liked Posts Page** of the Remeskin platform, where users can view the posts they have liked.
+### 🖼️ Liked Posts Page Example
+This screenshot displays an example of the **Liked Posts Page** on the Remeskin platform, showcasing posts that the user has liked.
 
+- **Search and Filter**:
+  - **Search Bar**: Positioned at the top, allowing users to search through liked posts using keywords.
+  - **Category Filter**: Below the search bar, providing a dropdown menu to filter liked posts by categories.
 
-- **Liked Posts Feed**:
-  - Displays a series of posts liked by the user, including:
-    - A post by "Saoirse28" titled **"Unsure"** with an image of the medication "Equoral" (100 mg) and a description expressing concerns about starting treatment with the medication and seeking advice.
-    - Another post by "Bartosz" visible below with its respective title, image, and description.
-  - Each post includes:
-    - **Date**: Displayed in the top-right corner of the post card.
-    - **Like and Comment Counts**: Located below the post content, showing the number of interactions.
-    
-This page offers a focused view of the user's liked posts, making it easy to revisit or engage further with previously liked content.
+- **Post Section**:
+  - **Post Author**: The post is created by **Saoirse28**, with the posting date displayed (**27 Dec 2024**).
+  - **Post Content**:
+    - A captivating featured image of a serene sunset over a reflective body of water, symbolizing tranquility and hope.
+    - Text content titled **"Strength in Every Step"**, emphasizing perseverance and shared experiences. The message inspires users with motivational words:
+      - "Healing is a journey, not a race. Every small step forward is progress."
+      - Encourages users to find strength in community and shared stories.
+    - A **category label** ("General") is prominently displayed below the text, making it easy to identify the post's context.
+  - **Engagement Metrics**:
+    - Displays **1 like** (liked by the user) and **0 comments**.
+
+This page provides users with a personalized and uplifting space to revisit posts they have liked, helping them reconnect with inspiring and valuable content shared by the community.
 
 ![Liked Posts Page](documentation/like.png)
 
@@ -390,7 +421,7 @@ This alert provides immediate feedback about an issue, guiding the user to retry
 
 ## ✅ Testing
 
-### Manual Testing
+#### 🛠️ Manual Testing
 - The application was manually tested to ensure all core functionalities work as expected across different devices and screen sizes.
 - Key manual test cases included:
   - User registration and login flows.
@@ -399,7 +430,28 @@ This alert provides immediate feedback about an issue, guiding the user to retry
   - Responsiveness on desktop, tablet, and mobile devices.
   - Interaction with SweetAlert notifications for success, error, and confirmation messages.
 
-### Browser Compatibility
+#### 🌟 Lighthouse Report
+The application was tested using **Lighthouse** to evaluate its performance, accessibility, best practices, and SEO. Below are the results:
+
+| Metric             | Score |
+|--------------------|-------|
+| **Performance**    | 91    |
+| **Accessibility**  | 88    |
+| **Best Practices** | 96    |
+| **SEO**            | 92    |
+
+**Performance Breakdown**:
+- **First Contentful Paint**: 0.7s
+- **Largest Contentful Paint**: 2.0s
+- **Total Blocking Time**: 0ms
+- **Cumulative Layout Shift**: 0.001
+
+![Lighthouse Report](documentation/lighthouse.png)
+
+These scores reflect a well-optimized and user-friendly application, ensuring a seamless experience for users.
+
+
+#### 🌐 Browser Compatibility
 - The application was tested on the following browsers:
   - Google Chrome
   - Mozilla Firefox

@@ -6,6 +6,7 @@ axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
 axios.defaults.withCredentials = true;
 
 
+
 // Create instances for axios requests
 export const axiosReq = axios.create();
 export const axiosRes = axios.create();
