@@ -57,10 +57,10 @@ function ProductCreateForm() {
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
-      URL.revokeObjectURL(image);
+      URL.revokeObjectURL(image); // Usuń poprzedni podgląd
       setProductData({
         ...productData,
-        image: URL.createObjectURL(event.target.files[0]),
+        image: event.target.files[0], // Przechowuj faktyczny plik obrazu
       });
     }
   };
@@ -71,7 +71,12 @@ function ProductCreateForm() {
 
     formData.append("name", name);
     formData.append("description", description);
-    formData.append("image", imageInput.current.files[0]);
+
+    // Dodaj obraz tylko, jeśli został wybrany
+    if (imageInput.current?.files[0]) {
+      formData.append("image", imageInput.current.files[0]);
+    }
+
     formData.append("category", category);
 
     try {
@@ -104,7 +109,7 @@ function ProductCreateForm() {
               {image ? (
                 <>
                   <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
+                    <Image className={appStyles.Image} src={URL.createObjectURL(image)} rounded />
                   </figure>
                   <div>
                     <Form.Label className={`${btnStyles.Button} ${btnStyles.Blue} btn`} htmlFor="image-upload">
