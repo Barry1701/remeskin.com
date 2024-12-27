@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
+import styles from "../../styles/Product.module.css"; // Import the styles
 
 const Product = ({ id, owner, name, description, image, category_name, setProducts }) => {
   const history = useHistory();
@@ -29,10 +30,20 @@ const Product = ({ id, owner, name, description, image, category_name, setProduc
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{description}</Card.Text>
-        {category_name && <Card.Text>Category: {category_name}</Card.Text>}
+        {category_name && (
+          <Card.Text>
+            <span className={styles.Category}>
+              Category: {category_name.charAt(0).toUpperCase() + category_name.slice(1)}
+            </span>
+          </Card.Text>
+        )}
         {isOwner && (
           <div className="d-flex justify-content-end">
-            <Button variant="warning" onClick={() => history.push(`/products/${id}/edit`)} className="mr-2">
+            <Button
+              variant="warning"
+              onClick={() => history.push(`/products/${id}/edit`)}
+              className="mr-2"
+            >
               Edit
             </Button>
             <Button variant="danger" onClick={handleDelete}>

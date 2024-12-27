@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Alert from "react-bootstrap/Alert";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/ProductPage.module.css";
+import sharedStyles from "../../styles/Product.module.css"; // Import shared styles
 
 function ProductPage() {
   const { id } = useParams();
@@ -56,8 +57,10 @@ function ProductPage() {
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
             {product.category_name && (
-              <Card.Text className="text-muted">
-                Category: {product.category_name}
+              <Card.Text>
+                <span className={sharedStyles.Category}>
+                  Category: {product.category_name.charAt(0).toUpperCase() + product.category_name.slice(1)}
+                </span>
               </Card.Text>
             )}
             {isOwner && (

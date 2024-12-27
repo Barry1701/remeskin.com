@@ -280,18 +280,28 @@ This section enhances engagement by allowing users to categorize their contribut
 ![Comment](documentation/comment.png)
 
 
-### 🖼️ Products Page
-This screenshot displays the **Products Page** of the Remeskin platform, where users can explore recommended skincare and allergy-related products.
+### 🖼️ Product Page Example
+This screenshot displays an example from the **Product Page** of the Remeskin platform, where users can explore recommended products shared by the community.
 
-- **Search Bar**: Located at the top, allowing users to search for specific products by name.
-- **Category Dropdown**: A dropdown menu to filter products by category, helping users quickly find relevant recommendations.
+- **Search and Filter**:
+  - **Search Bar**: Located at the top, allowing users to search for specific products.
+  - **Category Filter**: Below the search bar, providing a dropdown menu to filter products by categories.
+
 - **Product Section**:
-  - Displays a product titled **"Natural Oils"** with an accompanying description explaining its benefits and usage.
-  - Includes an image of the product (e.g., bottles of oils) to provide a visual representation.
-  - Shows the assigned category: **Non-Steroidal Eczema Treatments**.
-  - **Edit** and **Delete** buttons are visible for the owner of the product, allowing them to update or remove the product listing.
+  - **Product Title**: The featured product is **"Vesgantti Single Mattress"**.
+  - **Product Content**:
+    - A testimonial from the user highlights the product's effectiveness in improving comfort and sleep quality for their child with sensitive skin. The description emphasizes the product's ability to reduce scratching and promote peaceful sleep.
+    - The **category label** ("Hypoallergenic Clothing and Bedding") is prominently displayed below the description for clarity.
+  - **Default Product Image**:
+    - The image shown is the default product representation, designed by the author and generated using AI tools, maintaining a clean and professional aesthetic.
 
-This page provides a user-friendly interface to browse, manage, and share products beneficial for individuals with skin issues and allergies.
+- **Most Followed Profiles**:
+  - Displayed on the right side, showcasing a list of the most followed profiles on the platform. Each profile includes:
+    - **Username** and profile picture.
+    - A **follow/unfollow button** to manage connections.
+
+This page provides users with a well-organized and user-friendly interface to explore and share product recommendations for skin and allergy-related challenges.
+
 
 ![Products Page](documentation/product.png)
 

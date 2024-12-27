@@ -24,7 +24,7 @@ function PostsPage({ message, filter = "" }) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState(""); // Nowe pole dla kategorii
+  const [category, setCategory] = useState("");
 
   const currentUser = useCurrentUser();
 
@@ -32,7 +32,7 @@ function PostsPage({ message, filter = "" }) {
     const fetchPosts = async () => {
       try {
         const { data } = await axiosReq.get(
-          `/posts/?${filter}search=${query}&category=${category}` // Dodano kategorię do żądania
+          `/posts/?${filter}search=${query}&category=${category}`
         );
         setPosts(data);
         setHasLoaded(true);
@@ -49,14 +49,14 @@ function PostsPage({ message, filter = "" }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, category, pathname, currentUser]); // Dodano category jako zależność
+  }, [filter, query, category, pathname, currentUser]);
 
   const handleSearchChange = (event) => {
     setQuery(event.target.value);
   };
 
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value); // Ustawienie kategorii
+    setCategory(event.target.value);
   };
 
   const noPostsMessage = message || "No posts found.";
@@ -83,7 +83,7 @@ function PostsPage({ message, filter = "" }) {
           <Form.Control
             as="select"
             value={category}
-            onChange={handleCategoryChange} // Obsługa zmiany kategorii
+            onChange={handleCategoryChange}
           >
             <option value="">All Categories</option>
             <option value="general">General</option>
