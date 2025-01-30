@@ -11,7 +11,8 @@
 - [📱 PWA Support](#-pwa-support)
 - [⚙️ Installation and Setup](#️-installation-and-setup)
 - [📁 Project Structure](#-project-structure)
-- [Project Management](#project-management)
+- [📋 Project Management](#-project-management)
+- [🎨 Design](#-design)
 - [🖼️ Screenshots](#️-screenshots)
 - [✅ Testing](#-testing)
 - [🚀 Frontend Deployment](#-frontend-deployment)
@@ -116,7 +117,8 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 
 [⬆️ Back to Top](#top)
 
-## Project Management
+## 📋 Project Management
+
 ### Milestones
 
 | Milestone                   | Description                                     | Related User Stories      |
@@ -148,6 +150,278 @@ Remeskin is configured to support installation as a Progressive Web App (PWA). T
 
 >###  **Full List of User Stories**  
 >For the complete breakdown of user stories, visit the **[User Stories Board](https://github.com/users/Barry1701/projects/11)**.
+
+[⬆️ Back to Top](#top)
+
+## 🎨 Design
+
+This document outlines the key visual and UX design decisions for **Remeskin**, including color palette, typography, layout structure, and commonly used UI components.
+
+---
+
+### 1. Color Palette
+
+In the CSS files, several repeated color patterns and gradients are used. Below is a consolidated palette:
+
+- **Gradient (Navbar)**  
+  - `#6dd5ed` → `#2193b0` (linear gradient)
+- **Gradient (Category Labels / “Wow Effect”)**  
+  - `#ff7e5f` → `#feb47b`
+- **Accent Colors**  
+  - **Buttons & Background Variation**: `#242a3d` (dark blue-gray) or `#2142b2` (deep blue)  
+  - **Hearts (Liked Posts)**: `#f85032`
+- **Base Background** (in `index.css`)  
+  - A repeated texture plus a light linear gradient (`#e6e9f0` → `#eef1f5`)
+- **Text**  
+  - Default: `#333`  
+  - Lighter text (e.g., dates): `#c1c1c5` or `#555555`
+
+> **Tip:** If you want to standardize these colors further, consider defining them as CSS variables or SCSS variables.
+
+---
+
+### 2. Typography
+
+- **Primary Font**: [Poppins](https://fonts.google.com/specimen/Poppins) (imported in `index.html`).  
+  - Fallback stack: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`
+- **Code Snippets**  
+  - `source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace`
+- **Font Sizes**  
+  - Forms, buttons, and general text: typically `14px–16px`  
+  - `.Header` class: `16px`, uppercase, letter-spacing  
+  - Icons: `i { font-size: 1.6rem }`
+
+Since Bootstrap 4.6 is included, I also inherit its default font sizing (e.g., `<h1>` through `<h6>`).
+
+---
+
+### 3. Icons
+
+- **Font Awesome** is used via a `<script>` in `index.html`.
+- Common icons:  
+  - Sign-in/out (`fa-sign-in-alt`, `fa-sign-out-alt`), user (`fa-user`, `fa-user-plus`), heart (`fa-heart`), comments (`fa-comments`), etc.
+- Additional usage:  
+  - **3-dot menu**: `fa-ellipsis-v` (for `<MoreDropdown>`).
+
+---
+
+### 4. Layout & Responsiveness
+
+#### 4.1 Overall Structure
+
+- **Navbar** (fixed, gradient background)  
+  - Uses `<Navbar>` from `react-bootstrap` and custom CSS in `NavBar.module.css`.
+  - Collapses on mobile, toggled with a custom hook (`useClickOutsideToggle.js`).
+- **Main Content**  
+  - Wrapped in a `<Container>` with `.Main { padding-top: 81px }` to account for navbar height.
+- **Background**  
+  - A repeated dark texture plus a linear gradient, set in `body` (see `index.css`).
+
+#### 4.2 CSS Modules & Media Queries
+
+- Each component (e.g., `NavBar`, `Post`, `Comment`) often has its own `.module.css`.
+- **Responsive breakpoints** leverage Bootstrap’s defaults (sm, md, lg, xl).
+  - For instance, `.d-none d-lg-block` to hide/show elements depending on screen size.
+
+#### 4.3 Common Layout Patterns
+
+- **Two-column layout** on wider screens: main feed (`lg=8`) + sidebar (`lg=4`).
+- On smaller viewports, the sidebar is hidden or moved below the main feed.
+
+---
+
+### 5. Core UI Components
+
+1. **Navbar** (`NavBar.js`)
+   - Gradient background, sign-in / sign-up links for guests, or user profile links if logged in.
+   - `.NavLink` classes control text color, hover transitions, and icons.
+
+2. **Buttons** (various styles in `Button.module.css`)
+   - Classes like `.Blue`, `.BlueOutline`, `.Black`, `.BlackOutline`, `.Bright`.
+   - Rounded corners (`border-radius: 100px`), hover states that invert colors, etc.
+
+3. **Cards / Posts**
+   - Implemented via `<Card>` from `react-bootstrap` + additional styles in `Post.module.css`.
+   - Category labels (like “General”, “Eczema”, “Allergy”) have bright gradient backgrounds with hover scaling.
+
+4. **Forms** (Sign in/up, PostCreateForm, ProductCreateForm, etc.)
+   - Typically use `<Form>` from `react-bootstrap` plus modular CSS (`SignInUpForm.module.css`, `PostCreateEditForm.module.css`).
+   - Validation errors displayed with `<Alert>`.
+
+5. **Alerts / Modals**
+   - [SweetAlert2](https://sweetalert2.github.io/) for success/error confirmations.
+   - `<Alert>` from `react-bootstrap` for inline messages (e.g., form validation).
+
+6. **Avatars**
+   - `Avatar.js` uses `.Avatar` from `Avatar.module.css` to present user images in circular form.
+
+---
+
+### 6. Highlights & Visual Effects
+
+- **Hover States**
+  - Navbar: slightly darker gradient on hover.
+  - Category chips: color gradient flips, scale effect (`transform: scale(1.05)`).
+  - Buttons: background color toggles or inverts.
+- **Shadows**
+  - Subtle box-shadows on `.Post`, `.ProductCard`, and category labels.
+
+---
+
+### 7. Wireframes
+
+Below are **text-based wireframes** for Remeskin’s main pages, illustrating layout and core elements. Although simplified, they show how content is arranged and where key features appear. 
+
+---
+
+**1. Home Page**
+
+```text
+┌───────────────────────────────────────────────────────────────────────────┐
+│                               NavBar (fixed)                              │
+│  [ Remeskin Logo ] [Add Post] [Home] [Products] [Add Product] [Feed]      │
+│        [Liked] [Profile] [Sign Out]   (if logged in)                      │
+│        [Sign In] [Sign Up]          (if logged out)                       │
+└───────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────┬──────────────┐
+│ [ Search Bar ] [ Category Filter Dropdown ]               │              │
+├───────────────────────────────────────────────────────────┤  Most        │
+│  [ PostCard - Title, Content, Image, Category Label ]     │ Followed     │
+│  [ Like / Comment icons & counts ]                        │ Profiles     │
+│  [ Edit/Delete if owner ]                                 │ (Sidebar)    │
+├───────────────────────────────────────────────────────────┤              │
+│  [ Another PostCard ... ]                                 │              │
+└───────────────────────────────────────────────────────────┴──────────────┘
+
+```
+
+**Description**:
+
+- The NavBar at the top has a gradient background, showing logo and navigation links.  
+- The main area (left column) contains a feed of user posts with search and category filters.  
+- The right column lists **Most Followed Profiles**.  
+
+---
+
+**2. Sign up Page**
+
+```text
+┌───────────────────────────────┐   ┌─────────────────────────────────────┐
+│          Sign-Up Form         │   │   Motivational / Personal Image     │
+│  [Username]                   │   │   (e.g., child with eczema)         │
+│  [Password]                   │   │                                     │
+│  [Confirm Password]           │   └─────────────────────────────────────┘
+│  [Sign Up Button]             │
+│  [Link to Sign In]            │
+└───────────────────────────────┘
+```
+
+**Description**:
+
+- On the left: a form asking for username, password, and password confirmation.  
+- On the right: an image or illustration.  
+- After submission, SweetAlert2 shows success/failure.  
+
+---
+
+**3. Sign In Page**
+
+```text
+┌───────────────────────────────┐   ┌─────────────────────────────────────┐
+│           Sign-In Form        │   │     AI-generated / Artistic Image   │
+│  [Username]                   │   │     related to skin/allergies       │
+│  [Password]                   │   │                                     │
+│  [Sign In Button]             │   └─────────────────────────────────────┘
+│  [Link to Sign Up]            │
+└───────────────────────────────┘
+
+```
+
+**Description**:
+
+- Similar layout to Sign Up: form on the left, image on the right.  
+- Successful login redirects the user to the home/feed page.
+
+---
+
+**4. Profile Page**
+
+```text
+┌─────────────────────────────────────────────────────┐
+│ [Avatar]   Username                                 │
+│  Followers: X   Following: Y    Posts: Z            │
+│  [Follow/Unfollow Button] (if not owner)            │
+│  [ProfileEditDropdown if owner]                     │
+│  Bio: "User’s personal info or description"         │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────┐
+│           [User’s Posts with InfiniteScroll]        │
+│  [Post 1]                                           │
+│  [Post 2]                                           │
+│  ...                                                │
+└─────────────────────────────────────────────────────┘
+
+```
+
+**Description**:
+
+- Shows user’s avatar, bio, and stats (number of followers/following/posts).  
+- If the profile is owned by the logged-in user, there’s an edit dropdown (to change image, username, password).  
+- User’s posts load in an infinite scroll below.  
+
+---
+
+**5. Add Post Page**
+
+```text
+┌───────────────────────────────────────────────────────┐
+│  [Image Upload Preview or Placeholder]                │
+│                                                       │
+│  [Title]                                              │
+│  [Content (textarea)]                                 │
+│  [Category Dropdown: General / Eczema / Allergy ]     │
+│                                                       │
+│  [Create Button] [Cancel Button]                      │
+└───────────────────────────────────────────────────────┘
+
+```
+
+**Description**:
+
+- Form includes fields for a post’s title, content, category, and an optional image.  
+- On submit, a SweetAlert2 message confirms success or shows errors.  
+
+---
+
+**6. Product Page**
+
+```text
+┌─────────────────────────────────────────────────────────────────┬──────────┐
+│ [Search Field] [Category Filter for Products]                   │          │
+│-----------------------------------------------------------------│ Popular  │
+│ [ProductCard: Title, Description, Image, Category Label]        │Profiles  │
+│ [ Edit/Delete if owner ]                                        │(Sidebar) │
+│-----------------------------------------------------------------│          │
+│ [ Another ProductCard ... ]                                     │          │
+└─────────────────────────────────────────────────────────────────┴──────────┘
+
+```
+
+**Description**:
+
+- Shows a list of community-recommended products, each with a category label.  
+- Users can search products by name and filter by category.  
+- Owners can edit or delete their own product entries.  
+
+
+
+---
+
+
+
 
 [⬆️ Back to Top](#top)
 

@@ -27,15 +27,15 @@ h5 {
   font-weight: bold;
   color: white;
   background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Gradient */
-  padding: 4px 8px; /* Dodaj przestrzeń wewnętrzną */
-  border-radius: 8px; /* Zaokrąglenie krawędzi */
-  display: inline-block; /* Umożliwia lepsze rozmieszczenie */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Cień dla "wow efektu" */
-  margin-top: 5px; /* Odstęp od innych elementów */
+  padding: 4px 8px; /* Add internal spacing */
+  border-radius: 8px; /* Rounded corners */
+  display: inline-block; /* Enables better layout */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for a "wow" effect */
+  margin-top: 5px; /* Margin from other elements */
 }
 
 .Category:hover {
-  background: linear-gradient(45deg, #feb47b, #ff7e5f); /* Efekt hover */
-  transform: scale(1.05); /* Powiększenie przy najechaniu */
-  transition: all 0.3s ease-in-out; /* Płynne przejście */
+  background: linear-gradient(45deg, #feb47b, #ff7e5f); /* Hover effect */
+  transform: scale(1.05); /* Enlargement on hover */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
 }
