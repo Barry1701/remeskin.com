@@ -13,6 +13,7 @@
 - [📁 Project Structure](#-project-structure)
 - [📋 Project Management](#-project-management)
 - [🎨 Design](#-design)
+- [🧩 Componenent Documentation](#-component-documentation)
 - [🖼️ Screenshots](#️-screenshots)
 - [✅ Testing](#-testing)
 - [🚀 Frontend Deployment](#-frontend-deployment)
@@ -424,6 +425,257 @@ Below are **text-based wireframes** for Remeskin’s main pages, illustrating la
 
 
 [⬆️ Back to Top](#top)
+
+## 🧩 Component Documentation
+
+Below is an overview of key **reusable components** used in Remeskin. Each entry describes the component’s **purpose**, **props**, **styling**, **usage examples**, and **additional notes** on testing or edge cases.
+
+---
+
+### 1. `NavBar` (src/components/NavBar.js)
+
+**Purpose**  
+- Displays a responsive navigation bar at the top of the application.
+- Shows different links and icons depending on whether the user is logged in (`currentUser` state) or logged out.
+
+**Props**  
+- *No direct props passed in*; instead, it relies on:
+  - `useCurrentUser()` to check authentication status and display user-specific links.
+  - `useSetCurrentUser()` to handle logouts.
+
+**Styling**  
+- Uses [React Bootstrap’s Navbar](https://react-bootstrap.github.io/components/navbar/) under the hood.  
+- Has **custom gradient** (`NavBar.module.css`), with hover effects that slightly darken the gradient.
+
+**Usage Example**
+
+```jsx
+import NavBar from "./components/NavBar";
+
+function App() {
+  return (
+    <div>
+      <NavBar />
+      {/* Other routes and components here */}
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+**Edge Cases & Testing**:
+
+- **Logged-out state**: Check that Sign In / Sign Up links appear, and that restricted links (like Add Post) are hidden.  
+- **Logged-in state**: Ensure user-specific links (Profile, Sign Out) appear correctly. Test the sign-out flow (e.g., error handling if the logout fails).
+
+### 2. `Avatar` (src/components/Avatar.js)
+
+**Purpose**  
+- Renders a circular user avatar (profile image) at a specified size.  
+- Optional text can appear to the right of the avatar.
+
+**Props**  
+- `src` (**string**, required): The image URL for the avatar.  
+- `height` (**number**, default=45): The avatar’s rendered size, used for both width and height.  
+- `text` (**string | JSX**, optional): If provided, appears inline with the avatar image.
+
+**Styling**  
+- Controlled by `Avatar.module.css`, using:
+  - `border-radius: 50%` for the circle.
+  - `object-fit: cover` to ensure the image is neatly cropped.
+
+```jsx
+
+import Avatar from "./components/Avatar";
+
+function ProfileBadge() {
+  return (
+    <div>
+      <Avatar src="/images/profile.jpg" height={60} text="MyUserName" />
+    </div>
+  );
+}
+
+```
+
+**Edge Cases & Testing:**
+
+- **Broken image URL:** The default behavior is to show a broken image icon if `src` is invalid. Consider adding an `onError` fallback if desired.
+- **Long text:** If text is lengthy, ensure it wraps or truncates correctly in small layouts.
+
+### 3. `MoreDropdown` (src/components/MoreDropdown.js)
+
+**Purpose**
+- Renders a three-dot “options” dropdown (using `<Dropdown>` from react-bootstrap).
+- Typically used to display quick actions (e.g., **Edit / Delete**) on posts, comments, or profiles.
+
+**Props**
+- **`handleEdit`** *(function, optional)*: Called when the user selects **“Edit”**.
+- **`handleDelete`** *(function, optional)*: Called when the user selects **“Delete”**.
+
+**Styling**
+- `.DropdownItem` classes in **MoreDropdown.module.css** minimize padding and customize alignment.
+- By default, the dropdown is positioned to the left (`drop="left"`), which can be changed if needed.
+
+**Usage Example**
+
+```jsx
+
+import { MoreDropdown } from "../components/MoreDropdown";
+
+function PostActions({ onEdit, onDelete }) {
+  return (
+    <MoreDropdown handleEdit={onEdit} handleDelete={onDelete} />
+  );
+}
+
+```
+
+**Edge Cases & Testing**
+
+- **No `handleEdit` or `handleDelete`**: The menu still appears, but selecting an action may do nothing.
+- **Position conflicts**: In narrow layouts, `drop="left"` might cause the menu to extend off-screen. Verify on mobile.
+
+### 4. `ProfileEditDropdown` (src/components/MoreDropdown.js)
+
+**Purpose**
+- A specialized variant of **MoreDropdown** for editing user profiles (**Edit Profile, Change Username, Change Password**).
+
+**Props**
+- **`id`** *(number, required)*: The profile ID used to build edit links.
+
+**Styling & Usage**
+- Similar to **MoreDropdown**, but includes unique menu items relevant to profile editing.
+
+**Example Usage in `ProfilePage.js`**:
+
+```jsx
+
+{profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+
+```
+
+**Edge Cases**
+
+- Must ensure the logged-in user actually **“owns”** that profile.
+- If the user navigates to these routes manually without permissions, handle server rejections (**401/403**).
+
+### 5. `Asset` (src/components/Asset.js)
+
+**Purpose**
+- Shows either (or both) a **loading spinner** and an **image**, with optional text.
+- Commonly used to display **loading states** or **no-results placeholders**.
+
+**Props**
+- **`spinner`** *(boolean, optional)*: If `true`, renders a `<Spinner animation="border" />`.
+- **`src`** *(string, optional)*: A URL for a placeholder image.
+- **`message`** *(string, optional)*: Text displayed below the spinner/image.
+
+**Styling**
+- **Asset.module.css** uses a **flex container** to center content.
+- The spinner is from **react-bootstrap’s** `<Spinner>`.
+
+**Usage Example**
+
+```jsx
+
+function LoadingExample() {
+  return (
+    <Asset spinner message="Fetching data..." />
+  );
+}
+
+function NotFoundExample() {
+  return (
+    <Asset src="/images/no_results.png" message="No results found." />
+  );
+}
+
+```
+
+**Edge Cases & Testing**
+
+- **Both `spinner` and `src`**: The component shows both the spinner and the image. Confirm layout is okay.
+- **No props**: Renders an empty container if neither `spinner` nor `src` are provided.
+
+### 6. `NotFound` (src/components/NotFound.js)
+
+**Purpose**
+
+- A simple **fallback component** indicating that a page or resource **does not exist** (**404-like message**).
+- Often rendered when a **Route isn’t matched** or a **resource is missing**.
+
+**Props**
+
+- **None**
+
+**Styling**
+
+- Uses **NotFound.module.css**, which centers the message and an optional image.
+- Internally imports the **Asset** component with a default message like:
+  > *"Sorry, the page you're looking for doesn't exist."*
+
+**Usage Example**
+
+```jsx
+
+import NotFound from "../components/NotFound";
+
+function SomeRoutingComponent() {
+  // ...
+  <Route render={() => <NotFound />} />
+}
+
+```
+
+**Edge Cases & Testing**
+
+- **Conditional**: You could also show `<NotFound />` if a specific resource (**post, user, etc.**) wasn’t found by the API.
+- **Custom messages**: If you want dynamic content, pass a prop or use your own logic. Currently, it's static.
+
+### 7. `Form Components` (e.g., SignInForm, SignUpForm)
+
+While these forms are more **feature-specific** than truly **reusable**, you may still want to document them briefly if multiple parts of the application share these patterns.
+
+**Purpose**
+
+- Each form handles a **unique user flow** (**sign in, sign up, etc.**).
+- They often integrate **SweetAlert2** for **success/error feedback**.
+
+**Notable Details**
+
+- Usually rely on **axios.post()** calls (e.g., `POST /dj-rest-auth/login/`) and **context state updates** (`useSetCurrentUser`).
+- Use **react-bootstrap** components:
+  - `<Form>` for structured input fields.
+  - `<Alert>` for validation/error messages.
+  - `<Button>` for submission.
+
+**Usage**
+
+- Typically used as **pages**:
+
+  ```jsx
+  <Route path="/signup" element={<SignUpForm />} />
+
+  ```
+
+### `Final Thoughts on Components`
+
+These component descriptions reflect the primary reusable elements of Remeskin. My goal is to provide clear guidance on their usage, styling, and potential edge cases so that future contributors or reviewers can quickly understand how each part of the UI is constructed. 
+
+As the application grows, here are a few important points to keep in mind:
+
+1. **Maintain Accuracy** – Whenever new props are introduced or existing ones change, updating this documentation helps prevent confusion among collaborators.  
+2. **Visual Demonstrations** – Tools such as [Storybook](https://storybook.js.org/) can illustrate component variations and states in a more visual, interactive manner.  
+3. **Testing** – Adding both unit and integration tests ensures that each component behaves as intended and reduces the risk of regressions when making updates or adding new features.
+
+By following these guidelines, I aim to keep the codebase well-structured and user-friendly for anyone who may work on or evaluate this project in the future.
+
+[⬆️ Back to Top](#top)
+
+---
 
 ## 🖼️ Screenshots
 Below are screenshots showcasing key features and elements of the Remeskin platform. Each screenshot includes a detailed description to help users understand the functionality and design of the application.
