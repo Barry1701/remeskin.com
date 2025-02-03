@@ -993,6 +993,38 @@ These scores reflect a well-optimized and user-friendly application, ensuring a 
   - Mozilla Firefox
   - Microsoft Edge
 
+#### 🧪 Automated Testing
+
+This project uses **Jest** and **React Testing Library** for automated testing. We have implemented the following test suites to ensure that key components work as expected:
+
+- **NavBar.test.js**  
+  *Tests the navigation bar component.*  
+  - Verifies that when the user is logged out, the **Sign In** and **Sign Up** links are displayed and the **Sign Out** link is hidden.  
+  - Checks that when a user is logged in, the **Profile** and **Sign Out** links are shown, while **Sign In** and **Sign Up** are hidden.
+  
+- **Post.test.js**  
+  *Tests the Post component.*  
+  - Ensures that post details (title, content, category) are rendered correctly.  
+  - Simulates a non-owner user liking the post and verifies that the like action triggers an API call and updates the state.  
+  - Checks that if the logged-in user is the owner of the post, the like action is disabled (a tooltip with the message "You can't like your own post!" is shown).
+
+- **NotFound.test.js**  
+  *Tests the NotFound component.*  
+  - Confirms that the component renders a fallback message (e.g., "Sorry, the page you're looking for doesn't exist") and displays an image.
+
+- **Avatar.test.js**  
+  *Tests the Avatar component.*  
+  - Validates that the avatar image is rendered with the correct source (`src`), height, and that accompanying text is displayed if provided.
+
+### Running Automated Tests
+
+To run the tests, execute the following command in your terminal:
+
+```bash
+npm test
+
+```
+
 [⬆️ Back to Top](#top)
 
 ## 🚀 Frontend Deployment
