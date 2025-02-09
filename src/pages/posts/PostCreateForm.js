@@ -1,20 +1,16 @@
 import React, { useRef, useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
-import Image from "react-bootstrap/Image";
+import { Form, Button, Row, Col, Container, Alert, Image } from "react-bootstrap";
+import { useHistory } from "react-router";
+import Swal from "sweetalert2";
+
 import Asset from "../../components/Asset";
 import Upload from "../../assets/upload.png";
+import { axiosReq } from "../../api/axiosDefaults";
+import { useRedirect } from "../../hooks/useRedirect";
+
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import { useHistory } from "react-router";
-import { axiosReq } from "../../api/axiosDefaults";
-import { useRedirect } from "../../hooks/useRedirect";
-import Swal from "sweetalert2";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
@@ -26,8 +22,8 @@ function PostCreateForm() {
     image: "",
     category: "general", // Default category
   });
-  const { title, content, image, category } = postData;
 
+  const { title, content, image, category } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
 
@@ -116,12 +112,7 @@ function PostCreateForm() {
 
       <Form.Group>
         <Form.Label>Category</Form.Label>
-        <Form.Control
-          as="select"
-          name="category"
-          value={category}
-          onChange={handleChange}
-        >
+        <Form.Control as="select" name="category" value={category} onChange={handleChange}>
           <option value="general">General</option>
           <option value="eczema">Eczema</option>
           <option value="allergy">Allergy</option>
@@ -134,16 +125,10 @@ function PostCreateForm() {
       ))}
 
       <div className="d-flex justify-content-between mt-3">
-        <Button
-          className={`${btnStyles.Button} ${btnStyles.Blue}`}
-          onClick={() => history.goBack()}
-        >
+        <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => history.goBack()}>
           Cancel
         </Button>
-        <Button
-          className={`${btnStyles.Button} ${btnStyles.Bright}`}
-          type="submit"
-        >
+        <Button className={`${btnStyles.Button} ${btnStyles.Bright}`} type="submit">
           Create
         </Button>
       </div>
@@ -154,9 +139,7 @@ function PostCreateForm() {
     <Form onSubmit={handleSubmit}>
       <Row>
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
-          <Container
-            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-          >
+          <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}>
             <Form.Group className="text-center">
               {image ? (
                 <>
@@ -164,27 +147,19 @@ function PostCreateForm() {
                     <Image className={appStyles.Image} src={image} rounded />
                   </figure>
                   <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                      htmlFor="image-upload"
-                    >
+                    <Form.Label className={`${btnStyles.Button} ${btnStyles.Blue} btn`} htmlFor="image-upload">
                       Change the image
                     </Form.Label>
                   </div>
                 </>
               ) : (
-                <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="image-upload"
-                >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload an image"
-                  />
+                <Form.Label className="d-flex justify-content-center" htmlFor="image-upload">
+                  <Asset src={Upload} message="Click or tap to upload an image" />
                 </Form.Label>
               )}
 
-              <Form.File
+              <Form.Control
+                type="file"
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}

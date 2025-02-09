@@ -1,18 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
-import Image from "react-bootstrap/Image";
+import { Form, Row, Col, Container, Alert, Image } from "react-bootstrap";
+import { useHistory, useParams, useLocation } from "react-router";
+import Swal from "sweetalert2";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-import { useHistory, useParams, useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import Swal from "sweetalert2";
 
 function PostEditForm() {
   const [errors, setErrors] = useState({});
@@ -20,10 +15,10 @@ function PostEditForm() {
     title: "",
     content: "",
     image: "",
-    category: "general", // Default
+    category: "general",
   });
-  const { title, content, image, category } = postData;
 
+  const { title, content, image, category } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
@@ -33,10 +28,10 @@ function PostEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}/`);
-        const { title, content, image, category, is_owner } = data; // Category Added
+        const { title, content, image, category, is_owner } = data;
 
         if (is_owner) {
-          setPostData({ title, content, image, category }); // Set Category
+          setPostData({ title, content, image, category });
         } else {
           Swal.fire("Error!", "You do not own this post.", "error");
           history.push("/");
@@ -72,7 +67,7 @@ function PostEditForm() {
 
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("category", category); // Category Added
+    formData.append("category", category);
 
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
@@ -122,12 +117,7 @@ function PostEditForm() {
     <div className="text-center">
       <Form.Group>
         <Form.Label>Title</Form.Label>
-        <Form.Control
-          type="text"
-          name="title"
-          value={title}
-          onChange={handleChange}
-        />
+        <Form.Control type="text" name="title" value={title} onChange={handleChange} />
       </Form.Group>
       {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -137,13 +127,7 @@ function PostEditForm() {
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
-          value={content}
-          onChange={handleChange}
-        />
+        <Form.Control as="textarea" rows={6} name="content" value={content} onChange={handleChange} />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -153,12 +137,7 @@ function PostEditForm() {
 
       <Form.Group>
         <Form.Label>Category</Form.Label>
-        <Form.Control
-          as="select"
-          name="category"
-          value={category}
-          onChange={handleChange}
-        >
+        <Form.Control as="select" name="category" value={category} onChange={handleChange}>
           <option value="general">General</option>
           <option value="eczema">Eczema</option>
           <option value="allergy">Allergy</option>
@@ -171,17 +150,10 @@ function PostEditForm() {
       ))}
 
       <div className="d-flex justify-content-between mt-3">
-        <button
-          type="button"
-          onClick={handleDelete}
-          className={`${btnStyles.Button} ${btnStyles.Danger}`}
-        >
+        <button type="button" onClick={handleDelete} className={`${btnStyles.Button} ${btnStyles.Danger}`}>
           Delete
         </button>
-        <button
-          type="submit"
-          className={`${btnStyles.Button} ${btnStyles.Bright}`}
-        >
+        <button type="submit" className={`${btnStyles.Button} ${btnStyles.Bright}`}>
           Save Changes
         </button>
       </div>
@@ -192,23 +164,19 @@ function PostEditForm() {
     <Form onSubmit={handleSubmit}>
       <Row>
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
-          <Container
-            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-          >
+          <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}>
             <Form.Group className="text-center">
               <figure>
                 <Image className={appStyles.Image} src={image} rounded />
               </figure>
               <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                  htmlFor="image-upload"
-                >
+                <Form.Label className={`${btnStyles.Button} ${btnStyles.Blue} btn`} htmlFor="image-upload">
                   Change the image
                 </Form.Label>
               </div>
 
-              <Form.File
+              <Form.Control
+                type="file"
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
