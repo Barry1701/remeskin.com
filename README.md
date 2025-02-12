@@ -349,30 +349,40 @@ Below are **text-based wireframes** for Remeskin’s main pages, illustrating la
 **4. Profile Page**
 
 ```text
-┌─────────────────────────────────────────────────────┐
-│ [Avatar]   Username                                 │
-│  Followers: X   Following: Y    Posts: Z            │
-│  [Follow/Unfollow Button] (if not owner)            │
-│  [ProfileEditDropdown if owner]                     │
-│  Bio: "User’s personal info or description"         │
-│                                                     │
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│ [Avatar - Custom Image or Default]   Username               │
+│  Followers: X   Following: Y    Posts: Z                    │
+│  Allergy Type: [User’s Allergy - e.g., Milk Allergy]        │
+│  [Follow/Unfollow Button] (if not owner)                    │
+│  [Profile Edit Dropdown (Edit Profile, Change Username,     │
+│  Change Password) - only visible for profile owner]         │
+│  Bio: "User’s personal info or description"                 │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────┐
-│           [User’s Posts with InfiniteScroll]        │
-│  [Post 1]                                           │
-│  [Post 2]                                           │
-│  ...                                                │
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│           [User’s Posts with Infinite Scroll]                │
+│  [Post 1 - Image, Title, Description]                        │
+│  [Post 2 - Image, Title, Description]                        │
+│  ...                                                         │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ [Sidebar: Most Followed Profiles]                            │
+│ [User Profile 1 - Follow/Unfollow]                           │
+│ [User Profile 2 - Follow/Unfollow]                           │
+│ ...                                                          │
+└──────────────────────────────────────────────────────────────┘
 
 ```
 
 **Description**:
 
-- Shows user’s avatar, bio, and stats (number of followers/following/posts).  
-- If the profile is owned by the logged-in user, there’s an edit dropdown (to change image, username, password).  
-- User’s posts load in an infinite scroll below.  
-
+- Displays user’s **avatar, bio, allergy type, and profile stats** (number of followers, following, and posts).  
+- If the profile belongs to the logged-in user, a **three-dots menu** allows editing the profile, changing the username, or updating the password.  
+- The **user’s posts are listed below** with infinite scrolling, allowing seamless browsing.  
+- A **sidebar** on the right shows the most followed profiles with quick **follow/unfollow** options.  
+  
 ---
 
 **5. Add Post Page**
