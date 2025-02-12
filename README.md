@@ -897,27 +897,65 @@ This page provides users with a personalized and uplifting space to revisit post
 
 ![Liked Posts Page](documentation/like.png)
 
-### 🖼️ Profile Page
-This screenshot displays the **Profile Page** of the Remeskin platform, where users can view and manage their profile information and posts.
+### 🖼️ Profile Page Example
+This screenshot displays an example of the **Profile Page** on the Remeskin platform, where users can view and manage their personal profile and posts.
 
 - **Profile Information**:
-  - Shows the user's profile picture, username (**"Katarzyna"**), and statistics:
-    - **0 posts**
-    - **10 followers**
-    - **4 following**
-  - A **three dots menu** provides options to:
-    - **Edit Profile**: Allows the user to update their profile information.
-    - **Change Username**: Enables the user to update their username.
-    - **Change Password**: Provides a secure way to update the account password.
+  - **Profile Picture**: A circular avatar representing the user (**Katarzyna**).
+  - **Username**: Displayed prominently at the top of the profile.
+  - **Statistics**:
+    - **1 Post** created by the user.
+    - **10 Followers** who follow Katarzyna.
+    - **6 Following**, showing the number of users Katarzyna follows.
+  - **User Bio**: A short description: *"Hi, I'm Kate and I'm 40."*
+  - **Allergy Type**: Clearly displayed as **Milk Allergy**, indicating a specific condition relevant to the community.
+  - **Three-Dots Menu (⋮)**:
+    - Users can click on the three-dots menu to access additional profile management options:
+      - **Edit Profile**: Allows users to update their bio, profile picture, or other personal details.
+      - **Change Username**: Provides an option to modify the displayed username.
+      - **Change Password**: Enables users to securely update their account password.
 
-- **User's Posts Section**:
-  - Displays the posts created by the user.
-  - If no posts are found, as in this case, it shows the message: **"No results found, Katarzyna hasn't posted yet."**
-  - The **"No results found" image** was conceptualized by the author and generated using AI tools to enhance the user experience with a visually appealing placeholder.
+- **User's Posts**:
+  - A post dated **09 Feb 2025**, containing an image of the back of a child's head with visible redness, likely related to an allergic reaction or skin condition.
+  - The post provides a space for discussion, support, and advice from the community.
 
-This page offers a clean and organized interface for users to manage their profiles and review their contributions to the community.
+- **Most Followed Profiles**:
+  - Displayed on the right side, showing a list of the most followed profiles on the platform.
+  - Each profile includes:
+    - **Username** and profile picture.
+    - A **follow/unfollow button** to manage connections.
+  - Katarzyna’s profile is also visible in this section with her avatar.
+
+This page provides a structured and user-friendly layout, enabling individuals to share their experiences, track engagement, and connect with others facing similar challenges.
 
 ![Profile Page](documentation/profile.png)
+
+### 🖼️ Edit Profile Page Example
+This screenshot displays the **Edit Profile Page** on the Remeskin platform, where users can update their profile details.
+
+- **Profile Picture**:
+  - Users can change their profile picture by clicking the **"Change the image"** button below the avatar.
+  - The default profile image is designed to match the platform’s aesthetic.
+
+- **Profile Fields**:
+  - **Name**: Users can update their displayed name.
+  - **Bio**: A text area where users can write a short personal description.
+
+- **Allergy Type Selection**:
+  - A dropdown menu allowing users to specify their allergy type.
+  - Available options include:
+    - **No Specific Allergy**
+    - **Milk Allergy**
+    - **Nut Allergy**
+    - **Wheat Allergy**
+    - **Egg Allergy**
+    - **Shellfish Allergy**
+  - This feature helps personalize the user profile and connects individuals facing similar health challenges.
+
+This page provides a clean and user-friendly interface, allowing users to customize their profile and enhance community engagement.
+
+![Edit Page](documentation/edit.png)
+
 
 ### 🖼️ SweetAlert Notifications
 
