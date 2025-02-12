@@ -350,13 +350,13 @@ Below are **text-based wireframes** for Remeskin’s main pages, illustrating la
 
 ```text
 ┌──────────────────────────────────────────────────────────────┐
-│ [Avatar - Custom Image or Default]   Username               │
-│  Followers: X   Following: Y    Posts: Z                    │
-│  Allergy Type: [User’s Allergy - e.g., Milk Allergy]        │
-│  [Follow/Unfollow Button] (if not owner)                    │
-│  [Profile Edit Dropdown (Edit Profile, Change Username,     │
-│  Change Password) - only visible for profile owner]         │
-│  Bio: "User’s personal info or description"                 │
+│ [Avatar - Custom Image or Default]   Username                │
+│  Followers: X   Following: Y    Posts: Z                     │
+│  Allergy Type: [User’s Allergy - e.g., Milk Allergy]         │
+│  [Follow/Unfollow Button] (if not owner)                     │
+│  [Profile Edit Dropdown (Edit Profile, Change Username,      │
+│  Change Password) - only visible for profile owner]          │
+│  Bio: "User’s personal info or description"                  │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
 
