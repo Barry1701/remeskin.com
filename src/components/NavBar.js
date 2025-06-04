@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
-import Swal from "sweetalert2"; // Import SweetAlert
+import Swal from "sweetalert2";
 import Avatar from "./Avatar";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
@@ -19,23 +19,19 @@ const NavBar = () => {
 
   const handleSignOut = async () => {
     try {
-      // Log the user out
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
 
-      // SweetAlert success notification
       Swal.fire({
         icon: "success",
         title: "Logged Out",
         text: "You have been successfully logged out."
       }).then(() => {
-        history.push("/signin"); // Redirect to sign-in page
+        history.push("/signin");
       });
     } catch (err) {
       console.error(err);
-
-      // SweetAlert error notification in case of logout failure
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -67,10 +63,41 @@ const NavBar = () => {
     </NavLink>
   );
 
+  // Inbox / Outbox / New Message icons
+  const inboxIcon = (
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/inbox"
+    >
+      <i className="fas fa-inbox"></i>Inbox
+    </NavLink>
+  );
+
+  const outboxIcon = (
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/outbox"
+    >
+      <i className="fas fa-paper-plane"></i>Outbox
+    </NavLink>
+  );
+
+  const newMessageIcon = (
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/messages/new"
+    >
+      <i className="fas fa-edit"></i>New Message
+    </NavLink>
+  );
+
   // Logged-in Icons
   const loggedInIcons = (
     <>
-      {addPostIcon} {/* Add Post Icon */}
+      {addPostIcon}
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -87,7 +114,7 @@ const NavBar = () => {
       >
         <i className="fas fa-box-open"></i>Products
       </NavLink>
-      {addProductIcon} {/* Add Product Icon */}
+      {addProductIcon}
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -102,6 +129,12 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
+
+      {/* Dodajemy DM */}
+      {inboxIcon}
+      {outboxIcon}
+      {newMessageIcon}
+
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}

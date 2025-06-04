@@ -20,6 +20,12 @@ import ProductCreateForm from "./pages/products/ProductCreateForm";
 import ProductEditForm from "./pages/products/ProductEditForm";
 import ProductPage from "./pages/products/ProductPage";
 import NotFound from "./components/NotFound";
+// === Importy do wiadomości ===
+import InboxList from "./pages/inbox/InboxList";
+import OutboxList from "./pages/inbox/OutboxList";
+import DirectMessageDetail from "./pages/inbox/DirectMessageDetail";
+import DirectMessageForm from "./pages/inbox/DirectMessageForm";
+// =============================
 
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 
@@ -171,7 +177,36 @@ function App() {
               currentUser ? <ProductEditForm /> : <Redirect to="/signin" />
             }
           />
-
+          {/* === ROUTES DLA WIADOMOŚCI === */}
+          <Route
+            exact
+            path="/inbox"
+            render={() =>
+              currentUser ? <InboxList /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/outbox"
+            render={() =>
+              currentUser ? <OutboxList /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/messages/send"
+            render={() =>
+              currentUser ? <DirectMessageForm /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/messages/:id"
+            render={() =>
+              currentUser ? <DirectMessageDetail /> : <Redirect to="/signin" />
+            }
+          />
+          {/* === KONIEC ROUTES DLA WIADOMOŚCI === */}
           {/* Default route */}
           <Route render={() => <NotFound />} />
         </Switch>
