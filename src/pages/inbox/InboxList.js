@@ -10,7 +10,15 @@ const InboxList = () => {
     const fetchInbox = async () => {
       try {
         const { data } = await axiosReq.get("/inbox/");
-        setMessages(data);
+        // Some endpoints return an object with a `results` array while others
+        // return the array directly. Normalize the value so `messages` is
+        // always an array.
+        const inboxMessages = Array.isArray(data)
+          ? data
+          : Array.isArray(data?.results)
+          ? data.results
+          : [];
+        setMessages(inboxMessages);
       } catch (err) {
         console.error(err);
       }
@@ -21,12 +29,19 @@ const InboxList = () => {
 
   if (loading) return <div>Loading...</div>;
 
+  // Guard against unexpected data shapes to prevent runtime errors
+  const messageList = Array.isArray(messages)
+    ? messages
+    : Array.isArray(messages?.results)
+    ? messages.results
+    : [];
+
   return (
     <div>
       <h2>Inbox</h2>
-      {messages.length === 0 && <div>No messages.</div>}
+      {messageList.length === 0 && <div>No messages.</div>}
       <ul>
-        {messages.map((msg) => (
+        {messageList.map((msg) => (
           <li key={msg.id}>
             <b>From:</b> {msg.sender_username} <b>Subject:</b> {msg.subject}{" "}
             <Link to={`/messages/${msg.id}`}>View</Link>
