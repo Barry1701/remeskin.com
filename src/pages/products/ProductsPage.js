@@ -7,7 +7,7 @@ import Asset from "../../components/Asset";
 import Product from "./Product";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/ProductsPage.module.css";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import NoResults from "../../assets/no_results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
