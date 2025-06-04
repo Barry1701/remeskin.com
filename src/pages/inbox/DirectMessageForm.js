@@ -2,21 +2,19 @@ import React, { useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 
 const DirectMessageForm = () => {
-  const [recipient, setRecipient] = useState("");
+  const [receiver, setReceiver] = useState("");
   const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [content, setContent] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosReq.post("/inbox/", { recipient, subject, body });
-      setSuccess(true);
-      setRecipient("");
+      await axiosReq.post("/messages/", { receiver, subject, content });
+      setReceiver("");
       setSubject("");
-      setBody("");
+      setContent("");
     } catch (err) {
-      alert("Błąd wysyłki wiadomości");
+      console.error(err);
     }
   };
 
@@ -26,10 +24,10 @@ const DirectMessageForm = () => {
       <input
         type="text"
         placeholder="Recipient username"
-        value={recipient}
-        onChange={(e) => setRecipient(e.target.value)}
+        value={receiver}
+        onChange={(e) => setReceiver(e.target.value)}
         required
-        name="recipient"
+        name="receiver"
       />
       <input
         type="text"
@@ -41,13 +39,12 @@ const DirectMessageForm = () => {
       />
       <textarea
         placeholder="Your message"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         required
-        name="body"
+        name="content"
       />
       <button type="submit">Send</button>
-      {success && <p>Message sent!</p>}
     </form>
   );
 };
