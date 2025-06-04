@@ -194,7 +194,7 @@ function App() {
           />
           <Route
             exact
-            path="/messages/send"
+            path="/messages/new"
             render={() =>
               currentUser ? <DirectMessageForm /> : <Redirect to="/signin" />
             }
