@@ -12,7 +12,7 @@ import Upload from "../../assets/upload.png";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Swal from "sweetalert2"; // Import SweetAlert2

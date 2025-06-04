@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Row, Col, Container, Alert, Image } from "react-bootstrap";
-import { useHistory, useParams, useLocation } from "react-router";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import styles from "../../styles/PostCreateEditForm.module.css";

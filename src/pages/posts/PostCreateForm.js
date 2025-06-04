@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Row, Col, Container, Alert, Image } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import Asset from "../../components/Asset";
