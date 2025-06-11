@@ -14,8 +14,11 @@ const DirectMessageDetail = () => {
       try {
         const { data } = await axiosReq.get(`/messages/${id}/`);
         setMsg(data);
-        // Opcjonalnie PATCH oznaczenie przeczytanej
-        if (!data.read) {
+        // Mark as read only if the current user is the recipient
+        if (
+          data.recipient_username === currentUser?.username &&
+          !data.read
+        ) {
           await axiosReq.patch(`/messages/${id}/`, { read: true });
         }
       } catch (err) {
@@ -23,14 +26,12 @@ const DirectMessageDetail = () => {
       }
     };
     fetchMsg();
-  }, [id]);
+  }, [id, currentUser]);
 
   if (!msg) return <div>Loading...</div>;
 
-  const toLabel =
-    msg.recipient_username === currentUser?.username
-      ? "You"
-      : msg.recipient_username;
+  const isRecipient = msg.recipient_username === currentUser?.username;
+  const receiverLabel = msg.receiver_username || msg.recipient_username;
 
   return (
     <div className={styles.Container}>
@@ -38,9 +39,11 @@ const DirectMessageDetail = () => {
       <div className={styles.Meta}>
         <b>From:</b> {msg.sender_username}
       </div>
-      <div className={styles.Meta}>
-        <b>To:</b> {toLabel}
-      </div>
+      {!isRecipient && (
+        <div className={styles.Meta}>
+          <b>To:</b> {receiverLabel}
+        </div>
+      )}
       <div className={styles.Content}>{msg.content}</div>
       <div className={styles.Meta}>
         <b>Date:</b> {msg.created_at}

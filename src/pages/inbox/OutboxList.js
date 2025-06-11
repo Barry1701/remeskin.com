@@ -19,7 +19,9 @@ const OutboxList = () => {
           : Array.isArray(data?.results)
           ? data.results
           : [];
-        setMessages(outboxMessages);
+        // Mark outbox messages as read by default so they aren't shown as unread
+        const markedRead = outboxMessages.map((msg) => ({ ...msg, read: true }));
+        setMessages(markedRead);
       } catch (err) {
         console.error(err);
       }
@@ -45,7 +47,7 @@ const OutboxList = () => {
         {messageList.map((msg) => (
           <li key={msg.id} className={styles.Message}>
             <div>
-              <b>To:</b> {msg.recipient_username}
+              <b>To:</b> {msg.receiver_username || msg.recipient_username}
             </div>
             <div>
               <b>Subject:</b> {msg.subject}
