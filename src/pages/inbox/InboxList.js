@@ -58,7 +58,7 @@ const InboxList = () => {
               <Mail className="w-4 h-4" />
               <span>Subject: {msg.subject}</span>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex items-center justify-between">
               <Badge variant={msg.read ? "outline" : "secondary"}>
                 {msg.read ? "Read" : "Unread"}
               </Badge>
@@ -66,8 +66,8 @@ const InboxList = () => {
                 to={`/messages/${msg.id}`}
                 className="inline-flex items-center gap-1 bg-[#2142b2] text-white px-4 py-2 rounded hover:bg-[#242a3d] transition"
               >
-                <ArrowRight className="w-4 h-4" />
                 View
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </CardFooter>
           </Card>
