@@ -148,7 +148,7 @@ function App() {
             element={currentUser ? <DirectMessageForm /> : <Navigate to="/signin" />}
           />
           <Route
-            path="/messages/:id"
+            path="/messages/:id/"
             element={currentUser ? <DirectMessageDetail /> : <Navigate to="/signin" />}
           />
           {/* === KONIEC ROUTES DLA WIADOMOŚCI === */}

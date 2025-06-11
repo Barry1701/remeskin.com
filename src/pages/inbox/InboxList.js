@@ -52,18 +52,20 @@ const InboxList = () => {
           >
             <CardHeader>
               <User className="w-4 h-4" />
-              <span>From: {msg.sender_username}</span>
+              <span className="font-semibold">From:</span>
+              <span>{msg.sender_username}</span>
             </CardHeader>
             <CardContent className="flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              <span>Subject: {msg.subject}</span>
+              <span className="font-semibold">Subject:</span>
+              <span>{msg.subject}</span>
             </CardContent>
             <CardFooter className="flex items-center justify-between">
               <Badge variant={msg.read ? "outline" : "secondary"}>
                 {msg.read ? "Read" : "Unread"}
               </Badge>
               <Link
-                to={`/messages/${msg.id}`}
+                to={`/messages/${msg.id}/`}
                 className="inline-flex items-center gap-1 bg-[#2142b2] text-white px-4 py-2 rounded hover:bg-[#242a3d] transition"
               >
                 View
