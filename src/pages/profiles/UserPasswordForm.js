@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
@@ -16,7 +16,7 @@ import appStyles from "../../App.module.css";
 import Swal from "sweetalert2";
 
 const UserPasswordForm = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
   const currentUser = useCurrentUser();
 
@@ -38,16 +38,16 @@ const UserPasswordForm = () => {
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
       Swal.fire("Error!", "Unauthorized access to this page.", "error");
-      history.push("/");
+      navigate("/");
     }
-  }, [currentUser, history, id]);
+  }, [currentUser, navigate, id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
       Swal.fire("Success!", "Your password has been updated.", "success").then(
-        () => history.goBack()
+        () => navigate(-1)
       );
     } catch (err) {
       console.log(err);
@@ -93,7 +93,7 @@ const UserPasswordForm = () => {
             ))}
             <Button
               className={`${btnStyles.Button} ${btnStyles.Blue}`}
-              onClick={() => history.goBack()}
+              onClick={() => navigate(-1)}
             >
               cancel
             </Button>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
@@ -13,7 +13,7 @@ import axios from "axios";
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
@@ -28,7 +28,7 @@ const NavBar = () => {
         title: "Logged Out",
         text: "You have been successfully logged out."
       }).then(() => {
-        history.push("/signin");
+        navigate("/signin");
       });
     } catch (err) {
       console.error(err);

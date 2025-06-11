@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -33,7 +33,7 @@ const SignUpForm = () => {
   // State to handle form errors
   const [errors, setErrors] = useState({});
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Handle changes in form input fields
   const handleChange = (event) => {
@@ -54,7 +54,7 @@ const SignUpForm = () => {
       Swal.fire("Success!", "Your account has been created.", "success");
 
       // Redirect user to the sign-in page
-      history.push("/signin");
+      navigate("/signin");
     } catch (err) {
       // Set error messages in the form
       setErrors(err.response?.data);

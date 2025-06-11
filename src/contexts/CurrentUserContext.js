@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { removeTokenTimestamp, shouldRefreshToken } from "../utils/utils";
 
 export const CurrentUserContext = createContext();
@@ -13,7 +13,7 @@ export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Fetch the current user data on mount
   const handleMount = async () => {
@@ -39,7 +39,7 @@ export const CurrentUserProvider = ({ children }) => {
           } catch (err) {
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
-                history.push("/signin");
+                navigate("/signin");
               }
               return null;
             });
@@ -61,7 +61,7 @@ export const CurrentUserProvider = ({ children }) => {
           } catch (error) {
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
-                history.push("/signin");
+                navigate("/signin");
               }
               return null;
             });
@@ -72,7 +72,7 @@ export const CurrentUserProvider = ({ children }) => {
         return Promise.reject(err);
       }
     );
-  }, [history]);
+  }, [navigate]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

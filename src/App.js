@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import Container from "react-bootstrap/Container";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./api/axiosDefaults";
 
 import SignUpForm from "./pages/auth/SignUpForm";
@@ -37,179 +37,124 @@ function App() {
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
-        <Switch>
+        <Routes>
           {/* Default route for logged-in and logged-out users */}
           <Route
-            exact
             path="/"
-            render={() =>
+            element={
               currentUser ? (
                 <PostsPage message="Sorry, no posts to display here. Try searching with different keywords." />
               ) : (
-                <Redirect to="/signin" />
+                <Navigate to="/signin" />
               )
             }
           />
 
           {/* Route for logged-in users */}
           <Route
-            exact
             path="/feed"
-            render={() =>
+            element={
               currentUser ? (
                 <PostsPage
                   message="No new updates in your feed. Follow more users to see their latest posts here."
                   filter={`owner__followed__owner__profile=${profileId}&`}
                 />
               ) : (
-                <Redirect to="/signin" />
+                <Navigate to="/signin" />
               )
             }
           />
           <Route
-            exact
             path="/liked"
-            render={() =>
+            element={
               currentUser ? (
                 <PostsPage
                   message="You haven’t liked any posts yet. Start exploring and like posts to see them here."
                   filter={`likes__owner__profile=${profileId}&ordering=-likes__created_at&`}
                 />
               ) : (
-                <Redirect to="/signin" />
+                <Navigate to="/signin" />
               )
             }
           />
 
           {/* Routes for sign-in and sign-up */}
           <Route
-            exact
             path="/signin"
-            render={() =>
-              currentUser ? <Redirect to="/" /> : <SignInForm />
-            }
+            element={currentUser ? <Navigate to="/" /> : <SignInForm />}
           />
           <Route
-            exact
             path="/signup"
-            render={() =>
-              currentUser ? <Redirect to="/" /> : <SignUpForm />
-            }
+            element={currentUser ? <Navigate to="/" /> : <SignUpForm />}
           />
 
           {/* Routes for posts */}
           <Route
-            exact
             path="/posts/create"
-            render={() =>
-              currentUser ? <PostCreateForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <PostCreateForm /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/posts/:id"
-            render={() =>
-              currentUser ? <PostPage /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <PostPage /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/posts/:id/edit"
-            render={() =>
-              currentUser ? <PostEditForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <PostEditForm /> : <Navigate to="/signin" />}
           />
 
           {/* Routes for profiles */}
           <Route
-            exact
             path="/profiles/:id"
-            render={() =>
-              currentUser ? <ProfilePage /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <ProfilePage /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/profiles/:id/edit/username"
-            render={() =>
-              currentUser ? <UsernameForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <UsernameForm /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/profiles/:id/edit/password"
-            render={() =>
-              currentUser ? <UserPasswordForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <UserPasswordForm /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/profiles/:id/edit"
-            render={() =>
-              currentUser ? <ProfileEditForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <ProfileEditForm /> : <Navigate to="/signin" />}
           />
 
           {/* Routes for products */}
           <Route
-            exact
             path="/products"
-            render={() => (
-              <ProductsPage message="Sorry, no products found. Check back later!" />
-            )}
+            element={<ProductsPage message="Sorry, no products found. Check back later!" />}
           />
           <Route
-            exact
             path="/products/create"
-            render={() =>
-              currentUser ? <ProductCreateForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <ProductCreateForm /> : <Navigate to="/signin" />}
           />
+          <Route path="/products/:id" element={<ProductPage />} />
           <Route
-            exact
-            path="/products/:id"
-            render={() => <ProductPage />}
-          />
-          <Route
-            exact
             path="/products/:id/edit"
-            render={() =>
-              currentUser ? <ProductEditForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <ProductEditForm /> : <Navigate to="/signin" />}
           />
           {/* === ROUTES DLA WIADOMOŚCI === */}
           <Route
-            exact
             path="/inbox"
-            render={() =>
-              currentUser ? <InboxList /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <InboxList /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/outbox"
-            render={() =>
-              currentUser ? <OutboxList /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <OutboxList /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/messages/new"
-            render={() =>
-              currentUser ? <DirectMessageForm /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <DirectMessageForm /> : <Navigate to="/signin" />}
           />
           <Route
-            exact
             path="/messages/:id"
-            render={() =>
-              currentUser ? <DirectMessageDetail /> : <Redirect to="/signin" />
-            }
+            element={currentUser ? <DirectMessageDetail /> : <Navigate to="/signin" />}
           />
           {/* === KONIEC ROUTES DLA WIADOMOŚCI === */}
           {/* Default route */}
-          <Route render={() => <NotFound />} />
-        </Switch>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </Container>
     </div>
   );

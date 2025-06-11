@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Row, Col, Container, Alert, Image } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import Asset from "../../components/Asset";
@@ -25,7 +25,7 @@ function PostCreateForm() {
 
   const { title, content, image, category } = postData;
   const imageInput = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setPostData({
@@ -62,7 +62,7 @@ function PostCreateForm() {
         title: "Success!",
         text: "Your post has been created successfully.",
       }).then(() => {
-        history.push(`/posts/${data.id}`);
+        navigate(`/posts/${data.id}`);
       });
     } catch (err) {
       console.log(err);
@@ -125,7 +125,7 @@ function PostCreateForm() {
       ))}
 
       <div className="d-flex justify-content-between mt-3">
-        <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => history.goBack()}>
+        <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => navigate(-1)}>
           Cancel
         </Button>
         <Button className={`${btnStyles.Button} ${btnStyles.Bright}`} type="submit">

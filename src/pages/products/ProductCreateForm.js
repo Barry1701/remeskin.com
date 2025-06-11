@@ -12,7 +12,7 @@ import Upload from "../../assets/upload.png";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Swal from "sweetalert2"; // Import SweetAlert2
@@ -29,7 +29,7 @@ function ProductCreateForm() {
   const { name, description, image, category } = productData;
 
   const imageInput = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -86,7 +86,7 @@ function ProductCreateForm() {
         title: "Success",
         text: "Product created successfully!",
       });
-      history.push(`/products/${data.id}`);
+      navigate(`/products/${data.id}`);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
@@ -168,7 +168,7 @@ function ProductCreateForm() {
             ))}
 
             <div className="d-flex justify-content-between mt-3">
-              <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => history.goBack()}>
+              <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => navigate(-1)}>
                 Cancel
               </Button>
               <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">

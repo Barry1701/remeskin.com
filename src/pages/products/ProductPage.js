@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -11,7 +11,7 @@ import sharedStyles from "../../styles/Product.module.css"; // Import shared sty
 
 function ProductPage() {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const currentUser = useCurrentUser();
   const [product, setProduct] = useState(null);
   const [errors, setErrors] = useState("");
@@ -34,7 +34,7 @@ function ProductPage() {
   const handleDelete = async () => {
     try {
       await axiosReq.delete(`/products/${id}/`);
-      history.push("/products");
+      navigate("/products");
     } catch (err) {
       console.log(err);
     }
@@ -67,7 +67,7 @@ function ProductPage() {
               <div className="d-flex justify-content-end">
                 <Button
                   variant="warning"
-                  onClick={() => history.push(`/products/${id}/edit`)}
+                  onClick={() => navigate(`/products/${id}/edit`)}
                   className="mr-2"
                 >
                   Edit
