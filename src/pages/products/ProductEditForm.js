@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -19,7 +19,7 @@ function ProductEditForm() {
   });
   const { name, description, image, category } = productData;
   const imageInput = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function ProductEditForm() {
           title: "Error",
           text: "Failed to load the product. Redirecting to the main page.",
         });
-        history.push("/");
+        navigate("/");
       }
     };
 
@@ -54,7 +54,7 @@ function ProductEditForm() {
 
     fetchProduct();
     fetchCategories();
-  }, [history, id]);
+  }, [navigate, id]);
 
   const handleChange = (event) => {
     setProductData({
@@ -91,7 +91,7 @@ function ProductEditForm() {
         title: "Success",
         text: "Product updated successfully!",
       });
-      history.push(`/products/${id}`);
+      navigate(`/products/${id}`);
     } catch (err) {
       console.error(err);
       if (err.response?.status !== 401) {
@@ -123,7 +123,7 @@ function ProductEditForm() {
             title: "Deleted!",
             text: "Your product has been deleted.",
           });
-          history.push("/products");
+          navigate("/products");
         } catch (err) {
           console.error(err);
           Swal.fire({

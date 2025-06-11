@@ -1,13 +1,13 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
 import styles from "../../styles/Product.module.css"; // Import the styles
 
 const Product = ({ id, owner, name, description, image, category_name, setProducts }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const currentUser = useCurrentUser();
 
   const isOwner = currentUser?.username === owner;
@@ -41,7 +41,7 @@ const Product = ({ id, owner, name, description, image, category_name, setProduc
           <div className="d-flex justify-content-end">
             <Button
               variant="warning"
-              onClick={() => history.push(`/products/${id}/edit`)}
+              onClick={() => navigate(`/products/${id}/edit`)}
               className="mr-2"
             >
               Edit

@@ -10,7 +10,7 @@ import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import customImage from "../../assets/sign_out.png";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -32,7 +32,7 @@ function SignInForm() {
 
   const [errors, setErrors] = useState({});
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,7 +48,7 @@ function SignInForm() {
         title: "Welcome!",
         text: "You have successfully signed in.",
       }).then(() => {
-        history.push("/"); // Redirect to home page after login
+        navigate("/"); // Redirect to home page after login
       });
     } catch (err) {
       setErrors(err.response?.data);

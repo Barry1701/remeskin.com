@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
 import {
   useCurrentUser,
@@ -22,7 +22,7 @@ const UsernameForm = () => {
   const [username, setUsername] = useState("");
   const [errors, setErrors] = useState({});
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const currentUser = useCurrentUser();
@@ -33,9 +33,9 @@ const UsernameForm = () => {
       setUsername(currentUser.username);
     } else {
       Swal.fire("Error!", "Unauthorized access to this page.", "error");
-      history.push("/");
+      navigate("/");
     }
-  }, [currentUser, history, id]);
+  }, [currentUser, navigate, id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,7 +51,7 @@ const UsernameForm = () => {
         "Success!",
         "Your username has been updated successfully.",
         "success"
-      ).then(() => history.goBack());
+      ).then(() => navigate(-1));
     } catch (err) {
       console.log(err);
       setErrors(err.response?.data);
@@ -80,7 +80,7 @@ const UsernameForm = () => {
             ))}
             <Button
               className={`${btnStyles.Button} ${btnStyles.Blue}`}
-              onClick={() => history.goBack()}
+              onClick={() => navigate(-1)}
             >
               cancel
             </Button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -23,7 +23,7 @@ const ProfileEditForm = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Reference for the image input field
   const imageFile = useRef();
@@ -50,15 +50,15 @@ const ProfileEditForm = () => {
         } catch (err) {
           console.log(err);
           Swal.fire("Error!", "Failed to load profile details.", "error");
-          history.push("/");
+          navigate("/");
         }
       } else {
         Swal.fire("Error!", "Unauthorized access to this profile.", "error");
-        history.push("/");
+        navigate("/");
       }
     };
     handleMount();
-  }, [currentUser, history, id]);
+  }, [currentUser, navigate, id]);
 
   // Update local state on form changes
   const handleChange = (event) => {
@@ -93,7 +93,7 @@ const ProfileEditForm = () => {
 
       Swal.fire("Success!", "Your profile has been updated.", "success").then(
         () => {
-          history.goBack();
+          navigate(-1);
         }
       );
     } catch (err) {
@@ -147,7 +147,7 @@ const ProfileEditForm = () => {
       ))}
 
       {/* Buttons for cancel and save */}
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => history.goBack()}>
+      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => navigate(-1)}>
         cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">

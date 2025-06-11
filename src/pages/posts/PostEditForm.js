@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Row, Col, Container, Alert, Image } from "react-bootstrap";
-import { useHistory, useParams, useLocation } from "react-router";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
@@ -20,7 +20,7 @@ function PostEditForm() {
 
   const { title, content, image, category } = postData;
   const imageInput = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
 
@@ -34,7 +34,7 @@ function PostEditForm() {
           setPostData({ title, content, image, category });
         } else {
           Swal.fire("Error!", "You do not own this post.", "error");
-          history.push("/");
+          navigate("/");
         }
       } catch (err) {
         Swal.fire("Error!", "Failed to load post details.", "error");
@@ -42,7 +42,7 @@ function PostEditForm() {
     };
 
     handleMount();
-  }, [history, id]);
+  }, [navigate, id]);
 
   const handleChange = (event) => {
     setPostData({
@@ -76,7 +76,7 @@ function PostEditForm() {
     try {
       await axiosReq.put(`/posts/${id}/`, formData);
       Swal.fire("Success!", "Your post has been updated.", "success").then(() =>
-        history.push(`/posts/${id}`)
+        navigate(`/posts/${id}`)
       );
     } catch (err) {
       Swal.fire("Error!", "Failed to update the post. Please try again.", "error");
@@ -101,9 +101,9 @@ function PostEditForm() {
           await axiosReq.delete(`/posts/${id}/`);
           Swal.fire("Deleted!", "Your post has been deleted.", "success").then(() => {
             if (location.state?.fromProfile) {
-              history.push(`/profiles/${location.state.profileId}`);
+              navigate(`/profiles/${location.state.profileId}`);
             } else {
-              history.push("/");
+              navigate("/");
             }
           });
         } catch (err) {

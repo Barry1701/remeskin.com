@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
@@ -27,11 +27,11 @@ const Post = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation(); // Check the current page's path
 
   const handleEdit = () => {
-    history.push(`/posts/${id}/edit`);
+    navigate(`/posts/${id}/edit`);
   };
 
   const handleDelete = async () => {
@@ -55,9 +55,9 @@ const Post = (props) => {
 
           // Redirect based on the current path
           if (location.pathname === `/posts/${id}`) {
-            history.push("/"); // Redirect to home page if on PostPage
+            navigate("/"); // Redirect to home page if on PostPage
           } else if (location.pathname.startsWith(`/profiles/`)) {
-            history.push(location.pathname); // Stay on the profile page
+            navigate(location.pathname); // Stay on the profile page
           }
         } catch (err) {
           Swal.fire("Error!", "Something went wrong. Please try again.", "error");
