@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Mail, User } from "lucide-react";
+import { Mail, User, Eye } from "lucide-react";
 import styles from "../../styles/InboxList.module.css";
 import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
 import Badge from "../../components/ui/badge";
@@ -62,7 +62,10 @@ const InboxList = () => {
               <Badge variant={msg.read ? "outline" : "secondary"}>
                 {msg.read ? "Read" : "Unread"}
               </Badge>
-              <Button to={`/messages/${msg.id}`}>View</Button>
+              <Button to={`/messages/${msg.id}`}>
+                <Eye className="w-4 h-4" />
+                View
+              </Button>
             </CardFooter>
           </Card>
         ))}
