@@ -35,15 +35,19 @@ const DirectMessageDetail = () => {
   if (!msg) return <div>Loading...</div>;
 
   const isRecipient = msg.recipient_username === currentUser?.username;
-  const receiverLabel = msg.receiver_username || msg.recipient_username;
+  const receiverLabel =
+    msg.receiver_username ||
+    msg.recipient_username ||
+    msg.receiver ||
+    msg.recipient;
 
   return (
     <div className={styles.Container}>
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(isRecipient ? "/inbox" : "/outbox")}
         className="text-sm text-blue-600 hover:underline mb-4"
       >
-        ← Back to messages
+        ← Back to {isRecipient ? "Inbox" : "Outbox"}
       </button>
       <Card className="space-y-2">
         <CardHeader className="text-lg">
@@ -52,12 +56,14 @@ const DirectMessageDetail = () => {
         </CardHeader>
         <CardContent className="flex items-center gap-2">
           <User className="w-4 h-4" />
-          <span>From: {msg.sender_username}</span>
+          <span className="font-semibold">From:</span>
+          <span>{msg.sender_username}</span>
         </CardContent>
         {!isRecipient && (
           <CardContent className="flex items-center gap-2">
             <User className="w-4 h-4" />
-            <span>To: {receiverLabel}</span>
+            <span className="font-semibold">To:</span>
+            <span>{receiverLabel}</span>
           </CardContent>
         )}
         <CardContent className="whitespace-pre-line">
