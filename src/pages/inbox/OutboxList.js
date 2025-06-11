@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Mail, User, Eye } from "lucide-react";
+import { Mail, User, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import styles from "../../styles/OutboxList.module.css";
 import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
 import Badge from "../../components/ui/badge";
-import Button from "../../components/ui/button";
 
 const OutboxList = () => {
   const [messages, setMessages] = useState([]);
@@ -59,10 +59,13 @@ const OutboxList = () => {
             </CardContent>
             <CardFooter>
               <Badge variant="outline">Sent</Badge>
-              <Button to={`/messages/${msg.id}`}>
-                <Eye className="w-4 h-4" />
+              <Link
+                to={`/messages/${msg.id}`}
+                className="inline-flex items-center gap-1 bg-[#2142b2] text-white px-4 py-2 rounded hover:bg-[#242a3d] transition"
+              >
+                <ArrowRight className="w-4 h-4" />
                 View
-              </Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}
