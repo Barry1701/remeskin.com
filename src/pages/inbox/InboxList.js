@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { Link } from "react-router-dom";
+import styles from "../../styles/InboxList.module.css";
 
 const InboxList = () => {
   const [messages, setMessages] = useState([]);
@@ -37,15 +38,25 @@ const InboxList = () => {
     : [];
 
   return (
-    <div>
-      <h2>Inbox</h2>
+    <div className={styles.Container}>
+      <h2 className={styles.Title}>Inbox</h2>
       {messageList.length === 0 && <div>No messages.</div>}
-      <ul>
+      <ul className={styles.List}>
         {messageList.map((msg) => (
-          <li key={msg.id}>
-            <b>From:</b> {msg.sender_username} <b>Subject:</b> {msg.subject}{" "}
-            <Link to={`/messages/${msg.id}`}>View</Link>
-            {msg.read ? " (Read)" : " (Unread)"}
+          <li
+            key={msg.id}
+            className={`${styles.Message} ${!msg.read ? styles.Unread : ""}`}
+          >
+            <div>
+              <b>From:</b> {msg.sender_username}
+              {!msg.read && <span className={styles.UnreadTag}>Unread</span>}
+            </div>
+            <div>
+              <b>Subject:</b> {msg.subject}
+            </div>
+            <Link to={`/messages/${msg.id}`} className={styles.Link}>
+              View
+            </Link>
           </li>
         ))}
       </ul>
