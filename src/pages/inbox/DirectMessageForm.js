@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import styles from "../../styles/DirectMessageForm.module.css";
+import Swal from "sweetalert2";
 
 const DirectMessageForm = () => {
   const [receiver, setReceiver] = useState("");
@@ -14,8 +15,32 @@ const DirectMessageForm = () => {
       setReceiver("");
       setSubject("");
       setContent("");
+
+      Swal.fire({
+        icon: "success",
+        title: "Message Sent",
+        text: "Your message was successfully delivered.",
+        confirmButtonColor: "#3085d6",
+      });
     } catch (err) {
-      console.error(err);
+      if (
+        err.response?.status === 400 &&
+        err.response.data?.receiver?.[0] === "User does not exist."
+      ) {
+        Swal.fire({
+          icon: "error",
+          title: "User Not Found",
+          text: "The recipient username does not exist. Please check and try again.",
+          confirmButtonColor: "#d33",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Something went wrong while sending the message.",
+          confirmButtonColor: "#d33",
+        });
+      }
     }
   };
 
