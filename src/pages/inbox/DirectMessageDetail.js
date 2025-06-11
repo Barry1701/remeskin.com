@@ -40,6 +40,10 @@ const DirectMessageDetail = () => {
     msg.recipient_username ||
     msg.receiver ||
     msg.recipient;
+  const formattedDate = new Date(msg.created_at).toLocaleDateString(
+    "en-GB",
+    { day: "2-digit", month: "short", year: "numeric" }
+  );
 
   return (
     <div className={styles.Container}>
@@ -71,7 +75,7 @@ const DirectMessageDetail = () => {
         </CardContent>
         <CardContent className="flex items-center gap-2 text-sm text-gray-500">
           <Calendar className="w-4 h-4" />
-          <span>{msg.created_at}</span>
+          <span>{formattedDate}</span>
         </CardContent>
         <CardFooter className="justify-end">
           <Badge variant={msg.read ? "outline" : "secondary"}>
