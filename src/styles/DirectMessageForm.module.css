@@ -1,0 +1,50 @@
+.Form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.Title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.Field {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.TextArea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.Button {
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 576px) {
+  .Form {
+    margin: 20px;
+    padding: 15px;
+  }
+}

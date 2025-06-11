@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
+import styles from "../../styles/DirectMessageForm.module.css";
 
 const DirectMessageForm = () => {
   const [receiver, setReceiver] = useState("");
@@ -19,8 +20,8 @@ const DirectMessageForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Send a message</h3>
+    <form onSubmit={handleSubmit} className={styles.Form}>
+      <h3 className={styles.Title}>Send a message</h3>
       <input
         type="text"
         placeholder="Recipient username"
@@ -28,6 +29,7 @@ const DirectMessageForm = () => {
         onChange={(e) => setReceiver(e.target.value)}
         required
         name="receiver"
+        className={styles.Field}
       />
       <input
         type="text"
@@ -36,6 +38,7 @@ const DirectMessageForm = () => {
         onChange={(e) => setSubject(e.target.value)}
         required
         name="subject"
+        className={styles.Field}
       />
       <textarea
         placeholder="Your message"
@@ -43,8 +46,11 @@ const DirectMessageForm = () => {
         onChange={(e) => setContent(e.target.value)}
         required
         name="content"
+        className={`${styles.Field} ${styles.TextArea}`}
       />
-      <button type="submit">Send</button>
+      <button type="submit" className={styles.Button}>
+        Send
+      </button>
     </form>
   );
 };
