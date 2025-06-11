@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/DirectMessageDetail.module.css";
 import { Mail, User, Calendar } from "lucide-react";
@@ -11,6 +11,7 @@ const DirectMessageDetail = () => {
   const { id } = useParams();
   const [msg, setMsg] = useState(null);
   const currentUser = useCurrentUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMsg = async () => {
@@ -38,6 +39,12 @@ const DirectMessageDetail = () => {
 
   return (
     <div className={styles.Container}>
+      <button
+        onClick={() => navigate(-1)}
+        className="text-sm text-blue-600 hover:underline mb-4"
+      >
+        ← Back to messages
+      </button>
       <Card className="space-y-2">
         <CardHeader className="text-lg">
           <Mail className="w-4 h-4" />
