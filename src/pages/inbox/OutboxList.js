@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { Link } from "react-router-dom";
+import styles from "../../styles/OutboxList.module.css";
 
 const OutboxList = () => {
   const [messages, setMessages] = useState([]);
@@ -37,14 +38,21 @@ const OutboxList = () => {
     : [];
 
   return (
-    <div>
-      <h2>Outbox</h2>
+    <div className={styles.Container}>
+      <h2 className={styles.Title}>Outbox</h2>
       {messageList.length === 0 && <div>No sent messages.</div>}
-      <ul>
+      <ul className={styles.List}>
         {messageList.map((msg) => (
-          <li key={msg.id}>
-            <b>To:</b> {msg.recipient_username} <b>Subject:</b> {msg.subject}{" "}
-            <Link to={`/messages/${msg.id}`}>View</Link>
+          <li key={msg.id} className={styles.Message}>
+            <div>
+              <b>To:</b> {msg.recipient_username}
+            </div>
+            <div>
+              <b>Subject:</b> {msg.subject}
+            </div>
+            <Link to={`/messages/${msg.id}`} className={styles.Link}>
+              View
+            </Link>
           </li>
         ))}
       </ul>
