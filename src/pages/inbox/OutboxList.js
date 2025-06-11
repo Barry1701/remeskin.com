@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Link } from "react-router-dom";
+import { Mail, User } from "lucide-react";
 import styles from "../../styles/OutboxList.module.css";
+import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
+import Badge from "../../components/ui/badge";
+import Button from "../../components/ui/button";
 
 const OutboxList = () => {
   const [messages, setMessages] = useState([]);
@@ -43,21 +46,24 @@ const OutboxList = () => {
     <div className={styles.Container}>
       <h2 className={styles.Title}>Outbox</h2>
       {messageList.length === 0 && <div>No sent messages.</div>}
-      <ul className={styles.List}>
+      <div className="flex flex-col gap-4">
         {messageList.map((msg) => (
-          <li key={msg.id} className={styles.Message}>
-            <div>
-              <b>To:</b> {msg.receiver_username || msg.recipient_username}
-            </div>
-            <div>
-              <b>Subject:</b> {msg.subject}
-            </div>
-            <Link to={`/messages/${msg.id}`} className={styles.Link}>
-              View
-            </Link>
-          </li>
+          <Card key={msg.id}>
+            <CardHeader>
+              <User className="w-4 h-4" />
+              <span>To: {msg.receiver_username || msg.recipient_username}</span>
+            </CardHeader>
+            <CardContent className="flex items-center gap-2">
+              <Mail className="w-4 h-4" />
+              <span>Subject: {msg.subject}</span>
+            </CardContent>
+            <CardFooter>
+              <Badge variant="outline">Sent</Badge>
+              <Button to={`/messages/${msg.id}`}>View</Button>
+            </CardFooter>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
