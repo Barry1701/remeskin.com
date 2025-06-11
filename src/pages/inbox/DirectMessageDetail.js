@@ -3,6 +3,9 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/DirectMessageDetail.module.css";
+import { Mail, User, Calendar } from "lucide-react";
+import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
+import Badge from "../../components/ui/badge";
 
 const DirectMessageDetail = () => {
   const { id } = useParams();
@@ -35,22 +38,34 @@ const DirectMessageDetail = () => {
 
   return (
     <div className={styles.Container}>
-      <h3 className={styles.Subject}>Subject: {msg.subject}</h3>
-      <div className={styles.Meta}>
-        <b>From:</b> {msg.sender_username}
-      </div>
-      {!isRecipient && (
-        <div className={styles.Meta}>
-          <b>To:</b> {receiverLabel}
-        </div>
-      )}
-      <div className={styles.Content}>{msg.content}</div>
-      <div className={styles.Meta}>
-        <b>Date:</b> {msg.created_at}
-      </div>
-      <div className={styles.Meta}>
-        <b>Status:</b> {msg.read ? "Read" : "Unread"}
-      </div>
+      <Card className="space-y-2">
+        <CardHeader className="text-lg">
+          <Mail className="w-4 h-4" />
+          <span>{msg.subject}</span>
+        </CardHeader>
+        <CardContent className="flex items-center gap-2">
+          <User className="w-4 h-4" />
+          <span>From: {msg.sender_username}</span>
+        </CardContent>
+        {!isRecipient && (
+          <CardContent className="flex items-center gap-2">
+            <User className="w-4 h-4" />
+            <span>To: {receiverLabel}</span>
+          </CardContent>
+        )}
+        <CardContent className="whitespace-pre-line">
+          {msg.content}
+        </CardContent>
+        <CardContent className="flex items-center gap-2 text-sm text-gray-500">
+          <Calendar className="w-4 h-4" />
+          <span>{msg.created_at}</span>
+        </CardContent>
+        <CardFooter className="justify-end">
+          <Badge variant={msg.read ? "outline" : "secondary"}>
+            {msg.read ? "Read" : "Unread"}
+          </Badge>
+        </CardFooter>
+      </Card>
     </div>
   );
 };
