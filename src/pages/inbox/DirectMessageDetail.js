@@ -47,8 +47,17 @@ const DirectMessageDetail = () => {
     }
   }, [id, mounted, currentUser, navigate]);
 
+  const backTo = location.state?.from === "outbox" ? "/outbox" : "/inbox";
+
   return (
     <div className={styles.Container}>
+      <button
+        className={styles.BackButton}
+        type="button"
+        onClick={() => navigate(backTo)}
+      >
+        ← Back to {location.state?.from === "outbox" ? "Outbox" : "Inbox"}
+      </button>
       {msg ? (
         <div className={styles.MessageBox}>
           <div className={styles.HeaderRow}>
@@ -56,8 +65,11 @@ const DirectMessageDetail = () => {
             <span className={styles.Subject}>📧 {msg.subject}</span>
           </div>
           <div className={styles.Body}>💬 {msg.message}</div>
-          <p className={styles.From}>👤 From: {msg.sender_username}</p>
-          <p className={styles.To}>👤 To: {msg.recipient_username}</p>
+          {location.state?.from === "outbox" ? (
+            <p className={styles.To}>👤 To: {msg.recipient_username}</p>
+          ) : (
+            <p className={styles.From}>👤 From: {msg.sender_username}</p>
+          )}
         </div>
       ) : (
         <p>Loading message...</p>

@@ -48,7 +48,6 @@ const OutboxList = () => {
               <p className={styles.Info}>
                 👤 To: {msg.recipient_username || msg.recipient}
               </p>
-              <p className={styles.Info}>👤 From: Me</p>
               <Link
                 className={styles.ReadLink}
                 to={`/messages/${msg.id}`}
@@ -56,6 +55,9 @@ const OutboxList = () => {
               >
                 Read
               </Link>
+              <span className={styles.StatusBadge}>
+                {msg.read ? "✅" : "🔴"}
+              </span>
             </li>
           ))}
         </ul>

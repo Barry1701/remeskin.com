@@ -46,7 +46,7 @@ const InboxList = () => {
               <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
               <p className={styles.Subject}>📧 {msg.subject}</p>
               <p className={styles.Info}>
-                From: {msg.sender_username || msg.sender}
+                👤 From: {msg.sender_username || msg.sender}
               </p>
               <Link className={styles.ReadLink} to={`/messages/${msg.id}`}>
                 Read
