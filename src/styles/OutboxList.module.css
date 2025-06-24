@@ -39,3 +39,21 @@
     font-size: 0.9rem;
   }
 }
+
+.readButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #2142b2;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.readButton:hover {
+  background-color: #1b36a0;
+}

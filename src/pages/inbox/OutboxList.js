@@ -48,7 +48,10 @@ const OutboxList = () => {
       {messageList.length === 0 && <div>No sent messages.</div>}
       <div className="flex flex-col gap-4">
         {messageList.map((msg) => (
-          <Card key={msg.id}>
+          <Card
+            key={msg.id}
+            className={`${!msg.read ? "bg-gray-100" : ""}`}
+          >
             <CardHeader>
               <User className="w-4 h-4" />
               <span className="font-semibold">To:</span>
@@ -80,7 +83,7 @@ const OutboxList = () => {
               <Link
                 to={`/messages/${msg.id}/`}
                 state={{ from: "outbox" }}
-                className="inline-flex items-center gap-1 bg-[#2142b2] text-white px-4 py-2 rounded hover:bg-[#242a3d] transition"
+                className={styles.readButton}
               >
                 Read
               </Link>
