@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 
 import { Link } from "react-router-dom";
-import styles from "./InboxList.module.css";
-
+import styles from "../../styles/InboxList.module.css";
 const InboxList = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
