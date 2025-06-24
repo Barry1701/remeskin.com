@@ -1,17 +1,22 @@
-
 .Container {
   max-width: 700px;
   margin: 40px auto;
-  padding: 24px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 16px;
 }
 
 .Card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
   text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.Card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
 .Content {
   margin-top: 0.5rem;
@@ -29,3 +34,8 @@
   margin-bottom: 0.5rem;
 }
 
+@media (max-width: 576px) {
+  .Content {
+    text-align: left;
+  }
+}
