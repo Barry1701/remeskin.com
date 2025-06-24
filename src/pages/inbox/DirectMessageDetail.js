@@ -4,6 +4,13 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/DirectMessageDetail.module.css";
 
+const formatDate = (dateString) =>
+  new Date(dateString).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+
 const DirectMessageDetail = () => {
   const { id } = useParams();
   const [msg, setMsg] = useState(null);
@@ -44,11 +51,13 @@ const DirectMessageDetail = () => {
     <div className={styles.Container}>
       {msg ? (
         <div className={styles.MessageBox}>
-          <h2 className={styles.Subject}>📝 {msg.subject}</h2>
-          <p className={styles.From}>👤 From: {msg.sender_username}</p>
-          <p className={styles.To}>📨 To: {msg.recipient_username}</p>
-          <p className={styles.Date}>📅 {msg.created_at?.slice(0, 10)}</p>
+          <div className={styles.HeaderRow}>
+            <span className={styles.Date}>📅 {formatDate(msg.created_at)}</span>
+            <span className={styles.Subject}>📧 {msg.subject}</span>
+          </div>
           <div className={styles.Body}>💬 {msg.message}</div>
+          <p className={styles.From}>👤 From: {msg.sender_username}</p>
+          <p className={styles.To}>👤 To: {msg.recipient_username}</p>
         </div>
       ) : (
         <p>Loading message...</p>
