@@ -57,9 +57,12 @@ box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
   gap: 0.25rem;
 }
 
-.MessageBody {
-margin: 8px 0;
-color: #333;
+.Date {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #555;
 }
 
 .MessageFooter {

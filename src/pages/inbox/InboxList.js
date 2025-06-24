@@ -60,7 +60,9 @@ const InboxList = () => {
           return (
             <li key={msg.id} className={styles.Message}>
               <div className={styles.MessageHeader}>
-                <span className={styles.Date}>{formattedDate}</span>
+                <span className={styles.Date}>
+                  <i className="fas fa-calendar-alt" /> {formattedDate}
+                </span>
                 {!isRead && <span className={styles.UnreadDot}></span>}
               </div>
               <div className={styles.Meta}>
@@ -69,10 +71,10 @@ const InboxList = () => {
                   {msg.sender_username || msg.owner || msg.sender}
                 </span>
                 <span className={styles.MetaItem}>
-                  <i className="fas fa-envelope" /> {msg.subject}
+                  <i className="fas fa-envelope" /> Subject:&nbsp;
+                  {msg.subject}
                 </span>
               </div>
-              <div className={styles.Preview}>{msg.content}</div>
               <div className={styles.MessageFooter}>
                 <Link
                   to={`/messages/${msg.id}/`}
