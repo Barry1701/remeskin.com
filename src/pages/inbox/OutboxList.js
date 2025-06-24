@@ -43,21 +43,20 @@ const OutboxList = () => {
         <ul className={styles.List}>
           {messages.map((msg) => (
             <li key={msg.id} className={styles.Message}>
-              <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
-              <p className={styles.Subject}>📧 {msg.subject}</p>
-              <p className={styles.Info}>
-                👤 To: {msg.recipient_username || msg.recipient}
-              </p>
               <Link
-                className={styles.ReadLink}
+                className={styles.MessageLink}
                 to={`/messages/${msg.id}`}
                 state={{ from: "outbox" }}
               >
-                Read
+                <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
+                <p className={styles.Subject}>✉️ {msg.subject}</p>
+                <p className={styles.Info}>
+                  👤 To: {msg.recipient_username || msg.recipient}
+                </p>
+                {msg.read && (
+                  <span className={styles.StatusBadge}>✅</span>
+                )}
               </Link>
-              <span className={styles.StatusBadge}>
-                {msg.read ? "✅" : "🔴"}
-              </span>
             </li>
           ))}
         </ul>

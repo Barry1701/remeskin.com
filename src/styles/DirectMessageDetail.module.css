@@ -19,6 +19,15 @@
   flex-wrap: wrap;
 }
 
+.Subject,
+.From,
+.To,
+.Date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .Subject {
   font-size: 1.5rem;
   font-weight: bold;

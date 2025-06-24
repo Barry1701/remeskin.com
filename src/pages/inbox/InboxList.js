@@ -43,13 +43,13 @@ const InboxList = () => {
         <ul className={styles.List}>
           {messages.map((msg) => (
             <li key={msg.id} className={styles.Message}>
-              <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
-              <p className={styles.Subject}>📧 {msg.subject}</p>
-              <p className={styles.Info}>
-                👤 From: {msg.sender_username || msg.sender}
-              </p>
-              <Link className={styles.ReadLink} to={`/messages/${msg.id}`}>
-                Read
+              <Link className={styles.MessageLink} to={`/messages/${msg.id}`}>
+                <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
+                <p className={styles.Subject}>✉️ {msg.subject}</p>
+                <p className={styles.Info}>
+                  👤 From: {msg.sender_username || msg.sender}
+                </p>
+                {!msg.read && <span className={styles.UnreadDot}>🔴</span>}
               </Link>
             </li>
           ))}
