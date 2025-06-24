@@ -74,7 +74,7 @@ const InboxList = () => {
                 );
               })()}
               <Link
-                to={`/messages/${msg.id}`}
+                to={`/messages/${msg.id}/`}
                 state={{ from: "inbox" }}
                 className={styles.readButton}
               >
