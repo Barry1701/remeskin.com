@@ -57,7 +57,9 @@ const OutboxList = () => {
               >
                 <div className={styles.Row}>
                   <Calendar className={styles.Icon} />
-                  <span className={styles.Date}>{formatDate(msg.timestamp)}</span>
+                  <span className={styles.Date}>
+                    {formatDate(msg.created_at || msg.timestamp)}
+                  </span>
                 </div>
                 <div className={styles.Row}>
                   <Mail className={styles.Icon} />

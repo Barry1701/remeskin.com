@@ -48,7 +48,9 @@ const DirectMessageDetail = () => {
       <Card>
         <CardHeader className={styles.Header}>
           <Calendar className={styles.Icon} />
-          <span className={styles.Date}>{formatDate(msg.timestamp)}</span>
+          <span className={styles.Date}>
+            {formatDate(msg.created_at || msg.timestamp)}
+          </span>
           <Mail className={styles.Icon} />
           <h2 className={styles.Subject}>{msg.subject}</h2>
         </CardHeader>
