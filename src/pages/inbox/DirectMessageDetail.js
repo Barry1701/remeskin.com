@@ -65,11 +65,11 @@ const DirectMessageDetail = () => {
         <CardFooter className={styles.Footer}>
           <div className={styles.FooterGroup}>
             <User className={styles.Icon} />
-            <span>From: {msg.sender_username}</span>
-          </div>
-          <div className={styles.FooterGroup}>
-            <User className={styles.Icon} />
-            <span>To: {msg.recipient_username}</span>
+            {fromView === "Outbox" ? (
+              <span>To: {msg.recipient_username}</span>
+            ) : (
+              <span>From: {msg.sender_username}</span>
+            )}
           </div>
         </CardFooter>
       </Card>
