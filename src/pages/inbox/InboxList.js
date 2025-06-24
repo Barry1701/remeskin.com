@@ -63,6 +63,15 @@ const InboxList = () => {
                 <span className={styles.Date}>{formattedDate}</span>
                 {!isRead && <span className={styles.UnreadDot}></span>}
               </div>
+              <div className={styles.Meta}>
+                <span className={styles.MetaItem}>
+                  <i className="fas fa-user" /> From:&nbsp;
+                  {msg.sender_username || msg.owner || msg.sender}
+                </span>
+                <span className={styles.MetaItem}>
+                  <i className="fas fa-envelope" /> {msg.subject}
+                </span>
+              </div>
               <div className={styles.Preview}>{msg.content}</div>
               <div className={styles.MessageFooter}>
                 <Link

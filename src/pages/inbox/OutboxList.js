@@ -65,6 +65,19 @@ const OutboxList = () => {
                 <span className={styles.Date}>{formattedDate}</span>
                 {!isRead && <span className={styles.UnreadDot}></span>}
               </div>
+              <div className={styles.Meta}>
+                <span className={styles.MetaItem}>
+                  <i className="fas fa-user" /> To:&nbsp;
+                  {msg.recipient_username ||
+                    msg.receiver_username ||
+                    msg.to_user?.username ||
+                    msg.recipient ||
+                    msg.receiver}
+                </span>
+                <span className={styles.MetaItem}>
+                  <i className="fas fa-envelope" /> {msg.subject}
+                </span>
+              </div>
               <div className={styles.Preview}>{msg.content}</div>
               <div className={styles.MessageFooter}>
                 <Link

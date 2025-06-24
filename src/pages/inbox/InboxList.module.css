@@ -33,12 +33,28 @@ box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
 }
 
 .MessageHeader {
-display: flex;
-align-items: center;
-justify-content: space-between;
-font-weight: 600;
-color: #34495e;
-margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.Meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #555;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.MetaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .MessageBody {
