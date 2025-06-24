@@ -7,7 +7,7 @@ import {
   Check,
   Dot,
 } from "lucide-react";
-import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
+import { FaUser as UserIcon } from "react-icons/fa";
 import styles from "./OutboxList.module.css";
 
 const formatDate = (dateString) =>
