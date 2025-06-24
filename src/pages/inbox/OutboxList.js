@@ -78,12 +78,11 @@ const OutboxList = () => {
                 );
               })()}
               <Link
-                to={`/messages/${msg.id}/`}
+                to={`/messages/${msg.id}`}
                 state={{ from: "outbox" }}
                 className="inline-flex items-center gap-1 bg-[#2142b2] text-white px-4 py-2 rounded hover:bg-[#242a3d] transition"
               >
-                View
-                <ArrowRight className="w-4 h-4" />
+                Read
               </Link>
             </CardFooter>
           </Card>
