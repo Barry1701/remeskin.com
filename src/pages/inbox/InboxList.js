@@ -67,11 +67,9 @@ const InboxList = () => {
                   msg.read === "true" ||
                   msg.read === 1 ||
                   msg.read === "1";
-                return (
-                  <Badge variant={isRead ? "outline" : "secondary"}>
-                    {isRead ? "Read" : "Unread"}
-                  </Badge>
-                );
+                return !isRead ? (
+                  <Badge variant="secondary">Unread</Badge>
+                ) : null;
               })()}
               <Link
                 to={`/messages/${msg.id}/`}
