@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import styles from "../../styles/DirectMessageDetail.module.css";
 import { Mail, User, Calendar } from "lucide-react";
 import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
 import Badge from "../../components/ui/badge";
@@ -10,9 +9,14 @@ import Badge from "../../components/ui/badge";
 const DirectMessageDetail = () => {
   const { id } = useParams();
   const [msg, setMsg] = useState(null);
+  const [mounted, setMounted] = useState(false);
   const currentUser = useCurrentUser();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const fetchMsg = async () => {
@@ -57,31 +61,35 @@ const DirectMessageDetail = () => {
   );
 
   return (
-    <div className={styles.Container}>
+    <div
+      className={`max-w-2xl mx-auto p-4 sm:p-6 rounded-xl ${
+        mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      } transition-all duration-500`}
+    >
       <button
         onClick={() => navigate(backTarget)}
         className="text-sm text-blue-600 hover:underline mb-4"
       >
         ← Back to {backLabel}
       </button>
-      <Card className="space-y-2">
-        <CardHeader className="text-lg">
-          <Mail className="w-4 h-4" />
+      <Card className="space-y-4">
+        <CardHeader className="flex items-center gap-2 text-2xl font-bold">
+          <Mail className="w-5 h-5 text-gray-600" />
           <span>{msg.subject}</span>
         </CardHeader>
         <CardContent className="flex items-center gap-2">
-          <User className="w-4 h-4" />
+          <User className="w-4 h-4 text-gray-500" />
           <span className="font-semibold">From:</span>
           <span>{msg.sender_username}</span>
         </CardContent>
         {!isRecipient && (
           <CardContent className="flex items-center gap-2">
-            <User className="w-4 h-4" />
+            <User className="w-4 h-4 text-gray-500" />
             <span className="font-semibold">To:</span>
             <span>{receiverLabel}</span>
           </CardContent>
         )}
-        <CardContent className="whitespace-pre-line">
+        <CardContent className="whitespace-pre-line leading-relaxed">
           {msg.content}
         </CardContent>
         <CardContent className="flex items-center gap-2 text-sm text-gray-500">
