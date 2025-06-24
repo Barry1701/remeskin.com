@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Calendar, Mail, User, MessageCircle } from "lucide-react";
@@ -11,8 +11,8 @@ const DirectMessageDetail = () => {
   const [msg, setMsg] = useState({});
   const currentUser = useCurrentUser();
   const navigate = useNavigate();
-  const location = useLocation();
-  const fromView = location.state?.from === "outbox" ? "Outbox" : "Inbox";
+  const fromOutbox = currentUser?.username === msg.sender_username;
+  const fromView = fromOutbox ? "Outbox" : "Inbox";
 
   useEffect(() => {
     const fetchMsg = async () => {
@@ -44,7 +44,7 @@ const DirectMessageDetail = () => {
           <div className={styles.HeaderGroup}>
             <Calendar className={styles.Icon} />
             <span className={styles.Date}>
-              {new Date(msg.created_at).toLocaleDateString("en-GB", {
+              {new Date(msg.timestamp).toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
@@ -65,7 +65,7 @@ const DirectMessageDetail = () => {
         <CardFooter className={styles.Footer}>
           <div className={styles.FooterGroup}>
             <User className={styles.Icon} />
-            {fromView === "Outbox" ? (
+            {fromOutbox ? (
               <span>To: {msg.recipient_username}</span>
             ) : (
               <span>From: {msg.sender_username}</span>
