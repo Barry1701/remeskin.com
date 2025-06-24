@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Calendar, Mail, User, MessageCircle } from "lucide-react";
+import { Calendar, Mail, MessageCircle } from "lucide-react";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import styles from "./DirectMessageDetail.module.css";
 import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
 
@@ -61,7 +62,7 @@ const DirectMessageDetail = () => {
         </CardContent>
 
         <CardFooter className={styles.Footer}>
-          <User className={styles.Icon} />
+          <UserIcon className={styles.Icon} />
           {fromOutbox ? (
             <span>To: {msg.recipient_username}</span>
           ) : (
