@@ -33,17 +33,25 @@ box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
 }
 
 .MessageHeader {
-display: flex;
-align-items: center;
-justify-content: space-between;
-font-weight: 600;
-color: #34495e;
-margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 8px;
 }
 
-.MessageBody {
-margin: 8px 0;
-color: #333;
+.Date {
+    font-size: 0.875rem;
+    color: #555;
+}
+
+.Preview {
+    margin: 4px 0 8px;
+    color: #333;
+    max-height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .MessageFooter {

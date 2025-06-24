@@ -50,12 +50,6 @@ const DirectMessageDetail = () => {
   const isSender =
     msg.sender_username === currentUser?.username ||
     msg.owner === currentUser?.username;
-  const receiverLabel =
-    msg.receiver_username ||
-    msg.recipient_username ||
-    msg.to_user?.username ||
-    msg.receiver ||
-    msg.recipient;
   const cameFrom = location.state?.from;
   const backTarget =
     cameFrom === "inbox"
@@ -84,50 +78,11 @@ const DirectMessageDetail = () => {
         ← Back to {backLabel}
       </button>
       <div className={styles.Card}>
-        <div className={styles.Subject}>
-          <span role="img" aria-label="subject">
-            📧
-          </span>
-          <span>{msg.subject}</span>
-        </div>
-        {!isSender && (
-          <div className={styles.Meta}>
-            <span role="img" aria-label="from">
-              👤
-            </span>
-            <span>From:</span>
-            <span>{msg.sender_username}</span>
-          </div>
-        )}
-        {!isRecipient && (
-          <div className={styles.Meta}>
-            <span role="img" aria-label="to">
-              👤
-            </span>
-            <span>To:</span>
-            <span>{receiverLabel}</span>
-          </div>
-        )}
-        <div className={styles.Content}>
-          <span role="img" aria-label="message">
-            💬
-          </span>
-          <span>{msg.content}</span>
-        </div>
-        <div className={styles.Date}>
-          <span role="img" aria-label="date">
-            📅
-          </span>
-          <span>{formattedDate}</span>
-        </div>
+        <div className={styles.Content}>{msg.content}</div>
+        <div className={styles.Date}>{formattedDate}</div>
         {isSender && (
           <div className={styles.Status}>
-            <span role="img" aria-label="status">
-              {msg.read === true || msg.read === "true" || msg.read === 1 || msg.read === "1" ? "✅" : "📩"}
-            </span>
-            <span>
-              {msg.read === true || msg.read === "true" || msg.read === 1 || msg.read === "1" ? "Read" : "Unread"}
-            </span>
+            {msg.read === true || msg.read === "true" || msg.read === 1 || msg.read === "1" ? "Read" : "Unread"}
           </div>
         )}
       </div>

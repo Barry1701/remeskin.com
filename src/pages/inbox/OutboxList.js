@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Mail, User } from "lucide-react";
+
 import { Link } from "react-router-dom";
 import styles from "../../styles/OutboxList.module.css";
 
@@ -40,37 +40,32 @@ const OutboxList = () => {
     ? messages.results
     : [];
 
+  const sortedMessages = [...messageList].sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
+
   return (
     <div className={styles.Container}>
       <h2 className={styles.Title}>Outbox</h2>
       {messageList.length === 0 && <div>No sent messages.</div>}
       <ul className={styles.List}>
-        {messageList.map((msg) => {
+        {sortedMessages.map((msg) => {
           const isRead =
             msg.read === true ||
             msg.read === "true" ||
             msg.read === 1 ||
             msg.read === "1";
+          const formattedDate = new Date(msg.created_at).toLocaleDateString(
+            "en-GB",
+            { day: "2-digit", month: "short", year: "numeric" }
+          );
           return (
             <li key={msg.id} className={styles.Message}>
               <div className={styles.MessageHeader}>
-                <div className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  <span className="font-semibold">To:</span>
-                  <span>
-                    {msg.receiver_username ||
-                      msg.recipient_username ||
-                      msg.receiver ||
-                      msg.recipient}
-                  </span>
-                </div>
+                <span className={styles.Date}>{formattedDate}</span>
                 {!isRead && <span className={styles.UnreadDot}></span>}
               </div>
-              <div className={styles.MessageBody}>
-                <Mail className="w-4 h-4" />
-                <span className="font-semibold">Subject:</span>
-                <span>{msg.subject}</span>
-              </div>
+              <div className={styles.Preview}>{msg.content}</div>
               <div className={styles.MessageFooter}>
                 <Link
                   to={`/messages/${msg.id}/`}

@@ -17,28 +17,8 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
 }
 
-.Subject {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.Meta {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 500;
-  margin-bottom: 0.75rem;
-}
-
 .Content {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin: 1.25rem 0;
+  margin-bottom: 1rem;
   line-height: 1.6;
   white-space: pre-line;
 }
