@@ -3,6 +3,13 @@ import { axiosReq } from "../../api/axiosDefaults";
 import styles from "../../styles/InboxList.module.css";
 import { Link } from "react-router-dom";
 
+const formatDate = (dateString) =>
+  new Date(dateString).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+
 const InboxList = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,10 +43,13 @@ const InboxList = () => {
         <ul className={styles.List}>
           {messages.map((msg) => (
             <li key={msg.id} className={styles.Message}>
-              <Link to={`/messages/${msg.id}`}>
-                <p className={styles.Subject}>📝 {msg.subject}</p>
-                <p className={styles.Info}>👤 From: {msg.sender}</p>
-                <p className={styles.Date}>📅 {msg.created_at?.slice(0, 10)}</p>
+              <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
+              <p className={styles.Subject}>📧 {msg.subject}</p>
+              <p className={styles.Info}>
+                From: {msg.sender_username || msg.sender}
+              </p>
+              <Link className={styles.ReadLink} to={`/messages/${msg.id}`}>
+                Read
               </Link>
             </li>
           ))}
