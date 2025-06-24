@@ -38,6 +38,7 @@ const DirectMessageDetail = () => {
   if (!msg) return <div>Loading...</div>;
 
   const isRecipient = msg.recipient_username === currentUser?.username;
+  const isSender = msg.sender_username === currentUser?.username;
   const receiverLabel =
     msg.receiver_username ||
     msg.recipient_username ||
@@ -77,13 +78,15 @@ const DirectMessageDetail = () => {
           </span>
           <span>{msg.subject}</span>
         </div>
-        <div className={styles.Meta}>
-          <span role="img" aria-label="from">
-            👤
-          </span>
-          <span>From:</span>
-          <span>{msg.sender_username}</span>
-        </div>
+        {!isSender && (
+          <div className={styles.Meta}>
+            <span role="img" aria-label="from">
+              👤
+            </span>
+            <span>From:</span>
+            <span>{msg.sender_username}</span>
+          </div>
+        )}
         {!isRecipient && (
           <div className={styles.Meta}>
             <span role="img" aria-label="to">
@@ -105,6 +108,16 @@ const DirectMessageDetail = () => {
           </span>
           <span>{formattedDate}</span>
         </div>
+        {isSender && (
+          <div className={styles.Status}>
+            <span role="img" aria-label="status">
+              {msg.read === true || msg.read === "true" || msg.read === 1 || msg.read === "1" ? "✅" : "📩"}
+            </span>
+            <span>
+              {msg.read === true || msg.read === "true" || msg.read === 1 || msg.read === "1" ? "Read" : "Unread"}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
