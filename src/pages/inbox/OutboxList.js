@@ -59,37 +59,28 @@ const OutboxList = () => {
             "en-GB",
             { day: "2-digit", month: "short", year: "numeric" }
           );
+          const preview = (msg.content || "")
+            .replace(/\n+/g, " ")
+            .trim()
+            .slice(0, 100);
           return (
             <li key={msg.id} className={styles.Message}>
-              <div className={styles.MessageHeader}>
-                <span className={styles.Date}>
-                  <i className="fas fa-calendar-alt" /> {formattedDate}
-                </span>
-                {!isRead && <span className={styles.UnreadDot}></span>}
-              </div>
-              <div className={styles.Meta}>
-                <span className={styles.MetaItem}>
-                  <i className="fas fa-user" /> To:&nbsp;
-                  {msg.recipient_username ||
-                    msg.receiver_username ||
-                    msg.to_user?.username ||
-                    msg.recipient ||
-                    msg.receiver}
-                </span>
-                <span className={styles.MetaItem}>
-                  <i className="fas fa-envelope" /> Subject:&nbsp;
-                  {msg.subject}
-                </span>
-              </div>
-              <div className={styles.MessageFooter}>
-                <Link
-                  to={`/messages/${msg.id}/`}
-                  state={{ from: "outbox" }}
-                  className={styles.Link}
-                >
-                  Read
-                </Link>
-              </div>
+              <Link
+                to={`/messages/${msg.id}/`}
+                state={{ from: "outbox" }}
+                className={styles.LinkCard}
+              >
+                <div className={styles.MessageHeader}>
+                  <span className={styles.Date}>
+                    <i className="fas fa-calendar-alt" /> {formattedDate}
+                  </span>
+                  {!isRead && <span className={styles.UnreadDot}></span>}
+                </div>
+                <p className={styles.Preview}>
+                  📨 {preview}
+                  {msg.content && msg.content.length > 100 ? "..." : ""}
+                </p>
+              </Link>
             </li>
           );
         })}
