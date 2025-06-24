@@ -62,7 +62,7 @@ const DirectMessageDetail = () => {
         <div className={styles.MessageBox}>
           <div className={styles.HeaderRow}>
             <span className={styles.Date}>📅 {formatDate(msg.created_at)}</span>
-            <span className={styles.Subject}>📧 {msg.subject}</span>
+            <span className={styles.Subject}>✉️ {msg.subject}</span>
           </div>
           <div className={styles.Body}>💬 {msg.message}</div>
           {location.state?.from === "outbox" ? (
