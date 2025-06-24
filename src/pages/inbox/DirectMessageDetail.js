@@ -23,7 +23,11 @@ const DirectMessageDetail = () => {
         setMsg(data);
         // Mark as read only if the current user is the recipient
         if (
-          data.recipient_username === currentUser?.username &&
+          (data.recipient_username === currentUser?.username ||
+            data.receiver_username === currentUser?.username ||
+            data.to_user?.username === currentUser?.username ||
+            data.recipient === currentUser?.username ||
+            data.receiver === currentUser?.username) &&
           !data.read
         ) {
           await axiosReq.patch(`/messages/${id}/`, { read: true });
@@ -37,11 +41,19 @@ const DirectMessageDetail = () => {
 
   if (!msg) return <div>Loading...</div>;
 
-  const isRecipient = msg.recipient_username === currentUser?.username;
-  const isSender = msg.sender_username === currentUser?.username;
+  const isRecipient =
+    msg.recipient_username === currentUser?.username ||
+    msg.receiver_username === currentUser?.username ||
+    msg.to_user?.username === currentUser?.username ||
+    msg.recipient === currentUser?.username ||
+    msg.receiver === currentUser?.username;
+  const isSender =
+    msg.sender_username === currentUser?.username ||
+    msg.owner === currentUser?.username;
   const receiverLabel =
     msg.receiver_username ||
     msg.recipient_username ||
+    msg.to_user?.username ||
     msg.receiver ||
     msg.recipient;
   const cameFrom = location.state?.from;
