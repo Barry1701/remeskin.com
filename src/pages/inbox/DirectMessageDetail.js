@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Mail, User, Calendar } from "lucide-react";
-import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
-import Badge from "../../components/ui/badge";
+import styles from "../../styles/DirectMessageDetail.module.css";
 
 const DirectMessageDetail = () => {
   const { id } = useParams();
@@ -62,7 +60,7 @@ const DirectMessageDetail = () => {
 
   return (
     <div
-      className={`max-w-2xl mx-auto p-4 sm:p-6 rounded-xl ${
+      className={`${styles.Container} max-w-2xl mx-auto p-4 sm:p-6 rounded-xl ${
         mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       } transition-all duration-500`}
     >
@@ -72,45 +70,42 @@ const DirectMessageDetail = () => {
       >
         ← Back to {backLabel}
       </button>
-      <Card className="space-y-4">
-        <CardHeader className="flex items-center gap-2 text-2xl font-bold">
-          <Mail className="w-5 h-5 text-gray-600" />
+      <div className={styles.Card}>
+        <div className={styles.Subject}>
+          <span role="img" aria-label="subject">
+            📧
+          </span>
           <span>{msg.subject}</span>
-        </CardHeader>
-        <CardContent className="flex items-center gap-2">
-          <User className="w-4 h-4 text-gray-500" />
-          <span className="font-semibold">From:</span>
+        </div>
+        <div className={styles.Meta}>
+          <span role="img" aria-label="from">
+            👤
+          </span>
+          <span>From:</span>
           <span>{msg.sender_username}</span>
-        </CardContent>
+        </div>
         {!isRecipient && (
-          <CardContent className="flex items-center gap-2">
-            <User className="w-4 h-4 text-gray-500" />
-            <span className="font-semibold">To:</span>
+          <div className={styles.Meta}>
+            <span role="img" aria-label="to">
+              👤
+            </span>
+            <span>To:</span>
             <span>{receiverLabel}</span>
-          </CardContent>
+          </div>
         )}
-        <CardContent className="whitespace-pre-line leading-relaxed">
-          {msg.content}
-        </CardContent>
-        <CardContent className="flex items-center gap-2 text-sm text-gray-500">
-          <Calendar className="w-4 h-4" />
+        <div className={styles.Content}>
+          <span role="img" aria-label="message">
+            💬
+          </span>
+          <span>{msg.content}</span>
+        </div>
+        <div className={styles.Date}>
+          <span role="img" aria-label="date">
+            📅
+          </span>
           <span>{formattedDate}</span>
-        </CardContent>
-        <CardFooter className="justify-end">
-          {(() => {
-            const isRead =
-              msg.read === true ||
-              msg.read === "true" ||
-              msg.read === 1 ||
-              msg.read === "1";
-            return (
-              <Badge variant={isRead ? "outline" : "secondary"}>
-                {isRead ? "Read" : "Unread"}
-              </Badge>
-            );
-          })()}
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };
