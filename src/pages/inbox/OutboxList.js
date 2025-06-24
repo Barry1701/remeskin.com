@@ -48,14 +48,12 @@ const OutboxList = () => {
                 to={`/messages/${msg.id}`}
                 state={{ from: "outbox" }}
               >
-                <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
+                <p className={styles.Date}>📅 {formatDate(msg.timestamp)}</p>
                 <p className={styles.Subject}>✉️ {msg.subject}</p>
-                <p className={styles.Info}>
-                  👤 To: {msg.recipient_username || msg.recipient}
-                </p>
-                {msg.read && (
-                  <span className={styles.StatusBadge}>✅</span>
-                )}
+                <p className={styles.Info}>👤 To: {msg.recipient_username}</p>
+                <span className={styles.StatusBadge}>
+                  {msg.readByRecipient ? "✅" : "🔴"}
+                </span>
               </Link>
             </li>
           ))}
