@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Calendar, Mail, MessageCircle, User as UserIcon } from "lucide-react";
-import styles from "./DirectMessageDetail.module.css";
+import styles from "../../styles/DirectMessageDetail.module.css";
 import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
 
 const formatDate = (dateString) =>

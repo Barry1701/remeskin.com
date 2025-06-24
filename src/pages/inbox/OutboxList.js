@@ -8,7 +8,7 @@ import {
   Dot,
   User as UserIcon,
 } from "lucide-react";
-import styles from "./OutboxList.module.css";
+import styles from "../../styles/OutboxList.module.css";
 
 const formatDate = (dateString) =>
   new Date(dateString).toLocaleDateString("en-GB", {
