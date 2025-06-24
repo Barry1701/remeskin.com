@@ -61,11 +61,21 @@ const InboxList = () => {
               <span>{msg.subject}</span>
             </CardContent>
             <CardFooter className="flex items-center justify-between">
-              <Badge variant={msg.read ? "outline" : "secondary"}>
-                {msg.read ? "Read" : "Unread"}
-              </Badge>
+              {(() => {
+                const isRead =
+                  msg.read === true ||
+                  msg.read === "true" ||
+                  msg.read === 1 ||
+                  msg.read === "1";
+                return (
+                  <Badge variant={isRead ? "outline" : "secondary"}>
+                    {isRead ? "Read" : "Unread"}
+                  </Badge>
+                );
+              })()}
               <Link
                 to={`/messages/${msg.id}/`}
+                state={{ from: "inbox" }}
                 className="inline-flex items-center gap-1 bg-[#2142b2] text-white px-4 py-2 rounded hover:bg-[#242a3d] transition"
               >
                 View

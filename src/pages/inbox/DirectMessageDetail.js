@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/DirectMessageDetail.module.css";
 import { Mail, User, Calendar } from "lucide-react";
@@ -12,6 +12,7 @@ const DirectMessageDetail = () => {
   const [msg, setMsg] = useState(null);
   const currentUser = useCurrentUser();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchMsg = async () => {
@@ -40,6 +41,16 @@ const DirectMessageDetail = () => {
     msg.recipient_username ||
     msg.receiver ||
     msg.recipient;
+  const cameFrom = location.state?.from;
+  const backTarget =
+    cameFrom === "inbox"
+      ? "/inbox"
+      : cameFrom === "outbox"
+      ? "/outbox"
+      : isRecipient
+      ? "/inbox"
+      : "/outbox";
+  const backLabel = backTarget === "/inbox" ? "Inbox" : "Outbox";
   const formattedDate = new Date(msg.created_at).toLocaleDateString(
     "en-GB",
     { day: "2-digit", month: "short", year: "numeric" }
@@ -48,10 +59,10 @@ const DirectMessageDetail = () => {
   return (
     <div className={styles.Container}>
       <button
-        onClick={() => navigate(isRecipient ? "/inbox" : "/outbox")}
+        onClick={() => navigate(backTarget)}
         className="text-sm text-blue-600 hover:underline mb-4"
       >
-        ← Back to {isRecipient ? "Inbox" : "Outbox"}
+        ← Back to {backLabel}
       </button>
       <Card className="space-y-2">
         <CardHeader className="text-lg">
@@ -78,9 +89,18 @@ const DirectMessageDetail = () => {
           <span>{formattedDate}</span>
         </CardContent>
         <CardFooter className="justify-end">
-          <Badge variant={msg.read ? "outline" : "secondary"}>
-            {msg.read ? "Read" : "Unread"}
-          </Badge>
+          {(() => {
+            const isRead =
+              msg.read === true ||
+              msg.read === "true" ||
+              msg.read === 1 ||
+              msg.read === "1";
+            return (
+              <Badge variant={isRead ? "outline" : "secondary"}>
+                {isRead ? "Read" : "Unread"}
+              </Badge>
+            );
+          })()}
         </CardFooter>
       </Card>
     </div>
