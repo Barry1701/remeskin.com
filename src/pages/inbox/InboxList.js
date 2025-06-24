@@ -76,7 +76,7 @@ const InboxList = () => {
               <Link
                 to={`/messages/${msg.id}`}
                 state={{ from: "inbox" }}
-                className="inline-flex items-center gap-1 bg-[#2142b2] text-white px-4 py-2 rounded hover:bg-[#242a3d] transition"
+                className="inline-flex items-center gap-2 bg-[#2142b2] text-white font-semibold px-4 py-2 rounded-xl shadow hover:bg-[#1b36a0] transition"
               >
                 Read
               </Link>
