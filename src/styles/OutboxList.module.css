@@ -58,16 +58,11 @@ box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
 }
 
 .Date {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     font-size: 0.875rem;
     color: #555;
-}
-
-.Preview {
-    margin: 4px 0 8px;
-    color: #333;
-    max-height: 3em;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .MessageFooter {
