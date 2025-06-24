@@ -20,67 +20,39 @@ const DirectMessageDetail = () => {
     const fetchMsg = async () => {
       try {
         const { data } = await axiosReq.get(`/messages/${id}/`);
-        setMsg(data);
-        // Mark as read only if the current user is the recipient
+
         if (
-          (data.recipient_username === currentUser?.username ||
-            data.receiver_username === currentUser?.username ||
-            data.to_user?.username === currentUser?.username ||
-            data.recipient === currentUser?.username ||
-            data.receiver === currentUser?.username) &&
-          !data.read
+          data.recipient_username === currentUser?.username ||
+          data.sender_username === currentUser?.username
         ) {
-          await axiosReq.patch(`/messages/${id}/`, { read: true });
+          setMsg(data);
+        } else {
+          navigate("/notfound");
         }
       } catch (err) {
         console.error(err);
+        navigate("/notfound");
       }
     };
-    fetchMsg();
-  }, [id, currentUser]);
 
-  if (!msg) return <div>Loading...</div>;
-
-  const isRecipient =
-    msg.recipient_username === currentUser?.username ||
-    msg.receiver_username === currentUser?.username ||
-    msg.to_user?.username === currentUser?.username ||
-    msg.recipient === currentUser?.username ||
-    msg.receiver === currentUser?.username;
-  // const isSender =
-  //   msg.sender_username === currentUser?.username ||
-  //   msg.owner === currentUser?.username;
-  const cameFrom = location.state?.from;
-  const backTarget =
-    cameFrom === "inbox"
-      ? "/inbox"
-      : cameFrom === "outbox"
-      ? "/outbox"
-      : isRecipient
-      ? "/inbox"
-      : "/outbox";
-  const backLabel = backTarget === "/inbox" ? "Inbox" : "Outbox";
-  const formattedDate = new Date(msg.created_at).toLocaleDateString(
-    "en-GB",
-    { day: "2-digit", month: "short", year: "numeric" }
-  );
+    if (mounted) {
+      fetchMsg();
+    }
+  }, [id, mounted, currentUser, navigate]);
 
   return (
-    <div
-      className={`${styles.Container} max-w-2xl mx-auto p-4 sm:p-6 rounded-xl ${
-        mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-      } transition-all duration-500`}
-    >
-      <button
-        onClick={() => navigate(backTarget)}
-        className="text-sm text-blue-600 hover:underline mb-4"
-      >
-        ← Back to {backLabel}
-      </button>
-      <div className={styles.Card}>
-        <div className={styles.Date}>📅 {formattedDate}</div>
-        <div className={styles.Content}>📨 {msg.content?.trim() || "No message content."}</div>
-      </div>
+    <div className={styles.Container}>
+      {msg ? (
+        <div className={styles.MessageBox}>
+          <h2 className={styles.Subject}>📝 {msg.subject}</h2>
+          <p className={styles.From}>👤 From: {msg.sender_username}</p>
+          <p className={styles.To}>📨 To: {msg.recipient_username}</p>
+          <p className={styles.Date}>📅 {msg.created_at?.slice(0, 10)}</p>
+          <div className={styles.Body}>💬 {msg.message}</div>
+        </div>
+      ) : (
+        <p>Loading message...</p>
+      )}
     </div>
   );
 };
