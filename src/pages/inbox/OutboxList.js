@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import styles from "../../styles/OutboxList.module.css";
 import { Link } from "react-router-dom";
+import {
+  Calendar,
+  Mail,
+  User,
+  Check,
+  Dot,
+} from "lucide-react";
+import styles from "./OutboxList.module.css";
 
 const formatDate = (dateString) =>
   new Date(dateString).toLocaleDateString("en-GB", {
@@ -48,12 +55,23 @@ const OutboxList = () => {
                 to={`/messages/${msg.id}`}
                 state={{ from: "outbox" }}
               >
-                <p className={styles.Date}>📅 {formatDate(msg.timestamp)}</p>
-                <p className={styles.Subject}>✉️ {msg.subject}</p>
-                <p className={styles.Info}>👤 To: {msg.recipient_username}</p>
-                <span className={styles.StatusBadge}>
-                  {msg.readByRecipient ? "✅" : "🔴"}
-                </span>
+                <div className={styles.Row}>
+                  <Calendar className={styles.Icon} />
+                  <span className={styles.Date}>{formatDate(msg.timestamp)}</span>
+                </div>
+                <div className={styles.Row}>
+                  <Mail className={styles.Icon} />
+                  <span className={styles.Subject}>{msg.subject}</span>
+                </div>
+                <div className={styles.Row}>
+                  <User className={styles.Icon} />
+                  <span className={styles.Recipient}>To: {msg.recipient_username}</span>
+                </div>
+                {msg.readByRecipient ? (
+                  <Check className={styles.StatusIcon} />
+                ) : (
+                  <Dot className={styles.StatusIcon} />
+                )}
               </Link>
             </li>
           ))}

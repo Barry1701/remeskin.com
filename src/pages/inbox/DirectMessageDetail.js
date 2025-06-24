@@ -3,9 +3,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Calendar, Mail, User, MessageCircle } from "lucide-react";
-import styles from "../../styles/DirectMessageDetail.module.css";
+import styles from "./DirectMessageDetail.module.css";
 import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card";
 
+const formatDate = (dateString) =>
+  new Date(dateString).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 const DirectMessageDetail = () => {
   const { id } = useParams();
   const [msg, setMsg] = useState({});
@@ -41,20 +47,10 @@ const DirectMessageDetail = () => {
 
       <Card>
         <CardHeader className={styles.Header}>
-          <div className={styles.HeaderGroup}>
-            <Calendar className={styles.Icon} />
-            <span className={styles.Date}>
-              {new Date(msg.timestamp).toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })}
-            </span>
-          </div>
-          <div className={styles.HeaderGroup}>
-            <Mail className={styles.Icon} />
-            <h2 className={styles.Subject}>{msg.subject}</h2>
-          </div>
+          <Calendar className={styles.Icon} />
+          <span className={styles.Date}>{formatDate(msg.timestamp)}</span>
+          <Mail className={styles.Icon} />
+          <h2 className={styles.Subject}>{msg.subject}</h2>
         </CardHeader>
 
         <CardContent className={styles.Content}>
@@ -63,14 +59,12 @@ const DirectMessageDetail = () => {
         </CardContent>
 
         <CardFooter className={styles.Footer}>
-          <div className={styles.FooterGroup}>
-            <User className={styles.Icon} />
-            {fromOutbox ? (
-              <span>To: {msg.recipient_username}</span>
-            ) : (
-              <span>From: {msg.sender_username}</span>
-            )}
-          </div>
+          <User className={styles.Icon} />
+          {fromOutbox ? (
+            <span>To: {msg.recipient_username}</span>
+          ) : (
+            <span>From: {msg.sender_username}</span>
+          )}
         </CardFooter>
       </Card>
     </div>
