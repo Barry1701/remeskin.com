@@ -47,9 +47,9 @@ const DirectMessageDetail = () => {
     msg.to_user?.username === currentUser?.username ||
     msg.recipient === currentUser?.username ||
     msg.receiver === currentUser?.username;
-  const isSender =
-    msg.sender_username === currentUser?.username ||
-    msg.owner === currentUser?.username;
+  // const isSender =
+  //   msg.sender_username === currentUser?.username ||
+  //   msg.owner === currentUser?.username;
   const cameFrom = location.state?.from;
   const backTarget =
     cameFrom === "inbox"
@@ -78,13 +78,8 @@ const DirectMessageDetail = () => {
         ← Back to {backLabel}
       </button>
       <div className={styles.Card}>
-        <div className={styles.Content}>{msg.content}</div>
-        <div className={styles.Date}>{formattedDate}</div>
-        {isSender && (
-          <div className={styles.Status}>
-            {msg.read === true || msg.read === "true" || msg.read === 1 || msg.read === "1" ? "Read" : "Unread"}
-          </div>
-        )}
+        <div className={styles.Date}>📅 {formattedDate}</div>
+        <div className={styles.Content}>📨 {msg.content?.trim() || "No message content."}</div>
       </div>
     </div>
   );
