@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import {
   Calendar,
   Mail,
-  User,
   Check,
   Dot,
 } from "lucide-react";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import styles from "./OutboxList.module.css";
 
 const formatDate = (dateString) =>
@@ -66,7 +66,7 @@ const OutboxList = () => {
                   <span className={styles.Subject}>{msg.subject}</span>
                 </div>
                 <div className={styles.Row}>
-                  <User className={styles.Icon} />
+                  <UserIcon className={styles.Icon} />
                   <span className={styles.Recipient}>To: {msg.recipient_username}</span>
                 </div>
                 {msg.readByRecipient ? (
