@@ -6,8 +6,8 @@ import {
   Mail,
   Check,
   Dot,
+  UserIcon,
 } from "lucide-react";
-import { FaUser as UserIcon } from "react-icons/fa";
 import styles from "./OutboxList.module.css";
 
 const formatDate = (dateString) =>
@@ -67,7 +67,8 @@ const OutboxList = () => {
                 </div>
                 <div className={styles.Row}>
                   <UserIcon className={styles.Icon} />
-                  <span className={styles.Recipient}>To: {msg.recipient_username}</span>
+                  <span>To:</span>
+                  <span className={styles.Recipient}>{msg.recipient_username}</span>
                 </div>
                 {msg.readByRecipient ? (
                   <Check className={styles.StatusIcon} />
