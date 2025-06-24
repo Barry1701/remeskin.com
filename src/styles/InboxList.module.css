@@ -1,125 +1,40 @@
 .Container {
-max-width: 700px;
-margin: 40px auto;
-padding: 0 16px;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 16px;
 }
 
 .Title {
-text-align: center;
-margin-bottom: 20px;
-font-size: 1.8rem;
-color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #2c3e50;
 }
 
 .List {
-list-style: none;
-padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .Message {
-background: linear-gradient(135deg, #f9f9ff, #e6e9f0);
-border-radius: 12px;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-padding: 16px 20px;
-margin-bottom: 20px;
-font-size: 1rem;
-animation: slideIn 0.4s ease-in-out;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  padding: 16px;
+  transition: transform 0.2s ease;
 }
 
 .Message:hover {
-transform: translateY(-5px);
-box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+  transform: scale(1.02);
 }
 
-.MessageHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 600;
-  color: #34495e;
-  margin-bottom: 10px;
+.Subject {
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
-.Meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.875rem;
+.Info, .Date {
+  font-size: 0.9rem;
   color: #555;
-  margin-bottom: 8px;
-  align-items: center;
-}
-
-.MetaItem {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.Date {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.875rem;
-  color: #555;
-}
-
-.MessageFooter {
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-size: 0.9rem;
-color: #777;
-margin-top: 12px;
-}
-
-.Link {
-color: #2142b2;
-font-weight: bold;
-text-decoration: none;
-margin-top: 10px;
-display: inline-block;
-}
-
-.Link:hover {
-text-decoration: underline;
-}
-
-.UnreadDot {
-width: 10px;
-height: 10px;
-background: #f44336;
-border-radius: 50%;
-display: inline-block;
-margin-left: 10px;
-animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-0% { transform: scale(1); }
-50% { transform: scale(1.3); }
-100% { transform: scale(1); }
-}
-
-@keyframes slideIn {
-from {
-transform: translateY(20px);
-opacity: 0;
-}
-to {
-transform: translateY(0);
-opacity: 1;
-}
-}
-
-@media (max-width: 576px) {
-.Message {
-font-size: 0.95rem;
-padding: 14px 16px;
-}
-
-.Title {
-font-size: 1.4rem;
-}
 }

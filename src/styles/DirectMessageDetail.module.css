@@ -1,41 +1,31 @@
 .Container {
   max-width: 700px;
   margin: 40px auto;
-  padding: 16px;
+  padding: 0 16px;
 }
 
-.Card {
+.MessageBox {
   background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 24px;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+  box-shadow: 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.Card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.Subject {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
 }
 
-.Content {
-  margin-top: 0.5rem;
-  line-height: 1.6;
-  white-space: pre-line;
-}
-
-.Date {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  font-size: 0.9rem;
+.From, .To, .Date {
+  font-size: 0.95rem;
   color: #555;
-  margin-bottom: 0.5rem;
+  margin-bottom: 6px;
 }
 
-@media (max-width: 576px) {
-  .Content {
-    text-align: left;
-  }
+.Body {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: #333;
 }
