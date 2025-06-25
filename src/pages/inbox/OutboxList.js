@@ -65,10 +65,8 @@ const OutboxList = () => {
                   <Mail className={styles.Icon} />
                   <span className={styles.Subject}>{msg.subject}</span>
                 </div>
-                <div className={styles.Row}>
-                  <UserIcon className={styles.Icon} />
-                  <span>To:</span>
-                  <span className={styles.Recipient}>{msg.recipient_username}</span>
+                <div className={styles.Recipient}>
+                  <UserIcon className={styles.Icon} /> To: {msg.recipient_username || "—"}
                 </div>
                 {msg.readByRecipient ? (
                   <Check className={styles.StatusIcon} />
