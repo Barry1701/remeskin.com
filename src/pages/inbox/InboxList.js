@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import styles from "../../styles/InboxList.module.css";
+import styles from "../../styles/MessageList.module.css";
 import { Link } from "react-router-dom";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const formatDate = (dateString) =>
   new Date(dateString).toLocaleDateString("en-GB", {
@@ -13,6 +14,7 @@ const formatDate = (dateString) =>
 const InboxList = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchInbox = async () => {
@@ -23,14 +25,12 @@ const InboxList = () => {
           : Array.isArray(data?.results)
           ? data.results
           : [];
-
         setMessages(inboxMessages);
-      } catch (err) {
-        console.error(err);
+      } catch {
+        /* handle error */
       }
       setLoading(false);
     };
-
     fetchInbox();
   }, []);
 
@@ -47,9 +47,13 @@ const InboxList = () => {
                 <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
                 <p className={styles.Subject}>✉️ {msg.subject}</p>
                 <p className={styles.Info}>
-                  👤 From: {msg.sender_username || msg.sender}
+                  👤 From: {msg.sender_username}
                 </p>
-                {!msg.read && <span className={styles.UnreadDot}>🔴</span>}
+                {/* nieprzeczytane tylko jeśli to Twój inbox */}
+                {msg.read === false &&
+                  msg.recipient_username === currentUser?.username && (
+                    <span className={styles.UnreadDot} />
+                  )}
               </Link>
             </li>
           ))}

@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
+import styles from "../../styles/MessageList.module.css";
 import { Link } from "react-router-dom";
-import {
-  Calendar,
-  Mail,
-  Check,
-  Dot,
-  User as UserIcon,
-} from "lucide-react";
-import styles from "../../styles/OutboxList.module.css";
 
 const formatDate = (dateString) =>
   new Date(dateString).toLocaleDateString("en-GB", {
@@ -30,14 +23,12 @@ const OutboxList = () => {
           : Array.isArray(data?.results)
           ? data.results
           : [];
-
         setMessages(outboxMessages);
       } catch (err) {
         console.error(err);
       }
       setLoading(false);
     };
-
     fetchOutbox();
   }, []);
 
@@ -55,23 +46,12 @@ const OutboxList = () => {
                 to={`/messages/${msg.id}`}
                 state={{ from: "outbox" }}
               >
-                <div className={styles.Row}>
-                  <Calendar className={styles.Icon} />
-                  <span className={styles.Date}>
-                    {formatDate(msg.created_at || msg.timestamp)}
-                  </span>
-                </div>
-                <div className={styles.Row}>
-                  <Mail className={styles.Icon} />
-                  <span className={styles.Subject}>{msg.subject}</span>
-                </div>
-                <div className={styles.Recipient}>
-                  <UserIcon className={styles.Icon} /> To: {msg.recipient_username}
-                </div>
-                {msg.readByRecipient ? (
-                  <Check className={styles.StatusIcon} />
-                ) : (
-                  <Dot className={styles.StatusIcon} />
+                <p className={styles.Date}>📅 {formatDate(msg.created_at)}</p>
+                <p className={styles.Subject}>✉️ {msg.subject}</p>
+                <p className={styles.Info}>👤 To: {msg.recipient_username}</p>
+                {/* jeśli read === false → nieprzeczytane przez odbiorcę */}
+                {msg.read === false && (
+                  <span className={styles.UnreadLabel}/>
                 )}
               </Link>
             </li>

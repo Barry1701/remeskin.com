@@ -4,15 +4,15 @@ import styles from "../../styles/DirectMessageForm.module.css";
 import Swal from "sweetalert2";
 
 const DirectMessageForm = () => {
-  const [receiver, setReceiver] = useState("");
+  const [recipient, setRecipient] = useState("");
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosReq.post("/messages/", { receiver, subject, content });
-      setReceiver("");
+      await axiosReq.post("/messages/", { recipient, subject, content });
+      setRecipient("");
       setSubject("");
       setContent("");
 
@@ -25,7 +25,7 @@ const DirectMessageForm = () => {
     } catch (err) {
       if (
         err.response?.status === 400 &&
-        err.response.data?.receiver?.[0] === "User does not exist."
+        err.response.data?.recipient?.[0] === "User does not exist."
       ) {
         Swal.fire({
           icon: "error",
@@ -50,10 +50,10 @@ const DirectMessageForm = () => {
       <input
         type="text"
         placeholder="Recipient username"
-        value={receiver}
-        onChange={(e) => setReceiver(e.target.value)}
+        value={recipient}
+        onChange={(e) => setRecipient(e.target.value)}
         required
-        name="receiver"
+        name="recipient"
         className={styles.Field}
       />
       <input

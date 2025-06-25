@@ -1,0 +1,100 @@
+.Container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.Title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+.List {
+  list-style: none;
+  padding: 0;
+}
+
+.Message {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+}
+
+.Message:hover {
+  transform: scale(1.02);
+}
+
+.MessageLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.Date,
+.Subject,
+.Info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.Subject {
+  font-weight: bold;
+}
+
+.UnreadDot {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #e74c3c;
+  box-shadow: 0 0 6px #e74c3c;
+  animation: glow 1.5s ease-in-out infinite;
+}
+
+.UnreadLabel {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 8px;
+  background-color: #e3342f;      /* czerwony */
+  border-radius: 50%;              /* okrąg */
+  position: relative;
+  top: 1px;                        /* dopasowanie pionowe */
+  animation: pulse 1.5s infinite;  /* pulsowanie */
+}
+
+/* efekt pulsowania */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(227, 52, 47, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(227, 52, 47, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(227, 52, 47, 0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 4px #e74c3c;
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 12px #e74c3c;
+    opacity: 0.7;
+  }
+}
