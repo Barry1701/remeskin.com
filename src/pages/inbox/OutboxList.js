@@ -6,7 +6,7 @@ import {
   Mail,
   Check,
   Dot,
-  UserIcon,
+  User as UserIcon,
 } from "lucide-react";
 import styles from "./OutboxList.module.css";
 
