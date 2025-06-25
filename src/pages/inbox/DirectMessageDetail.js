@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import {
@@ -22,16 +22,13 @@ const DirectMessageDetail = () => {
   const { id } = useParams();
   const [msg, setMsg] = useState({});
   const currentUser = useCurrentUser();
-  const navigate = useNavigate();
   const fromOutbox = currentUser?.username === msg.sender_username;
-  const fromView = fromOutbox ? "Outbox" : "Inbox";
 
   useEffect(() => {
     const fetchMsg = async () => {
       try {
         const { data } = await axiosReq.get(`/messages/${id}/`);
         setMsg(data);
-        // oznacz jako przeczytane, jeśli to ja jestem odbiorcą
         if (data.recipient_username === currentUser?.username) {
           await axiosReq.patch(`/messages/${id}/`, { read: true });
         }
@@ -44,16 +41,6 @@ const DirectMessageDetail = () => {
 
   return (
     <div className={styles.Container}>
-      {/* przycisk Back tylko gdy nie patrzymy z Outboxu */}
-      {!fromOutbox && (
-        <button
-          className={styles.BackButton}
-          onClick={() => navigate(`/${fromView.toLowerCase()}`)}
-        >
-          ← Back to {fromView}
-        </button>
-      )}
-
       <Card>
         <CardHeader className={styles.Header}>
           <Calendar className={styles.Icon} />
@@ -64,7 +51,6 @@ const DirectMessageDetail = () => {
           <Mail className={styles.Icon} />
           <h2 className={styles.Subject}>{msg.subject}</h2>
 
-          {/* pulsująca czerwona kropka dla nieprzeczytanej w Outbox */}
           {fromOutbox && msg.read === false && (
             <span className={styles.UnreadDot} />
           )}
