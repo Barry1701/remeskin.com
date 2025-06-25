@@ -67,3 +67,11 @@
   height: 16px;
   color: #6b7280;
 }
+
+.Recipient {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: #555;
+}

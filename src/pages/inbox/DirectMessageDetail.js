@@ -63,9 +63,9 @@ const DirectMessageDetail = () => {
         <CardFooter className={styles.Footer}>
           <UserIcon className={styles.Icon} />
           {fromOutbox ? (
-            <span>To: {msg.recipient_username}</span>
+            <span>To: {msg.recipient_username || "—"}</span>
           ) : (
-            <span>From: {msg.sender_username}</span>
+            <span>From: {msg.sender_username || "—"}</span>
           )}
         </CardFooter>
       </Card>
