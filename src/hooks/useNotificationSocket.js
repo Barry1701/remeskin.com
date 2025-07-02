@@ -1,35 +1,50 @@
-import { useEffect, useState, useRef } from "react";
-import ReconnectingWebSocket from "reconnecting-websocket";
+import { useEffect, useState, useCallback } from "react";
 
-export default function useNotificationSocket() {
+const useNotificationSocket = () => {
   const [notifications, setNotifications] = useState([]);
-  const wsRef = useRef(null);
 
   useEffect(() => {
-    if (process.env.NODE_ENV === "test") return;
-    // choose ws:// or wss:// based on page protocol
-    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-    const socketUrl = `${protocol}://${window.location.host}/ws/notifications/`;
-    wsRef.current = new ReconnectingWebSocket(socketUrl);
+    // budujemy URL np. wss://host/ws/notifications/
+    const wsProtocol = process.env.REACT_APP_WS_BASE_URL.startsWith("https")
+      ? "wss"
+      : "ws";
+    const wsUrl = `${process.env.REACT_APP_WS_BASE_URL.replace(
+      /^https?:\/\//,
+      wsProtocol + "://"
+    )}/ws/notifications/`;
 
-    wsRef.current.onmessage = ({ data }) => {
+    const socket = new WebSocket(wsUrl);
+
+    socket.onopen = () => {
+      console.log("🔔 WebSocket connected:", wsUrl);
+    };
+
+    socket.onmessage = (event) => {
       try {
-        const event = JSON.parse(data);
-        // push into array
-        setNotifications((prev) => [...prev, event]);
-      } catch (e) {
-        console.error("Invalid WebSocket payload:", e);
+        const payload = JSON.parse(event.data);
+        // payload: { message: "...", id: 123 }
+        setNotifications((prev) => [...prev, payload]);
+      } catch (err) {
+        console.error("WS parse error:", err);
       }
     };
 
+    socket.onerror = (err) => {
+      console.error("🔔 WebSocket error:", err);
+    };
+
+    socket.onclose = (e) => {
+      console.log("🔔 WebSocket closed:", e.code, e.reason);
+    };
+
     return () => {
-      wsRef.current.close();
+      socket.close();
     };
   }, []);
 
-  const clearNotifications = () => {
-    setNotifications([]);
-  };
+  const clearNotifications = useCallback(() => setNotifications([]), []);
 
   return { notifications, clearNotifications };
-}
+};
+
+export default useNotificationSocket;
