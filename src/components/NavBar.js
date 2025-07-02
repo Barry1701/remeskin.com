@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
@@ -18,6 +18,7 @@ const NavBar = () => {
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
   const { notifications, clearNotifications } = useNotificationSocket();
+  const [notifOpen, setNotifOpen] = useState(false);
   const unreadCount = notifications.length;
 
   const handleSignOut = async () => {
@@ -142,6 +143,35 @@ const NavBar = () => {
       {inboxIcon}
       {outboxIcon}
       {newMessageIcon}
+      <div className={styles.NotifWrapper}>
+        <button
+          className={styles.NotifButton}
+          onClick={() => {
+            setNotifOpen((o) => !o);
+            if (!notifOpen) clearNotifications();
+          }}
+          aria-label="Notifications"
+        >
+          <i className="fas fa-bell"></i>
+          {unreadCount > 0 && (
+            <span className={styles.NotifBadge}>{unreadCount}</span>
+          )}
+        </button>
+
+        {notifOpen && (
+          <ul className={styles.NotifDropdown}>
+            {notifications.length ? (
+              notifications.map((n) => (
+                <li key={n.id} className={styles.NotifItem}>
+                  {n.message}
+                </li>
+              ))
+            ) : (
+              <li className={styles.NotifEmpty}>No new notifications</li>
+            )}
+          </ul>
+        )}
+      </div>
 
       <NavLink
         className={styles.NavLink}
