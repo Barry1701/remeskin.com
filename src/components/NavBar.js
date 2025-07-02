@@ -3,6 +3,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import useNotificationSocket from "../hooks/useNotificationSocket";
 import { removeTokenTimestamp } from "../utils/utils";
 import Swal from "sweetalert2";
 import Avatar from "./Avatar";
@@ -16,6 +17,8 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
+  const { notifications, clearNotifications } = useNotificationSocket();
+  const unreadCount = notifications.length;
 
   const handleSignOut = async () => {
     try {
@@ -69,8 +72,13 @@ const NavBar = () => {
       className={styles.NavLink}
       activeClassName={styles.Active}
       to="/inbox"
+      onClick={clearNotifications}
     >
-      <i className="fas fa-inbox"></i>Inbox
+      <i className="fas fa-inbox"></i>
+      Inbox
+      {unreadCount > 0 && (
+        <span className={styles.Badge}>{unreadCount}</span>
+      )}
     </NavLink>
   );
 
