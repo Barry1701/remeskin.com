@@ -73,10 +73,9 @@ const NavBar = () => {
       activeClassName={styles.Active}
       to="/inbox"
     >
-      <i className="fas fa-inbox"></i>
-      Inbox
+      <i className="fas fa-inbox"></i> Inbox
       {unreadCount > 0 && (
-        <span className={styles.Badge}>{unreadCount}</span>
+        <Bell className={styles.BellIconActive} />
       )}
     </NavLink>
   );
@@ -101,15 +100,6 @@ const NavBar = () => {
     </NavLink>
   );
 
-  const notificationIcon = (
-    <NavLink
-      className={`${styles.NavLink} ${unreadCount > 0 ? styles.BellActive : ""}`}
-      to="/inbox"
-    >
-      <Bell className={styles.BellIcon} />
-      {unreadCount > 0 && <span className={styles.Badge}>{unreadCount}</span>}
-    </NavLink>
-  );
 
   // Logged-in Icons
   const loggedInIcons = (
@@ -152,7 +142,6 @@ const NavBar = () => {
       {outboxIcon}
       {newMessageIcon}
 
-      {notificationIcon}
 
       <NavLink
         className={styles.NavLink}
