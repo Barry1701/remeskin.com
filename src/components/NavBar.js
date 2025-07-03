@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
@@ -10,6 +10,7 @@ import Avatar from "./Avatar";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import axios from "axios";
+import { Bell } from "lucide-react";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -18,7 +19,6 @@ const NavBar = () => {
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
   const { notifications, clearNotifications } = useNotificationSocket();
-  const [notifOpen, setNotifOpen] = useState(false);
   const unreadCount = notifications.length;
 
   const handleSignOut = async () => {
@@ -103,6 +103,17 @@ const NavBar = () => {
     </NavLink>
   );
 
+  const notificationIcon = (
+    <NavLink
+      className={`${styles.NavLink} ${unreadCount > 0 ? styles.BellActive : ""}`}
+      to="#"
+      onClick={clearNotifications}
+    >
+      <Bell className={styles.BellIcon} />
+      {unreadCount > 0 && <span className={styles.Badge}>{unreadCount}</span>}
+    </NavLink>
+  );
+
   // Logged-in Icons
   const loggedInIcons = (
     <>
@@ -143,35 +154,8 @@ const NavBar = () => {
       {inboxIcon}
       {outboxIcon}
       {newMessageIcon}
-      <div className={styles.NotifWrapper}>
-        <button
-          className={styles.NotifButton}
-          onClick={() => {
-            setNotifOpen((o) => !o);
-            if (!notifOpen) clearNotifications();
-          }}
-          aria-label="Notifications"
-        >
-          <i className="fas fa-bell"></i>
-          {unreadCount > 0 && (
-            <span className={styles.NotifBadge}>{unreadCount}</span>
-          )}
-        </button>
 
-        {notifOpen && (
-          <ul className={styles.NotifDropdown}>
-            {notifications.length ? (
-              notifications.map((n) => (
-                <li key={n.id} className={styles.NotifItem}>
-                  {n.message}
-                </li>
-              ))
-            ) : (
-              <li className={styles.NotifEmpty}>No new notifications</li>
-            )}
-          </ul>
-        )}
-      </div>
+      {notificationIcon}
 
       <NavLink
         className={styles.NavLink}

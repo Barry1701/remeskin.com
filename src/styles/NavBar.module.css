@@ -159,3 +159,39 @@
 .NotifItem:hover {
   background: #f5f5f5;
 }
+
+/* Dzwoneczek */
+.BellIcon {
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+}
+
+/* Kiedy są nieprzeczytane */
+.BellActive .BellIcon {
+  animation: swing 1s infinite ease-in-out;
+  color: #e3342f;
+}
+
+/* Czerwona kropka z licznikiem */
+.Badge {
+  background: #e3342f;
+  color: white;
+  font-size: 0.7rem;
+  padding: 0 5px;
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  right: -4px;
+  transform: translate(50%, -50%);
+}
+
+/* Animacja "huśtawki" */
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(15deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
