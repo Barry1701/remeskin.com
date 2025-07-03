@@ -165,7 +165,7 @@
   width: 20px;
   height: 20px;
   color: #6b7280;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 /* Kiedy są nieprzeczytane */
@@ -179,11 +179,11 @@
   background: #e3342f;
   color: white;
   font-size: 0.7rem;
-  padding: 0 5px;
+  padding: 0 6px;
   border-radius: 12px;
   position: absolute;
   top: 0;
-  right: -4px;
+  right: -6px;
   transform: translate(50%, -50%);
 }
 
