@@ -195,3 +195,22 @@
   75%  { transform: rotate(-15deg); }
   100% { transform: rotate(0deg); }
 }
+
+/* red swinging bell when there are unread messages */
+.BellIconActive {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  color: #e3342f;
+  animation: swing 1s infinite ease-in-out;
+}
+
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(15deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
