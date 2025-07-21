@@ -84,31 +84,21 @@
   }
 }
 
+
 .Badge {
-  background: #e74c3c;
+  background-color: #e3342f;       /* red */
   color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
+  border-radius: 9999px;
   font-size: 0.75rem;
-  position: absolute;
-  top: 0;
-  right: -6px;
-  animation: pulse 1.5s infinite;
+  padding: 0 6px;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.2); }
 }
 
 /* Bell icon when there are unread DMs */
