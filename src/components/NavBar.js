@@ -74,6 +74,7 @@ const NavBar = () => {
     >
       <i className="fas fa-inbox"></i>
       Inbox
+      {/* only show badge when there are unread messages */}
       {unreadCount > 0 && (
         <span className={styles.Badge}>{unreadCount}</span>
       )}
