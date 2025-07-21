@@ -10,7 +10,6 @@ import Avatar from "./Avatar";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import axios from "axios";
-import { Bell } from "lucide-react";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -73,9 +72,10 @@ const NavBar = () => {
       activeClassName={styles.Active}
       to="/inbox"
     >
-      <i className="fas fa-inbox"></i> Inbox
+      <i className="fas fa-inbox"></i>
+      Inbox
       {unreadCount > 0 && (
-        <Bell className={styles.BellIconActive} />
+        <span className={styles.Badge}>{unreadCount}</span>
       )}
     </NavLink>
   );
